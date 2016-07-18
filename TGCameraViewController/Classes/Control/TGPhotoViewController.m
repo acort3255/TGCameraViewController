@@ -28,7 +28,7 @@
 #import "TGAssetsLibrary.h"
 #import "TGCameraColor.h"
 #import "TGCameraFilterView.h"
-#import "UIImage+CameraFilters.h"
+#import "TGCameraViewController-Swift.h"
 #import "TGTintedButton.h"
 
 static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
