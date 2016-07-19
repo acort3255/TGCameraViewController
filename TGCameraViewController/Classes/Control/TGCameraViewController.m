@@ -23,6 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#import "TGCameraViewController-Swift.h"
 #import "TGCameraViewController.h"
 #import "TGPhotoViewController.h"
 #import "TGCameraSlideView.h"

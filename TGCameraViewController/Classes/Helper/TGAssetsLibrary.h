@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 @import AssetsLibrary;
-#import "TGAssetImageFile.h"
+#import "TGCameraViewController-Swift.h"
 
 typedef void(^TGAssetsResultCompletion)(NSURL *assetURL);
 typedef void(^TGAssetsFailureCompletion)(NSError* error);

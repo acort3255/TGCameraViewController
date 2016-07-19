@@ -25,7 +25,6 @@
 
 @import AssetsLibrary;
 #import "TGPhotoViewController.h"
-#import "TGAssetsLibrary.h"
 #import "TGCameraColor.h"
 #import "TGCameraFilterView.h"
 #import "TGCameraViewController-Swift.h"
@@ -152,7 +151,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
         }
         
         ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
-        TGAssetsLibrary *library = [TGAssetsLibrary defaultAssetsLibrary];
+        TGAssetsLibrary *library = [[TGAssetsLibrary alloc] init];
         
         void (^saveJPGImageAtDocumentDirectory)(UIImage *) = ^(UIImage *photo) {
             [library saveJPGImageAtDocumentDirectory:_photo resultBlock:^(NSURL *assetURL) {
