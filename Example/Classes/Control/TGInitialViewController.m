@@ -9,7 +9,7 @@
 #import "TGInitialViewController.h"
 #import "TGCamera.h"
 #import "TGCameraViewController.h"
-#import "TGCameraColor.h"
+#import "TGCameraViewController-Swift.h"
 
 @interface TGInitialViewController () <TGCameraDelegate>
 

@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 #import "TGCameraFlash.h"
-#import "TGCameraColor.h"
+#import "TGCameraViewController-Swift.h"
 #import "TGTintedButton.h"
 
 @implementation TGCameraFlash

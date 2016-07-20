@@ -7,7 +7,7 @@
 //
 
 #import "TGTintedLabel.h"
-#import "TGCameraColor.h"
+#import "TGCameraViewController-Swift.h"
 
 @interface TGTintedLabel ()
 

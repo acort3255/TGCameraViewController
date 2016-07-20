@@ -7,7 +7,7 @@
 //
 
 #import "TGTintedButton.h"
-#import "TGCameraColor.h"
+#import "TGCameraViewController-Swift.h"
 
 @interface TGTintedButton ()
 

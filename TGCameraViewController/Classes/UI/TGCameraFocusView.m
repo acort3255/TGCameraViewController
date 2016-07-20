@@ -7,7 +7,7 @@
 //
 
 #import "TGCameraFocusView.h"
-#import "TGCameraColor.h"
+#import "TGCameraViewController-Swift.h"
 
 @implementation TGCameraFocusView
 

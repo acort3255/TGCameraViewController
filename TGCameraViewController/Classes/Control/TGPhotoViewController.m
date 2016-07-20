@@ -25,7 +25,6 @@
 
 @import AssetsLibrary;
 #import "TGPhotoViewController.h"
-#import "TGCameraColor.h"
 #import "TGCameraFilterView.h"
 #import "TGCameraViewController-Swift.h"
 #import "TGTintedButton.h"

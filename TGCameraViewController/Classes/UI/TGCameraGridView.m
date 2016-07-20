@@ -24,8 +24,7 @@
 //  THE SOFTWARE.
 
 #import "TGCameraGridView.h"
-#import "TGCameraColor.h"
-
+#import "TGCameraViewController-Swift.h"
 @interface TGCameraGridView ()
 
 - (void)setup;

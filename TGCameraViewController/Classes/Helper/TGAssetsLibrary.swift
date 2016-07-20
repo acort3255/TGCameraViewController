@@ -29,7 +29,6 @@ public class TGAssetsLibrary: PHImageManager{
     required override public init() {
         super.init()
         createAlbum()
-        print("init.() is not allowed, use .defaultAssetsLibrary()")
     }
     
     
