@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 #import "TGCameraAuthorizationViewController.h"
-#import "TGCameraFunctions.h"
+#import "TGCameraViewController-Swift.h"
 
 @interface TGCameraAuthorizationViewController ()
 
@@ -47,12 +47,12 @@
 {
     [super viewDidLoad];
     
-    _titleLabel.text = TGLocalizedString(@"TGCameraViewController-Title");
-    _subtitleLabel.text = TGLocalizedString(@"TGCameraViewController-Subtitle");
-    _step1Label.text = TGLocalizedString(@"TGCameraViewController-Step1");
-    _step2Label.text = TGLocalizedString(@"TGCameraViewController-Step2");
-    _step3Label.text = TGLocalizedString(@"TGCameraViewController-Step3");
-    _step4Label.text = TGLocalizedString(@"TGCameraViewController-Step4");
+    _titleLabel.text = [TGCameraFunctions TGLocalizedString:@"TGCameraViewController-Title"];
+    _subtitleLabel.text = [TGCameraFunctions TGLocalizedString: @"TGCameraViewController-Subtitle"];
+    _step1Label.text = [TGCameraFunctions TGLocalizedString: @"TGCameraViewController-Step1"];
+    _step2Label.text = [TGCameraFunctions TGLocalizedString: @"TGCameraViewController-Step2"];
+    _step3Label.text = [TGCameraFunctions TGLocalizedString: @"TGCameraViewController-Step3"];
+    _step4Label.text = [TGCameraFunctions TGLocalizedString: @"TGCameraViewController-Step4"];
 }
 
 - (BOOL)prefersStatusBarHidden

@@ -94,28 +94,6 @@ public class TGAssetsLibrary: PHImageManager{
     public func loadImagesFromAlbum(albumName: String, withCallback callback: TGAssetsLoadImagesCompletion) {
         var items = [AnyObject]()
         
-        /*self.enumerateGroupsWithTypes(ALAssetsGroupAll, usingBlock: {
-            (group: ALAssetsGroup?, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
-            if group != nil
-            {
-                group?.enumerateAssetsUsingBlock({
-                    (result: ALAsset?, index: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
-                    if result != nil
-                    {
-                        //var file = TGAssetImageFile()
-                        let representation: ALAssetRepresentation = result!.defaultRepresentation()
-                        let file = TGAssetImageFile(path:result!.defaultRepresentation().url().absoluteString, image: UIImage(CGImage: representation.fullScreenImage().takeRetainedValue(), scale: CGFloat(representation.scale()), orientation: UIImageOrientation(rawValue: 0)!))
-                        items.append(file)
-                    }
-                    
-                    })
-                
-            }
-            }, failureBlock: {
-                (error: NSError?) -> Void in
-                callback(items: items, error: error!)
-        })*/
-        
         let assets : PHFetchResult = PHAsset.fetchAssetsInAssetCollection(assetCollection, options: nil)
         print(assets)
         
