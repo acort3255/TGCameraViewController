@@ -26,7 +26,6 @@
 #import "TGCamera.h"
 #import "TGCameraGrid.h"
 #import "TGCameraViewController-Swift.h"
-#import "TGCameraFocus.h"
 
 NSMutableDictionary *optionDictionary;
 

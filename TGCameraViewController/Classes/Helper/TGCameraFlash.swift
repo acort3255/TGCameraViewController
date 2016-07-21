@@ -44,11 +44,11 @@ public class TGCameraFlash: NSObject {
         let device: AVCaptureDevice = (session.inputs.last?.device)!
         let mode: AVCaptureFlashMode = device.flashMode
         let image: UIImage = UIImageFromAVCapture(mode)
-        var tintColor: UIColor = TintColorFromAVCapture(mode)
+        let tintColor: UIColor = TintColorFromAVCapture(mode)
         button.enabled = device.isFlashModeSupported(mode)
-        /*if (button is TGTintedButton) {
+        if (button is TGTintedButton) {
             (button as! TGTintedButton).customTintColorOverride = tintColor
-        }*/
+        }
         button.setImage(image, forState: .Normal)
     }
     

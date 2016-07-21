@@ -38,12 +38,13 @@ public class TGCameraSlideView: UIView, TGCameraSlideViewProtocol {
     
     
     public func initialPositionWithView(view: UIView) -> CGFloat {
-        NSException(name: kExceptionName, reason: kExceptionMessage, userInfo: nil)
+        NSException.raise(kExceptionName, format: kExceptionMessage, arguments: CVaListPointer.init(_fromUnsafeMutablePointer: nil))
+        
         return 0.0
     }
     
     public func finalPosition() -> CGFloat {
-        NSException(name: kExceptionName, reason: kExceptionMessage, userInfo: nil)
+        NSException.raise(kExceptionName, format: kExceptionMessage, arguments: CVaListPointer.init(_fromUnsafeMutablePointer: nil))
         return 0.0
     }
     
