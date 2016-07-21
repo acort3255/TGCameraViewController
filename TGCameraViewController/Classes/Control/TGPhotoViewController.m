@@ -26,7 +26,6 @@
 @import AssetsLibrary;
 #import "TGPhotoViewController.h"
 #import "TGCameraViewController-Swift.h"
-#import "TGTintedButton.h"
 
 static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
 static NSString* const kTGCacheCurveKey = @"TGCacheCurveKey";
