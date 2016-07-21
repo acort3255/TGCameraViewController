@@ -8,14 +8,14 @@
 
 import UIKit
 
-class TGCameraFilterView: UIView {
+public class TGCameraFilterView: UIView {
     
-    convenience init() {
+    public convenience init() {
         self.init()
         self.setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.setup()
@@ -27,7 +27,7 @@ class TGCameraFilterView: UIView {
         self.setup()
     }
     
-    func addToView(view: UIView, aboveView: UIView) {
+    public func addToView(view: UIView, aboveView: UIView) {
         var frame: CGRect = self.frame
         frame.origin.y = CGRectGetMaxY(view.frame) - CGRectGetHeight(aboveView.frame)
         self.frame = frame
@@ -40,7 +40,7 @@ class TGCameraFilterView: UIView {
 
     }
     
-    func removeFromSuperviewAnimated() {
+    public func removeFromSuperviewAnimated() {
         var frame: CGRect = self.frame
         frame.origin.y += CGRectGetHeight(self.frame)
         UIView.animateWithDuration(0.5, animations: {() -> Void in

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B2380ED1D40F22800E6D5B4 /* TGCameraToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2380EC1D40F22800E6D5B4 /* TGCameraToggle.swift */; };
 		0B2380EF1D40F57400E6D5B4 /* TGCameraFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2380EE1D40F57400E6D5B4 /* TGCameraFilterView.swift */; };
+		0B2380F11D40F8A700E6D5B4 /* TGCameraFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2380F01D40F8A700E6D5B4 /* TGCameraFocusView.swift */; };
 		0BDA9FA61D3D15E2008B6594 /* UIImage+CameraFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */; };
 		0BDA9FA81D3D2949008B6594 /* TGAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */; };
 		0BDA9FAC1D3D7BBD008B6594 /* TGAssetImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		0B2380EC1D40F22800E6D5B4 /* TGCameraToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGCameraToggle.swift; sourceTree = "<group>"; };
 		0B2380EE1D40F57400E6D5B4 /* TGCameraFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGCameraFilterView.swift; sourceTree = "<group>"; };
+		0B2380F01D40F8A700E6D5B4 /* TGCameraFocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGCameraFocusView.swift; sourceTree = "<group>"; };
 		0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CameraFilters.swift"; sourceTree = "<group>"; };
 		0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAlbum.swift; sourceTree = "<group>"; };
 		0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAssetImageFile.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				0B2380EE1D40F57400E6D5B4 /* TGCameraFilterView.swift */,
+				0B2380F01D40F8A700E6D5B4 /* TGCameraFocusView.swift */,
 				F89FACAD1B1A3D3A0079B391 /* TGCameraFocusView.h */,
 				F89FACAE1B1A3D3A0079B391 /* TGCameraFocusView.m */,
 				F89FACAF1B1A3D3A0079B391 /* TGCameraGridView.h */,
@@ -374,6 +377,7 @@
 				F89FACD81B1A3D3A0079B391 /* TGTintedLabel.m in Sources */,
 				0BDA9FB81D3FD32C008B6594 /* TGCameraShot.swift in Sources */,
 				0BDA9FA81D3D2949008B6594 /* TGAlbum.swift in Sources */,
+				0B2380F11D40F8A700E6D5B4 /* TGCameraFocusView.swift in Sources */,
 				F835957F19C7230500CAE395 /* TGInitialViewController.m in Sources */,
 				F82F8EE419C4F29000A47148 /* main.m in Sources */,
 				F89FACD21B1A3D3A0079B391 /* TGCameraFocusView.m in Sources */,
