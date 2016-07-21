@@ -25,7 +25,6 @@
 
 #import "TGCamera.h"
 #import "TGCameraGrid.h"
-#import "TGCameraGridView.h"
 #import "TGCameraViewController-Swift.h"
 #import "TGCameraFocus.h"
 

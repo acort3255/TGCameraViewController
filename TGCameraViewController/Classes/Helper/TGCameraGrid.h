@@ -25,8 +25,7 @@
 
 @import Foundation;
 @import UIKit;
-#import "TGCameraGridView.h"
-
+#import "TGCameraViewController-Swift.h"
 @interface TGCameraGrid : NSObject
 
 + (void)disPlayGridView:(TGCameraGridView *)gridView;

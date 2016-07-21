@@ -10,10 +10,10 @@ import UIKit
 
 let TGCameraFocusSize: CGFloat = 50
 
-class TGCameraFocusView: UIView {
+public class TGCameraFocusView: UIView {
     
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         // Initialization code
@@ -44,12 +44,12 @@ class TGCameraFocusView: UIView {
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Animation Method
     
-    func startAnimation() {
+    public func startAnimation() {
         self.layer.removeAllAnimations()
         self.transform = CGAffineTransformMakeScale(1.5, 1.5)
         self.alpha = 0
@@ -65,7 +65,7 @@ class TGCameraFocusView: UIView {
         })
     }
     
-    func stopAnimation() {
+    public func stopAnimation() {
         self.layer.removeAllAnimations()
         UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {() -> Void in
             self.transform = CGAffineTransformMakeScale(0.001, 0.001)

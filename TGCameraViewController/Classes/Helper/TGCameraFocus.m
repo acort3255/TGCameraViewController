@@ -25,7 +25,8 @@
 
 @import AVFoundation;
 @import UIKit;
-#import "TGCameraFocusView.h"
+#define TGCameraFocusSize 50
+#import "TGCameraViewController-Swift.h"
 #import "TGCameraFocus.h"
 
 @interface TGCameraFocus ()
