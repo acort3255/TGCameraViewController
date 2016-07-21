@@ -123,7 +123,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ni6-M2-hWT" userLabel="Actions View">
                     <rect key="frame" x="0.0" y="660" width="600" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nol-dD-ETh" userLabel="Grid" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nol-dD-ETh" userLabel="Grid" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="162" y="5" width="50" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Aub-V9-12O"/>
@@ -134,7 +134,7 @@
                                 <action selector="gridTapped" destination="-1" eventType="touchUpInside" id="6m1-BO-Ve2"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJG-N5-BnZ" userLabel="Toggle" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJG-N5-BnZ" userLabel="Toggle" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="275" y="5" width="50" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="6Yw-v5-k8c"/>
@@ -145,7 +145,7 @@
                                 <action selector="toggleTapped" destination="-1" eventType="touchUpInside" id="cnq-8L-ak1"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7O-pE-Mp0" userLabel="Flash" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7O-pE-Mp0" userLabel="Flash" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="388" y="5" width="50" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="6QJ-EO-jQZ"/>
@@ -171,7 +171,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJ9-I8-VJI" userLabel="Bottom View">
                     <rect key="frame" x="0.0" y="710" width="600" height="110"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3k-MF-E1l" userLabel="Close" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3k-MF-E1l" userLabel="Close" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="20" y="15" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="cgU-fk-MtB"/>
@@ -182,7 +182,7 @@
                                 <action selector="closeTapped" destination="-1" eventType="touchUpInside" id="mp3-Tj-Kz0"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtQ-Dg-G3i" userLabel="Shot" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtQ-Dg-G3i" userLabel="Shot" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="261" y="16" width="78" height="78"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="78" id="HAC-kq-tli"/>
@@ -193,7 +193,7 @@
                                 <action selector="shotTapped" destination="-1" eventType="touchUpInside" id="XqW-0H-DD4"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-gO-dPX" userLabel="Album" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-gO-dPX" userLabel="Album" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="500" y="15" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="Qit-id-URc"/>

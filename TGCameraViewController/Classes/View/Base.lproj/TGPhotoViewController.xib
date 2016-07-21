@@ -39,7 +39,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwe-hD-eWO" userLabel="Bottom View">
                     <rect key="frame" x="0.0" y="710" width="600" height="110"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAy-eH-OU9" userLabel="Back" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAy-eH-OU9" userLabel="Back" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="20" y="15" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="0Ms-p9-lfD"/>
@@ -50,7 +50,7 @@
                                 <action selector="backTapped" destination="-1" eventType="touchUpInside" id="fwF-J8-ieM"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc5-8R-lAJ" userLabel="Confirm" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc5-8R-lAJ" userLabel="Confirm" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="261" y="16" width="78" height="78"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="78" id="31h-nh-YvJ"/>
@@ -64,7 +64,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraCheckMark" translatesAutoresizingMaskIntoConstraints="NO" id="Scs-OK-XY9">
                             <rect key="frame" x="286" y="44" width="29" height="22"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwi-ED-cl6" userLabel="Filter" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwi-ED-cl6" userLabel="Filter" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
                             <rect key="frame" x="500" y="15" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="Qaz-63-vsp"/>

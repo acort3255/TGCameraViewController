@@ -19,7 +19,7 @@ public class TGTintedButton: UIButton {
     }
     
     override public func setBackgroundImage(image: UIImage?, forState state: UIControlState) {
-        if state != .Normal {
+        if state != .Normal{
             return
         }
         let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .AlwaysOriginal : .AlwaysTemplate
@@ -28,7 +28,7 @@ public class TGTintedButton: UIButton {
     
     override public func setImage(image: UIImage?, forState state: UIControlState) {
         if state != .Normal {
-            return
+           return
         }
         let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .AlwaysOriginal : .AlwaysTemplate
         super.setImage(image!.imageWithRenderingMode(renderingMode), forState: state)
@@ -39,10 +39,16 @@ public class TGTintedButton: UIButton {
         let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .AlwaysOriginal : .AlwaysTemplate
         if self.tintColor != color {
             self.tintColor = color
-            let backgroundImage: UIImage = self.backgroundImageForState(.Normal)!.imageWithRenderingMode(renderingMode)
-            self.setBackgroundImage(backgroundImage, forState: .Normal)
-            let image: UIImage = self.imageForState(.Normal)!.imageWithRenderingMode(renderingMode)
-            self.setImage(image, forState: .Normal)
+            let backgroundImage = self.backgroundImageForState(.Normal)?.imageWithRenderingMode(renderingMode)
+            if backgroundImage != nil
+            {
+                self.setBackgroundImage(backgroundImage, forState: .Normal)
+            }
+            let image: UIImage? = self.imageForState(.Normal)!.imageWithRenderingMode(renderingMode)
+            if image != nil
+            {
+                self.setImage(image, forState: .Normal)
+            }
         }
     }
     
