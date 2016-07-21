@@ -237,7 +237,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="833" y="280"/>
         </view>
-        <view contentMode="scaleToFill" id="vJp-kA-okD" customClass="TGCameraSlideUpView">
+        <view contentMode="scaleToFill" id="vJp-kA-okD" customClass="TGCameraSlideUpView" customModule="TGCameraViewController" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="225"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -260,7 +260,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1484" y="-17.5"/>
         </view>
-        <view contentMode="scaleToFill" id="Czb-nz-m44" customClass="TGCameraSlideDownView">
+        <view contentMode="scaleToFill" id="Czb-nz-m44" customClass="TGCameraSlideDownView" customModule="TGCameraViewController" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="225"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>

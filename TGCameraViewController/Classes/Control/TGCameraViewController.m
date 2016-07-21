@@ -26,7 +26,6 @@
 #import "TGCameraViewController-Swift.h"
 #import "TGCameraViewController.h"
 #import "TGPhotoViewController.h"
-#import "TGCameraSlideView.h"
 #import "TGTintedButton.h"
 
 
