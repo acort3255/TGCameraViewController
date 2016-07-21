@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 
 #import "TGCamera.h"
-#import "TGCameraGrid.h"
 #import "TGCameraViewController-Swift.h"
 
 NSMutableDictionary *optionDictionary;
