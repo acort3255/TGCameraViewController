@@ -26,7 +26,7 @@
 @import AssetsLibrary;
 #import "TGPhotoViewController.h"
 #import "TGCameraViewController-Swift.h"
-
+ 
 static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
 static NSString* const kTGCacheCurveKey = @"TGCacheCurveKey";
 static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
@@ -96,7 +96,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     [_cancelButton setImage:[UIImage imageNamed:@"CameraBack"] forState:UIControlStateNormal];
     [_confirmButton setImage:[UIImage imageNamed:@"CameraShot"] forState:UIControlStateNormal];
 
-    if ([[TGCamera getOption:kTGCameraOptionHiddenFilterButton] boolValue] == YES) {
+    if (TGCamera.filterButtonHidden == YES) {
         _filterWandButton.hidden = YES;
     }
     
@@ -160,7 +160,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
             }];
         };
         
-        if ([[TGCamera getOption:kTGCameraOptionSaveImageToAlbum] boolValue] && status != ALAuthorizationStatusDenied) {
+        if (TGCamera.saveImageToAlbum  == YES && status != ALAuthorizationStatusDenied) {
             [library saveImage:_photo resultBlock:^(NSURL *assetURL) {
                 if ([_delegate respondsToSelector:@selector(cameraDidSavePhotoAtPath:)]) {
                     [_delegate cameraDidSavePhotoAtPath:assetURL];

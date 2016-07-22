@@ -24,8 +24,7 @@
 //  THE SOFTWARE.
 
 @import UIKit;
-#import "TGCamera.h"
-
+#import "TGCameraViewController-Swift.h"
 @interface TGPhotoViewController : UIViewController
 
 + (instancetype)new __attribute__

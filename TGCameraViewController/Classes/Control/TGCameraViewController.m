@@ -81,20 +81,20 @@
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     if (devices.count > 1) {
         
-        if ([[TGCamera getOption:kTGCameraOptionHiddenToggleButton] boolValue] == YES) {
+        if (TGCamera.toggleButtonHidden == YES) {
             _toggleButton.hidden = YES;
             _toggleButtonWidth.constant = 0;
         }
     }
     else {
         
-        if ([[TGCamera getOption:kTGCameraOptionHiddenToggleButton] boolValue] == YES) {
+        if (TGCamera.toggleButtonHidden == YES) {
             _toggleButton.hidden = YES;
             _toggleButtonWidth.constant = 0;
         }
     }
     
-    if ([[TGCamera getOption:kTGCameraOptionHiddenAlbumButton] boolValue] == YES) {
+    if (TGCamera.albumButtonHidden == YES) {
         _albumButton.hidden = YES;
     }
     
@@ -147,7 +147,8 @@
     
     [self deviceOrientationDidChangeNotification];
     
-    [_camera startRunning];
+    
+    [TGCamera startRunning];
     
     _separatorView.hidden = YES;
     
@@ -168,7 +169,7 @@
     
     if (_wasLoaded == NO) {
         _wasLoaded = YES;
-        [_camera insertSublayerWithCaptureView:_captureView atRootView:self.view];
+        [TGCamera insertSublayerWithCaptureView:_captureView atRootView:self.view];
     }
 }
 
@@ -178,7 +179,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [_camera stopRunning];
+    [TGCamera stopRunning];
 }
 
 - (void)didReceiveMemoryWarning
@@ -241,12 +242,12 @@
 
 - (IBAction)gridTapped
 {
-    [_camera disPlayGridView];
+    [TGCamera displayGridView];
 }
 
 - (IBAction)flashTapped
 {
-    [_camera changeFlashModeWithButton:_flashButton];
+    [TGCamera changeFlashModeWithButton:_flashButton];
 }
 
 - (IBAction)shotTapped
@@ -258,7 +259,7 @@
     AVCaptureVideoOrientation videoOrientation = [self videoOrientationForDeviceOrientation:deviceOrientation];
     
     [self viewWillDisappearWithCompletion:^{
-        [_camera takePhotoWithCaptureView:_captureView videoOrientation:videoOrientation cropSize:_captureView.frame.size
+        [TGCamera takePhotoWithCaptureView:_captureView videoOrientation:videoOrientation cropSize:_captureView.frame.size
                                completion:^(UIImage *photo) {
                                    TGPhotoViewController *viewController = [TGPhotoViewController newWithDelegate:_delegate photo:photo];
                                    [self.navigationController pushViewController:viewController animated:YES];
@@ -279,13 +280,13 @@
 
 - (IBAction)toggleTapped
 {
-    [_camera toogleWithFlashButton:_flashButton];
+    [TGCamera toogleWithFlashButton:_flashButton];
 }
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)recognizer
 {
     CGPoint touchPoint = [recognizer locationInView:_captureView];
-    [_camera focusView:_captureView inTouchPoint:touchPoint];
+    [TGCamera focusView:_captureView inTouchPoint:touchPoint];
 }
 
 #pragma mark -

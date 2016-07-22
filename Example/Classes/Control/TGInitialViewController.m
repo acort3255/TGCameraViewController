@@ -7,7 +7,6 @@
 //
 
 #import "TGInitialViewController.h"
-#import "TGCamera.h"
 #import "TGCameraViewController.h"
 #import "TGCameraViewController-Swift.h"
 
@@ -30,7 +29,7 @@
     [super viewDidLoad];
     
     // save image at album
-    [TGCamera setOption:kTGCameraOptionSaveImageToAlbum value:[NSNumber numberWithBool:YES]];
+    TGCamera.albumButtonHidden = YES;
     
     // hidden toggle button
     //[TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];

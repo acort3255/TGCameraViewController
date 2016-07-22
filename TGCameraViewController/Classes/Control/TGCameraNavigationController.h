@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 @import UIKit;
-#import "TGCamera.h"
+#import "TGCameraViewController-Swift.h";
 
 @interface TGCameraNavigationController : UINavigationController
 
