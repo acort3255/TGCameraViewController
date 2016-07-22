@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 @import AVFoundation;
-#import "TGCameraAuthorizationViewController.h"
+#import "TGCameraViewController-Swift.h"
 #import "TGCameraNavigationController.h"
 #import "TGCameraViewController.h"
 
