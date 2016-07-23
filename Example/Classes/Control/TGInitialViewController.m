@@ -7,7 +7,6 @@
 //
 
 #import "TGInitialViewController.h"
-#import "TGCameraViewController.h"
 #import "TGCameraViewController-Swift.h"
 
 @interface TGInitialViewController () <TGCameraDelegate>

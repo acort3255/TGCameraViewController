@@ -11,11 +11,11 @@ import UIKit
 @objc public protocol TGCameraDelegate: NSObjectProtocol
 {
     func cameraDidCancel()
-    func cameraDidSelectAlbumPhoto(image: UIImage)
-    func cameraDidTakePhoto(image: UIImage)
+    func cameraDidSelectAlbumPhoto(image: UIImage?)
+    func cameraDidTakePhoto(image: UIImage?)
     
-    optional func cameraDidSavePhotoWithError(error: NSError)
-    optional func cameraDidSavePhotoAtPath(assetURL: NSURL)
+    optional func cameraDidSavePhotoWithError(error: NSError?)
+    optional func cameraDidSavePhotoAtPath(assetURL: NSURL?)
     optional func cameraWillTakePhoto()
     
 }

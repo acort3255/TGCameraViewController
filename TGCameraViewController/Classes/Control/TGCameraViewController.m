@@ -25,7 +25,6 @@
 
 #import "TGCameraViewController-Swift.h"
 #import "TGCameraViewController.h"
-#import "TGPhotoViewController.h"
 
 
 @interface TGCameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
