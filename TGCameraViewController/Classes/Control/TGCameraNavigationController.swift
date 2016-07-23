@@ -67,7 +67,7 @@ public class TGCameraNavigationController: UINavigationController {
     // MARK -Private Methods
     
     func setupAuthorizedWithDelegate(delegate: TGCameraDelegate) {
-        var viewController: TGCameraViewController = TGCameraViewController()
+        let viewController: TGCameraViewController = TGCameraViewController()
         viewController.delegate = delegate
         self.viewControllers = [viewController]
     }
