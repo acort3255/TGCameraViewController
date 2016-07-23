@@ -9,24 +9,38 @@
 import UIKit
 import AVFoundation
 
-public class TGCamera: NSObject {
+public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
     public static var toggleButtonHidden = Bool()
     public static var albumButtonHidden = Bool()
     public static var filterButtonHidden = Bool()
     public static var saveImageToAlbum = Bool()
-    public static var previewLayer = AVCaptureVideoPreviewLayer()
-    public static var stillImageOutput = AVCaptureStillImageOutput()
+    public var previewLayer: AVCaptureVideoPreviewLayer!
+    public var stillImageOutput: AVCaptureStillImageOutput!
     
-    private static var session = AVCaptureSession()
-    private static var gridView: TGCameraGridView?
+    // Video
+    public static var recordsVideo: Bool = false
+    public var movieOutputFile: AVCaptureMovieFileOutput!
+    public var audioCaptureDevice: AVCaptureDevice!
+    public var audioInput: AVCaptureDeviceInput!
+    public var videoInput: AVCaptureDeviceInput!
+    public var movieOutputFileURL = NSURL()
+    public var delegate = TGCameraViewController()
+    public var cropSize = CGSize()
+    //
+    
+    private var session: AVCaptureSession!
+    private var gridView: TGCameraGridView?
     
     public required override init() {
         super.init()
         
+        previewLayer = AVCaptureVideoPreviewLayer()
+        stillImageOutput = AVCaptureStillImageOutput()
+        
     }
     
-    public static func gridViewSetup()
+    public func gridViewSetup()
     {
         if  self.gridView == nil {
             var frame: CGRect = previewLayer.frame
@@ -39,33 +53,38 @@ public class TGCamera: NSObject {
         }
     }
     
-    public static func newCamera() -> TGCamera {
-        return super.init() as! TGCamera
+    public func newCamera() -> TGCamera {
+        return self.dynamicType.init()
     }
-    public static func cameraWithFlashButton(flashButton: UIButton) -> TGCamera
+    public func cameraWithFlashButton(flashButton: UIButton) -> TGCamera
     {
-        let camera = TGCamera.newCamera()
+        let camera = newCamera()
         setupWithFlashButton(flashButton)
         return camera
     }
     
-    public static func cameraWithFlashButton(flashButton: UIButton, devicePosition: AVCaptureDevicePosition)-> TGCamera{
-        let camera = TGCamera.newCamera()
-        setupWithFlashButton(flashButton, devicePosition: devicePosition)
+    public func cameraWithFlashButton(flashButton: UIButton, devicePosition: AVCaptureDevicePosition)-> TGCamera{
+        let camera = newCamera()
+        setupWithFlashButton(flashButton)
         return camera
     }
     
-    public static func startRunning()
+    public func startRunning()
     {
         session.startRunning()
     }
     
-    public static func stopRunning()
+    public func stopRunning()
     {
         session.stopRunning()
     }
     
-    public static func insertSublayerWithCaptureView(captureView: UIView, atRootView rootView: UIView)
+    public func stopRecording()
+    {
+        movieOutputFile.stopRecording()
+    }
+    
+    public func insertSublayerWithCaptureView(captureView: UIView, atRootView rootView: UIView)
     {
         self.previewLayer = AVCaptureVideoPreviewLayer(session: session)
         self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -79,23 +98,23 @@ public class TGCamera: NSObject {
         captureView.insertSubview(self.gridView!, atIndex: index)
     }
     
-    public static func displayGridView()
+    public func displayGridView()
     {
         
         TGCameraGrid.disPlayGridView(gridView!)
     }
     
-    public static func changeFlashModeWithButton(button: UIButton)
+    public func changeFlashModeWithButton(button: UIButton)
     {
         TGCameraFlash.changeModeWithCaptureSession(session, andButton: button)
     }
     
-    public static func focusView(focusView: UIView, inTouchPoint touchPoint: CGPoint)
+    public func focusView(focusView: UIView, inTouchPoint touchPoint: CGPoint)
     {
         TGCameraFocus.focusWithCaptureSession(session, touchPoint: touchPoint, inFocusView: focusView)
     }
     
-    public static func takePhotoWithCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: (image: UIImage) -> Void)
+    public func takePhotoWithCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: (image: UIImage) -> Void)
     {
         TGCameraShot.takePhotoCaptureView(captureView, stillImageOutput: stillImageOutput, videoOrientation: videoOrientation, cropSize: cropSize, completion: {(photo: UIImage) -> Void in
             completion(image: photo)
@@ -103,7 +122,13 @@ public class TGCamera: NSObject {
 
     }
     
-    public static func toogleWithFlashButton(flashButton: UIButton)
+    public func recordVideoWtihCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: (videoOutputURL: NSURL) -> Void)
+    {
+        TGCameraShot.recordVideoCaptureView(captureView, movieFileOutput: movieOutputFile, videoOrientation: videoOrientation, cropSize: cropSize)
+        
+    }
+    
+    public func toogleWithFlashButton(flashButton: UIButton)
     {
         TGCameraToggle.toogleWithCaptureSession(session)
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
@@ -113,7 +138,7 @@ public class TGCamera: NSObject {
     // MARK - Private Methods
     
     
-    public static func setupWithFlashButton(flashButton: UIButton) {
+    public func setupWithFlashButton(flashButton: UIButton) {
         //
         // create session
         //
@@ -165,7 +190,7 @@ public class TGCamera: NSObject {
 
     }
     
-    public static func setupWithFlashButton(flashButton: UIButton, devicePosition: AVCaptureDevicePosition) {
+    public func setupWithFlashButton(flashButton: UIButton, devicePosition: AVCaptureDevicePosition) {
         //
         // create session
         //
@@ -223,5 +248,12 @@ public class TGCamera: NSObject {
         // setup flash button
         //
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
+    }
+    
+    public func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!)
+    {
+        // send url for cropped video
+        let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
+        delegate.recordingStopped(tempURL)
     }
 }

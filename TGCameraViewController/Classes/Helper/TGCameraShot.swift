@@ -11,6 +11,8 @@ import AVFoundation
 import UIKit
 
 public class TGCameraShot: NSObject {
+    
+    public static var delegate: TGCamera!
     public static func takePhotoCaptureView(captureView: UIView, stillImageOutput: AVCaptureStillImageOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: (photo: UIImage) -> Void) {
         
          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -36,57 +38,24 @@ public class TGCameraShot: NSObject {
                     {
                         let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                         let image = UIImage(data: imageData)
-                        let croppedImage = cropImage(image!, withCropSize: cropSize)
+                        let croppedImage = TGMediaCrop.cropImage(image!, withCropSize: cropSize)
                         completion(photo: croppedImage)
                     }
             })
         })
     }
     
-    // MARK: Private
-    public static func cropImage(image: UIImage, withCropSize cropSize: CGSize) -> UIImage
+    public static func recordVideoCaptureView(captureView: UIView, movieFileOutput: AVCaptureMovieFileOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize)
     {
-        var newImage: UIImage? = nil
-        let imageSize: CGSize = image.size
-        let width: CGFloat = imageSize.width
-        let height: CGFloat = imageSize.height
-        let targetWidth: CGFloat = cropSize.width
-        let targetHeight: CGFloat = cropSize.height
-        var scaleFactor: CGFloat = 0
-        var scaledWidth: CGFloat = targetWidth
-        var scaledHeight: CGFloat = targetHeight
-        var thumbnailPoint: CGPoint = CGPointMake(0, 0)
-        
-        if CGSizeEqualToSize(imageSize, cropSize) == false {
-            let widthFactor: CGFloat = targetWidth / width
-            let heightFactor: CGFloat = targetHeight / height
-            if widthFactor > heightFactor {
-                scaleFactor = widthFactor
-            }
-            else {
-                scaleFactor = heightFactor
-            }
-            scaledWidth = width * scaleFactor
-            scaledHeight = height * scaleFactor
-            if widthFactor > heightFactor {
-                thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5
-            }
-            else {
-                if widthFactor < heightFactor {
-                    thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5
-                }
-            }
+        if movieFileOutput.recording == false
+        {
+            // Start recording to a temporary file.
+            let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
+            let outputFilePath: String = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(outputFileName + "mov").absoluteString
+            let outputFileURL = NSURL.fileURLWithPath(outputFilePath)
+            //NSLog(@"Path to video in camera call: %@", outputFileURL);
+            movieFileOutput.startRecordingToOutputFileURL(outputFileURL, recordingDelegate: delegate)
         }
-        
-        UIGraphicsBeginImageContextWithOptions(cropSize, true, 0)
-        var thumbnailRect: CGRect = CGRectZero
-        thumbnailRect.origin = thumbnailPoint
-        thumbnailRect.size.width = scaledWidth
-        thumbnailRect.size.height = scaledHeight
-        image.drawInRect(thumbnailRect)
-        newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-
     }
+    
 }

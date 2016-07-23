@@ -1,5 +1,5 @@
 //
-//  TGPhotoViewController.swift
+//  TGMediaViewController.swift
 //  TGCameraViewController
 //
 //  Created by Angel Cortez on 7/22/16.
@@ -15,7 +15,7 @@ let kTGCacheCurveKey: String = "TGCacheCurveKey"
 let kTGCacheVignetteKey: String = "TGCacheVignetteKey"
 
 
-public class TGPhotoViewController: UIViewController
+public class TGMediaViewController: UIViewController
 {
     
     
@@ -39,9 +39,9 @@ public class TGPhotoViewController: UIViewController
         //fatalError("init(coder:) has not been implemented")
     }*/
     
-    public static func newWithDelegate(delegate: TGCameraDelegate, photo: UIImage) -> TGPhotoViewController
+    public static func newWithDelegate(delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
     {
-        let viewController: TGPhotoViewController = TGPhotoViewController(nibName: nil, bundle: nil)
+        let viewController: TGMediaViewController = TGMediaViewController(nibName: nil, bundle: nil)
         //if viewController != nil {
             viewController.delegate = delegate
             viewController.photo = photo

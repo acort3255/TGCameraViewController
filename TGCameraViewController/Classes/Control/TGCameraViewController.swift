@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+public class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var delegate: TGCameraDelegate!
     @IBOutlet var captureView: UIView!
@@ -32,7 +32,7 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
     var camera: TGCamera!
     var wasLoaded: Bool!
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         wasLoaded = false
@@ -61,16 +61,24 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
         shotButton.setImage(UIImage(named: "CameraShot")!, forState: .Normal)
         gridButton.setImage(UIImage(named: "CameraGrid")!, forState: .Normal)
         toggleButton.setImage(UIImage(named: "CameraToggle")!, forState: .Normal)
-        self.camera = TGCamera.cameraWithFlashButton(flashButton)
+        camera = TGCamera()
+        self.camera.setupWithFlashButton(flashButton)
+        camera.delegate = self
         self.captureView.backgroundColor = UIColor.clearColor()
         self.topLeftView.transform = CGAffineTransformMakeRotation(0)
         self.topRightView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
         self.bottomLeftView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         self.bottomRightView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2 * 2))
+        
+        // Scaffolding for video support testing
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(takePicture))
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(recordVideo))
+        shotButton.addGestureRecognizer(tapGesture)
+        shotButton.addGestureRecognizer(longTapGesture)
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deviceOrientationDidChangeNotification), name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -91,12 +99,12 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
         flashButton.enabled = false
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         deviceOrientationDidChangeNotification()
         
-        TGCamera.startRunning()
+        camera.startRunning()
         separatorView.hidden = true
         
         TGCameraSlideView.hideSlideUpView(slideUpView, slideDownView: slideDownView, atView: captureView, completion: {
@@ -118,34 +126,34 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
         if !wasLoaded
         {
             wasLoaded = true
-            TGCamera.insertSublayerWithCaptureView(captureView, atRootView: view)
+            camera.insertSublayerWithCaptureView(captureView, atRootView: view)
         }
 
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override public func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        TGCamera.stopRunning()
+        camera.stopRunning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override public func prefersStatusBarHidden() -> Bool {
         return true
     }
     
     // MARK: - UIImagePickerControllerDelegate
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let photo: UIImage = TGAlbum.imageWithMediaInfo(info)!
-        let viewController: TGPhotoViewController = TGPhotoViewController.newWithDelegate(delegate, photo: photo)
+        let viewController: TGMediaViewController = TGMediaViewController.newWithDelegate(delegate, photo: photo)
         viewController.albumPhoto = true
         self.navigationController!.pushViewController(viewController, animated: false)
         self.dismissViewControllerAnimated(true, completion: { _ in })
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: { _ in })
     }
     
@@ -156,16 +164,17 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func gridTapped() {
-        TGCamera.displayGridView()
+        camera.displayGridView()
     }
     
     @IBAction func flashTapped() {
-        TGCamera.changeFlashModeWithButton(flashButton)
+        camera.changeFlashModeWithButton(flashButton)
     }
     
-    @IBAction func shotTapped() {
+    /*@IBAction func shotTapped(sender: UITapGestureRecognizer) {
         shotButton.enabled = false
         albumButton.enabled = false
+        
         
         let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
         let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
@@ -175,7 +184,42 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.navigationController!.pushViewController(viewController, animated: true)
             })
         })
+    }*/
+    
+    func takePicture()
+    {
+        shotButton.enabled = false
+        albumButton.enabled = false
+        print("Taking picture ")
+        let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
+        let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
+        self.viewWillDisappearWithCompletion({() -> Void in
+            self.camera.takePhotoWithCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size, completion: {(photo: UIImage) -> Void in
+                let viewController: TGMediaViewController = TGMediaViewController.newWithDelegate(self.delegate, photo: photo)
+                self.navigationController!.pushViewController(viewController, animated: true)
+            })
+        })
     }
+    
+    func recordVideo(sender: UILongPressGestureRecognizer)
+    {
+        if sender.state == UIGestureRecognizerState.Began
+        {
+            print("Start recording")
+            shotButton.enabled = false
+            albumButton.enabled = false
+            toggleButton.enabled = false
+        }
+        
+        if sender.state == UIGestureRecognizerState.Ended
+        {
+            print("Stop recording")
+            shotButton.enabled = true
+            albumButton.enabled = true
+            toggleButton.enabled = true
+        }
+    }
+    
     
     @IBAction func albumTapped() {
         shotButton.enabled = false
@@ -189,12 +233,12 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func toggleTapped() {
-        TGCamera.toogleWithFlashButton(flashButton)
+        camera.toogleWithFlashButton(flashButton)
     }
     
     @IBAction func handleTapGesture(recognizer: UITapGestureRecognizer) {
         let touchPoint: CGPoint = recognizer.locationInView(captureView)
-        TGCamera.focusView(captureView, inTouchPoint: touchPoint)
+        camera.focusView(captureView, inTouchPoint: touchPoint)
     }
     
     // MARK: - Private methods
@@ -243,6 +287,12 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
         TGCameraSlideView.showSlideUpView(slideUpView, slideDownView: slideDownView, atView: captureView, completion: {() -> Void in
             completion()
         })
+    }
+    
+    func recordingStopped(videoFileURL: NSURL)
+    {
+        //Send to TGMediaViewController
+        print(videoFileURL)
     }
     
 }

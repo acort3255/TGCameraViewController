@@ -9,9 +9,9 @@
 import AVFoundation
 import UIKit
 
-class TGCameraTorch: NSObject {
+public class TGCameraTorch: NSObject {
     public static func changeModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
-        var device: AVCaptureDevice = (session.inputs.last?.device)!
+        let device: AVCaptureDevice = (session.inputs.last?.device)!
         var mode: AVCaptureTorchMode = device.torchMode
         do {
             
