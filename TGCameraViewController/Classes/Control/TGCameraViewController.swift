@@ -39,7 +39,7 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
         if CGRectGetHeight(UIScreen.mainScreen().bounds) <= 480 {
             self.topViewHeight.constant = 0
         }
-        var devices: [AnyObject] = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        let devices: [AnyObject] = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
         if devices.count > 1 {
             if TGCamera.toggleButtonHidden == true {
                 self.toggleButton.hidden = true
@@ -84,11 +84,11 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
         bottomLeftView.hidden = true
         bottomRightView.hidden = true
         
-        gridButton.hidden = false
-        toggleButton.hidden = false
-        shotButton.hidden = false
-        albumButton.hidden = false
-        flashButton.hidden = false
+        gridButton.enabled = false
+        toggleButton.enabled = false
+        shotButton.enabled = false
+        albumButton.enabled = false
+        flashButton.enabled = false
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -193,7 +193,7 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func handleTapGesture(recognizer: UITapGestureRecognizer) {
-        var touchPoint: CGPoint = recognizer.locationInView(captureView)
+        let touchPoint: CGPoint = recognizer.locationInView(captureView)
         TGCamera.focusView(captureView, inTouchPoint: touchPoint)
     }
     
@@ -201,7 +201,7 @@ class TGCameraViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     func deviceOrientationDidChangeNotification() {
-        var orientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
+        let orientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
         var degress: Int
         switch orientation {
         case .FaceUp, .Portrait, .Unknown:

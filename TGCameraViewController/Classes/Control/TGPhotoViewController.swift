@@ -105,7 +105,7 @@ public class TGPhotoViewController: UIViewController
                 if TGCamera.saveImageToAlbum == true && status != PHAuthorizationStatus.Denied
                 {
                     library.saveImage(photo, resultBlock: { (assetURL) in
-                        self.delegate.cameraDidSavePhotoAtPath!(assetURL!)
+                        self.delegate.cameraDidSavePhotoAtPath!(assetURL)
                         }, failureBlock: { (error) in
                             self.delegate.cameraDidSavePhotoWithError!(error!)
                     })

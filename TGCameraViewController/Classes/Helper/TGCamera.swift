@@ -11,10 +11,10 @@ import AVFoundation
 
 public class TGCamera: NSObject {
     
-    public static var toggleButtonHidden: Bool = false
-    public static var albumButtonHidden: Bool = false
-    public static var filterButtonHidden: Bool = false
-    public static var saveImageToAlbum: Bool = false
+    public static var toggleButtonHidden = Bool()
+    public static var albumButtonHidden = Bool()
+    public static var filterButtonHidden = Bool()
+    public static var saveImageToAlbum = Bool()
     public static var previewLayer = AVCaptureVideoPreviewLayer()
     public static var stillImageOutput = AVCaptureStillImageOutput()
     
@@ -23,6 +23,7 @@ public class TGCamera: NSObject {
     
     public required override init() {
         super.init()
+        
     }
     
     public static func gridViewSetup()
