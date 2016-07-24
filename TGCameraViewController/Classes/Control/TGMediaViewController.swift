@@ -15,7 +15,7 @@ let kTGCacheCurveKey: String = "TGCacheCurveKey"
 let kTGCacheVignetteKey: String = "TGCacheVignetteKey"
 
 
-public class TGMediaViewController: UIViewController
+public class TGMediaViewController: UIViewController, PlayerDelegate
 {
     
     
@@ -30,7 +30,10 @@ public class TGMediaViewController: UIViewController
     public var delegate: TGCameraDelegate!
     var detailFilterView: UIView!
     var photo: UIImage!
+    var videoURL: NSURL!
     var cachePhoto: NSCache!
+    var isVideo: Bool = false
+    var videoPlayer: TGPlayer!
     public var albumPhoto: Bool!
     
     
@@ -39,16 +42,23 @@ public class TGMediaViewController: UIViewController
         //fatalError("init(coder:) has not been implemented")
     }*/
     
-    public static func newWithDelegate(delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
+    public static func newWithDelegateAndPhoto(delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
     {
         let viewController: TGMediaViewController = TGMediaViewController(nibName: nil, bundle: nil)
-        //if viewController != nil {
-            viewController.delegate = delegate
-            viewController.photo = photo
-            viewController.cachePhoto = NSCache()
-        // }
+        viewController.delegate = delegate
+        viewController.photo = photo
+        viewController.cachePhoto = NSCache()
         return viewController
 
+    }
+    
+    public static func newWithDelegateAndVideo(delegate: TGCameraDelegate, videoURL: NSURL) -> TGMediaViewController
+    {
+        let viewController: TGMediaViewController = TGMediaViewController(nibName: nil, bundle: nil)
+        viewController.delegate = delegate
+        viewController.videoURL = videoURL
+        viewController.isVideo = true
+        return viewController
     }
     
     public override func viewDidLoad() {
@@ -60,10 +70,27 @@ public class TGMediaViewController: UIViewController
             self.topViewHeight.constant = 0
         }
         self.photoView.clipsToBounds = true
-        self.photoView.image = photo
+        
+        if isVideo == false
+        {
+            self.photoView.image = photo
+        }
+        
+        else
+        {
+            videoPlayer = TGPlayer()
+            videoPlayer.playerView.frame = CGRectMake(photoView.frame.origin.x, photoView.frame.origin.y, 414, 414)//photoView.frame
+            videoPlayer.setURL(videoURL)
+            videoPlayer.delegate = self
+            view.addSubview(videoPlayer.playerView)
+            videoPlayer.playbackLoops = true
+            videoPlayer.playFromBeginning()
+            
+        }
+        
         cancelButton.setImage(UIImage(named: "CameraBack")!, forState: .Normal)
         confirmButton.setImage(UIImage(named: "CameraShot")!, forState: .Normal)
-        if TGCamera.filterButtonHidden == true {
+        if TGCamera.filterButtonHidden == true || isVideo == true{
             self.filterWandButton.hidden = true
         }
         self.addDetailViewToButton(defaultFilterButton)
@@ -76,6 +103,14 @@ public class TGMediaViewController: UIViewController
     
     
     @IBAction func backTapped() {
+        if isVideo == true {
+            videoPlayer.pause()
+            videoPlayer.muted = true
+            videoPlayer.delegate = nil
+            videoPlayer.clearAsset()
+            videoPlayer.playerView.removeFromSuperview()
+            videoPlayer = nil
+        }
         self.navigationController!.popViewControllerAnimated(true)
     }
     
@@ -183,6 +218,35 @@ public class TGMediaViewController: UIViewController
             cachePhoto[kTGCacheVignetteKey] = photo.vignetteWithRadius(0, intensity: 6)
             self.photoView.image = (cachePhoto[kTGCacheVignetteKey] as! UIImage)
         }
+    }
+    
+    // MARK: Video Player delegate
+    
+    public func playerReady(player: TGPlayer)
+    {
+        
+    }
+    public func playerPlaybackStateDidChange(player: TGPlayer)
+    {
+        
+    }
+    public func playerBufferingStateDidChange(player: TGPlayer)
+    {
+        
+    }
+    
+    public func playerPlaybackWillStartFromBeginning(player: TGPlayer)
+    {
+        
+    }
+    public func playerPlaybackDidEnd(player: TGPlayer)
+    {
+        
+    }
+    
+    public func playerDidReachHalfWayPoint()
+    {
+        
     }
     
     // MARK: Private methods

@@ -27,6 +27,8 @@
 		0B2381131D42E3D600E6D5B4 /* TGCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2381121D42E3D600E6D5B4 /* TGCameraViewController.swift */; };
 		0B2381151D43E6FC00E6D5B4 /* TGCameraTorch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2381141D43E6FC00E6D5B4 /* TGCameraTorch.swift */; };
 		0B2381171D440E9700E6D5B4 /* TGMediaCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2381161D440E9700E6D5B4 /* TGMediaCrop.swift */; };
+		0B2381191D4548EF00E6D5B4 /* TGPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2381181D4548EF00E6D5B4 /* TGPlayer.swift */; };
+		0B23811B1D45498100E6D5B4 /* TGVideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23811A1D45498100E6D5B4 /* TGVideoCacheManager.swift */; };
 		0BDA9FA61D3D15E2008B6594 /* UIImage+CameraFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */; };
 		0BDA9FA81D3D2949008B6594 /* TGAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */; };
 		0BDA9FAC1D3D7BBD008B6594 /* TGAssetImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */; };
@@ -68,6 +70,8 @@
 		0B2381121D42E3D600E6D5B4 /* TGCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGCameraViewController.swift; sourceTree = "<group>"; };
 		0B2381141D43E6FC00E6D5B4 /* TGCameraTorch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGCameraTorch.swift; sourceTree = "<group>"; };
 		0B2381161D440E9700E6D5B4 /* TGMediaCrop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGMediaCrop.swift; sourceTree = "<group>"; };
+		0B2381181D4548EF00E6D5B4 /* TGPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPlayer.swift; sourceTree = "<group>"; };
+		0B23811A1D45498100E6D5B4 /* TGVideoCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGVideoCacheManager.swift; sourceTree = "<group>"; };
 		0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CameraFilters.swift"; sourceTree = "<group>"; };
 		0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAlbum.swift; sourceTree = "<group>"; };
 		0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAssetImageFile.swift; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				0BDA9FB71D3FD32C008B6594 /* TGCameraShot.swift */,
 				0B2380EC1D40F22800E6D5B4 /* TGCameraToggle.swift */,
 				0B2381161D440E9700E6D5B4 /* TGMediaCrop.swift */,
+				0B2381181D4548EF00E6D5B4 /* TGPlayer.swift */,
+				0B23811A1D45498100E6D5B4 /* TGVideoCacheManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				0BDA9FB81D3FD32C008B6594 /* TGCameraShot.swift in Sources */,
 				0B2380F71D4109A200E6D5B4 /* TGCameraSlideView.swift in Sources */,
 				0B2381151D43E6FC00E6D5B4 /* TGCameraTorch.swift in Sources */,
+				0B23811B1D45498100E6D5B4 /* TGVideoCacheManager.swift in Sources */,
 				0BDA9FA81D3D2949008B6594 /* TGAlbum.swift in Sources */,
 				0B2380FF1D41129900E6D5B4 /* TGTintedButton.swift in Sources */,
 				0B2380F11D40F8A700E6D5B4 /* TGCameraFocusView.swift in Sources */,
@@ -369,6 +376,7 @@
 				0B2380EF1D40F57400E6D5B4 /* TGCameraFilterView.swift in Sources */,
 				F82F8EDC19C4F29000A47148 /* AppDelegate.m in Sources */,
 				0B2380ED1D40F22800E6D5B4 /* TGCameraToggle.swift in Sources */,
+				0B2381191D4548EF00E6D5B4 /* TGPlayer.swift in Sources */,
 				0BDA9FAC1D3D7BBD008B6594 /* TGAssetImageFile.swift in Sources */,
 				0B23810F1D42792500E6D5B4 /* TGMediaViewController.swift in Sources */,
 				0B2380FD1D41105D00E6D5B4 /* TGCameraSlideUpView.swift in Sources */,

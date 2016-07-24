@@ -21,12 +21,14 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     // Video
     public static var recordsVideo: Bool = false
     public var movieOutputFile: AVCaptureMovieFileOutput!
+    public var videoCaptureDevice: AVCaptureDevice!
     public var audioCaptureDevice: AVCaptureDevice!
     public var audioInput: AVCaptureDeviceInput!
     public var videoInput: AVCaptureDeviceInput!
     public var movieOutputFileURL = NSURL()
     public var delegate = TGCameraViewController()
     public var cropSize = CGSize()
+    public var isRecording = false
     //
     
     private var session: AVCaptureSession!
@@ -59,13 +61,13 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public func cameraWithFlashButton(flashButton: UIButton) -> TGCamera
     {
         let camera = newCamera()
-        setupWithFlashButton(flashButton)
+        setupWithFlashButtonForPictures(flashButton)
         return camera
     }
     
     public func cameraWithFlashButton(flashButton: UIButton, devicePosition: AVCaptureDevicePosition)-> TGCamera{
         let camera = newCamera()
-        setupWithFlashButton(flashButton)
+        setupWithFlashButtonForPictures(flashButton)
         return camera
     }
     
@@ -81,7 +83,9 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
     public func stopRecording()
     {
+        print("stop!!!!!!!")
         movieOutputFile.stopRecording()
+        isRecording = false
     }
     
     public func insertSublayerWithCaptureView(captureView: UIView, atRootView rootView: UIView)
@@ -106,7 +110,13 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
     public func changeFlashModeWithButton(button: UIButton)
     {
-        TGCameraFlash.changeModeWithCaptureSession(session, andButton: button)
+        if isRecording == false{
+            TGCameraFlash.changeModeWithCaptureSession(session, andButton: button)
+        }
+        else
+        {
+            TGCameraTorch.changeModeWithCaptureSession(session, andButton: button)
+        }
     }
     
     public func focusView(focusView: UIView, inTouchPoint touchPoint: CGPoint)
@@ -122,10 +132,10 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
 
     }
     
-    public func recordVideoWtihCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: (videoOutputURL: NSURL) -> Void)
+    public func recordVideoWtihCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize)
     {
-        TGCameraShot.recordVideoCaptureView(captureView, movieFileOutput: movieOutputFile, videoOrientation: videoOrientation, cropSize: cropSize)
-        
+        TGCameraShot.recordVideoCaptureView(captureView, movieFileOutput: movieOutputFile, videoOrientation: videoOrientation, cropSize: cropSize, delegate: self)
+        isRecording = true
     }
     
     public func toogleWithFlashButton(flashButton: UIButton)
@@ -138,12 +148,12 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     // MARK - Private Methods
     
     
-    public func setupWithFlashButton(flashButton: UIButton) {
+    public func setupWithFlashButtonForPictures(flashButton: UIButton) {
         //
         // create session
         //
         self.session = AVCaptureSession()
-        self.session.sessionPreset = AVCaptureSessionPresetPhoto
+        self.session.sessionPreset = AVCaptureSessionPresetHigh
         //
         // setup device
         //
@@ -183,6 +193,13 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         self.stillImageOutput = AVCaptureStillImageOutput()
         self.stillImageOutput.outputSettings = outputSettings
         session.addOutput(stillImageOutput)
+        
+        movieOutputFile = AVCaptureMovieFileOutput()
+        session.addOutput(movieOutputFile)
+        audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        audioInput = try! AVCaptureDeviceInput(device: audioCaptureDevice)
+        session.addInput(audioInput)
+        
         //
         // setup flash button
         //
@@ -190,12 +207,12 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
 
     }
     
-    public func setupWithFlashButton(flashButton: UIButton, devicePosition: AVCaptureDevicePosition) {
+    /*public func setupWithFlashButtonForPictures(flashButton: UIButton, devicePosition: AVCaptureDevicePosition) {
         //
         // create session
         //
         self.session = AVCaptureSession()
-        self.session.sessionPreset = AVCaptureSessionPresetPhoto
+        self.session.sessionPreset = AVCaptureSessionPresetHigh
         //
         // setup device
         //
@@ -234,6 +251,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         //
         let deviceInput: AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: device)
         session.addInput(deviceInput)
+        
         //
         // add output to session
         //
@@ -250,10 +268,70 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
     }
     
+    public func setupWithFlashButtonForVideo(flashButton: UIButton)
+    {
+        //
+        // create session
+        //
+        //session = AVCaptureSession()
+        //self.session.sessionPreset = AVCaptureSessionPresetPhoto
+        //
+        // setup device
+        //
+        movieOutputFile = AVCaptureMovieFileOutput()
+        let device: AVCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        do{
+            try device.lockForConfiguration()
+            if device.autoFocusRangeRestrictionSupported {
+                device.autoFocusRangeRestriction = .Near
+            }
+            if device.smoothAutoFocusSupported {
+                device.smoothAutoFocusEnabled = true
+            }
+            if device.isFocusModeSupported(.ContinuousAutoFocus) {
+                device.focusMode = .ContinuousAutoFocus
+            }
+            device.exposureMode = .ContinuousAutoExposure
+            device.unlockForConfiguration()
+        }
+            
+        catch
+        {
+            print("Unable to lock configuration")
+        }
+        
+        //
+        // add device input to session
+        //
+        
+        
+        session.beginConfiguration()
+        audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        audioInput = try! AVCaptureDeviceInput(device: audioCaptureDevice)
+        session.addInput(audioInput)
+        session.addOutput(movieOutputFile)
+        session.commitConfiguration()
+        
+        //
+        // setup torch button
+        //
+        TGCameraTorch.torchModeWithCaptureSession(session, andButton: flashButton)
+    }*/
+    
     public func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!)
     {
         // send url for cropped video
-        let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
-        delegate.recordingStopped(tempURL)
+        print("did Finish recording")
+        
+        if error == nil
+        {
+            let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
+            delegate.recordingStopped(tempURL)
+        }
+        
+        else
+        {
+            print(error.description)
+        }
     }
 }

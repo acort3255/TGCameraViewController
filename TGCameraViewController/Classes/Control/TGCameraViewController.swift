@@ -62,7 +62,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         gridButton.setImage(UIImage(named: "CameraGrid")!, forState: .Normal)
         toggleButton.setImage(UIImage(named: "CameraToggle")!, forState: .Normal)
         camera = TGCamera()
-        self.camera.setupWithFlashButton(flashButton)
+        self.camera.setupWithFlashButtonForPictures(flashButton)
         camera.delegate = self
         self.captureView.backgroundColor = UIColor.clearColor()
         self.topLeftView.transform = CGAffineTransformMakeRotation(0)
@@ -147,7 +147,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     
     public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let photo: UIImage = TGAlbum.imageWithMediaInfo(info)!
-        let viewController: TGMediaViewController = TGMediaViewController.newWithDelegate(delegate, photo: photo)
+        let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndPhoto(delegate, photo: photo)
         viewController.albumPhoto = true
         self.navigationController!.pushViewController(viewController, animated: false)
         self.dismissViewControllerAnimated(true, completion: { _ in })
@@ -195,7 +195,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
         self.viewWillDisappearWithCompletion({() -> Void in
             self.camera.takePhotoWithCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size, completion: {(photo: UIImage) -> Void in
-                let viewController: TGMediaViewController = TGMediaViewController.newWithDelegate(self.delegate, photo: photo)
+                let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndPhoto(self.delegate, photo: photo)
                 self.navigationController!.pushViewController(viewController, animated: true)
             })
         })
@@ -209,6 +209,10 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             shotButton.enabled = false
             albumButton.enabled = false
             toggleButton.enabled = false
+            
+            let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
+            let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
+            camera.recordVideoWtihCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size)
         }
         
         if sender.state == UIGestureRecognizerState.Ended
@@ -217,6 +221,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             shotButton.enabled = true
             albumButton.enabled = true
             toggleButton.enabled = true
+            camera.stopRecording()
         }
     }
     
@@ -293,6 +298,8 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     {
         //Send to TGMediaViewController
         print(videoFileURL)
+        let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndVideo(self.delegate, videoURL: videoFileURL)
+        self.navigationController!.pushViewController(viewController, animated: true)
     }
     
 }

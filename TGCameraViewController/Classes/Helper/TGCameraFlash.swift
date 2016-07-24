@@ -12,7 +12,18 @@ import UIKit
 
 public class TGCameraFlash: NSObject {
     public static func changeModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
-        let device: AVCaptureDevice = (session.inputs.last?.device)!
+        var device: AVCaptureDevice!// = (session.inputs.last?.device)!
+        // find the input that supports flash aka video input
+        for input in session.inputs
+        {
+            if (input as! AVCaptureDeviceInput).device.flashAvailable == true
+            {
+                device = input.device
+                break
+            }
+        }
+        
+        if device != nil {
         var mode: AVCaptureFlashMode = device.flashMode
         
         do {
@@ -37,19 +48,34 @@ public class TGCameraFlash: NSObject {
         {
             print("Could not lock configuration for avcapture device")
         }
+        }
     }
     
     public static func flashModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
         
-        let device: AVCaptureDevice = (session.inputs.last?.device)!
-        let mode: AVCaptureFlashMode = device.flashMode
-        let image: UIImage = UIImageFromAVCapture(mode)
-        let tintColor: UIColor = TintColorFromAVCapture(mode)
-        button.enabled = device.isFlashModeSupported(mode)
-        if (button is TGTintedButton) {
-            (button as! TGTintedButton).customTintColorOverride = tintColor
+        var device: AVCaptureDevice! //= (session.inputs.last?.device)!
+        print(session.inputs.count)
+        
+        // find the input that supports flash aka video input
+        for input in session.inputs
+        {
+            if (input as! AVCaptureDeviceInput).device.flashAvailable == true
+            {
+                device = input.device
+                break
+            }
         }
-        button.setImage(image, forState: .Normal)
+        
+        if device != nil{
+            let mode: AVCaptureFlashMode = device.flashMode
+            let image: UIImage = UIImageFromAVCapture(mode)
+            let tintColor: UIColor = TintColorFromAVCapture(mode)
+            button.enabled = device.isFlashModeSupported(mode)
+            if (button is TGTintedButton) {
+                (button as! TGTintedButton).customTintColorOverride = tintColor
+            }
+            button.setImage(image, forState: .Normal)
+        }
     }
     
     // MARK: Private

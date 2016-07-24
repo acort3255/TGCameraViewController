@@ -45,16 +45,30 @@ public class TGCameraShot: NSObject {
         })
     }
     
-    public static func recordVideoCaptureView(captureView: UIView, movieFileOutput: AVCaptureMovieFileOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize)
+    public static func recordVideoCaptureView(captureView: UIView, movieFileOutput: AVCaptureMovieFileOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, delegate: TGCamera)
     {
         if movieFileOutput.recording == false
         {
+            var videoConnection: AVCaptureConnection? = nil
+            for connection in movieFileOutput.connections {
+                for port in connection.inputPorts! {
+                    if port.mediaType == AVMediaTypeVideo {
+                        videoConnection = connection as? AVCaptureConnection
+                    }
+                }
+                if videoConnection == nil {
+                    return
+                }
+                
+                videoConnection!.videoOrientation = videoOrientation
+            }
+
+            
             // Start recording to a temporary file.
             let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
-            let outputFilePath: String = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(outputFileName + "mov").absoluteString
-            let outputFileURL = NSURL.fileURLWithPath(outputFilePath)
+            let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mov"
             //NSLog(@"Path to video in camera call: %@", outputFileURL);
-            movieFileOutput.startRecordingToOutputFileURL(outputFileURL, recordingDelegate: delegate)
+            movieFileOutput.startRecordingToOutputFileURL(NSURL.fileURLWithPath(outputFileURL), recordingDelegate: delegate)
         }
     }
     
