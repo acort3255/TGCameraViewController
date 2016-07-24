@@ -97,12 +97,9 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
 
     }
     
-    override public func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    
-    @IBAction func backTapped() {
+    override public func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         if isVideo == true {
             videoPlayer.pause()
             videoPlayer.muted = true
@@ -111,6 +108,14 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             videoPlayer.playerView.removeFromSuperview()
             videoPlayer = nil
         }
+    }
+    
+    override public func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    
+    @IBAction func backTapped() {
         self.navigationController!.popViewControllerAnimated(true)
     }
     
@@ -118,11 +123,11 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         delegate.cameraWillTakePhoto!()
         
         
-        if photoView != nil
+        if photoView != nil && isVideo == false
         {
             photo = photoView.image
             
-            if albumPhoto == nil
+            if albumPhoto != nil
             {
                 delegate.cameraDidSelectAlbumPhoto(photo)
             }
@@ -137,7 +142,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
                 let library = TGAssetsLibrary()
                 let status = PHPhotoLibrary.authorizationStatus()
                 
-                if TGCamera.saveImageToAlbum == true && status != PHAuthorizationStatus.Denied
+                if TGCamera.saveMediaToAlbum == true && status != PHAuthorizationStatus.Denied
                 {
                     library.saveImage(photo, resultBlock: { (assetURL) in
                         self.delegate.cameraDidSavePhotoAtPath!(assetURL)
@@ -163,6 +168,25 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
                 print("Can't save to directory")
             }
             
+        }
+        
+        else
+        {
+            if #available(iOS 8.0, *) {
+                let library = TGAssetsLibrary()
+                let status = PHPhotoLibrary.authorizationStatus()
+                if TGCamera.saveMediaToAlbum == true && status != .Denied
+                {
+                    library.saveVideo(videoURL, resultBlock: {_ in
+                        self.delegate.cameraDidRecordVideo(self.videoURL)
+                        }, failureBlock: {(error) in
+                        print("Could not save video to album: \(error!.description)")
+                    })
+                }
+            } else {
+                // Fallback on earlier versions
+                print("This version is not supported")
+            }
         }
     }
     

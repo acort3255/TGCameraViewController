@@ -11,10 +11,10 @@ import AVFoundation
 
 public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
-    public static var toggleButtonHidden = Bool()
-    public static var albumButtonHidden = Bool()
-    public static var filterButtonHidden = Bool()
-    public static var saveImageToAlbum = Bool()
+    public static var toggleButtonHidden = false
+    public static var albumButtonHidden = false
+    public static var filterButtonHidden = false
+    public static var saveMediaToAlbum = false
     public var previewLayer: AVCaptureVideoPreviewLayer!
     public var stillImageOutput: AVCaptureStillImageOutput!
     
@@ -99,6 +99,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         rootLayer.insertSublayer(previewLayer, atIndex: 0)
         let index: Int = captureView.subviews.count - 1
         gridViewSetup()
+        cropSize = captureView.frame.size
         captureView.insertSubview(self.gridView!, atIndex: index)
     }
     
@@ -207,7 +208,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
 
     }
     
-    /*public func setupWithFlashButtonForPictures(flashButton: UIButton, devicePosition: AVCaptureDevicePosition) {
+    public func setupWithFlashButtonForPictures(flashButton: UIButton, devicePosition: AVCaptureDevicePosition) {
         //
         // create session
         //
@@ -262,13 +263,20 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         self.stillImageOutput = AVCaptureStillImageOutput()
         self.stillImageOutput.outputSettings = outputSettings
         session.addOutput(stillImageOutput)
+        
+        movieOutputFile = AVCaptureMovieFileOutput()
+        session.addOutput(movieOutputFile)
+        audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        audioInput = try! AVCaptureDeviceInput(device: audioCaptureDevice)
+        session.addInput(audioInput)
+        
         //
         // setup flash button
         //
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
     }
     
-    public func setupWithFlashButtonForVideo(flashButton: UIButton)
+    /* public func setupWithFlashButtonForVideo(flashButton: UIButton)
     {
         //
         // create session
@@ -325,8 +333,14 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         
         if error == nil
         {
-            let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
-            delegate.recordingStopped(tempURL)
+            //let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
+            //delegate.recordingStopped(tempURL)
+            TGMediaCrop.cropVideo(outputFileURL, completion: { (croppedVideoURL) in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                   self.delegate.recordingStopped(croppedVideoURL)
+                })
+            })
         }
         
         else

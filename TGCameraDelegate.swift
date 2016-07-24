@@ -14,6 +14,8 @@ import UIKit
     func cameraDidSelectAlbumPhoto(image: UIImage?)
     func cameraDidTakePhoto(image: UIImage?)
     
+    func cameraDidRecordVideo(videoURL: NSURL?)
+    
     optional func cameraDidSavePhotoWithError(error: NSError?)
     optional func cameraDidSavePhotoAtPath(assetURL: NSURL?)
     optional func cameraWillTakePhoto()

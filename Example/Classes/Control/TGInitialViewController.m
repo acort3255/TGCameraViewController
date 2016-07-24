@@ -12,6 +12,7 @@
 @interface TGInitialViewController () <TGCameraDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *photoView;
+@property (strong, nonatomic) TGPlayer* videoPlayer;
 
 - (IBAction)takePhotoTapped;
 
@@ -30,6 +31,7 @@
     // save image at album
     TGCamera.albumButtonHidden = YES;
     TGCamera.filterButtonHidden = YES;
+    TGCamera.saveMediaToAlbum = YES;
     
     // hidden toggle button
     //[TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];
@@ -40,8 +42,8 @@
     
     // hide filter button
     //[TGCamera setOption:kTGCameraOptionHiddenFilterButton value:[NSNumber numberWithBool:YES]];
-
-    
+    _videoPlayer = [[TGPlayer alloc] init];
+    _videoPlayer.playerView.clipsToBounds = YES;
     _photoView.clipsToBounds = YES;
     
     UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -68,6 +70,18 @@
 {
     _photoView.image = image;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cameraDidRecordVideo: (NSURL *)videoURL
+{
+    [_videoPlayer setURL:videoURL];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+        _videoPlayer.playerView.frame = _photoView.frame;
+        [self.view addSubview:_videoPlayer.playerView];
+        [_videoPlayer playFromBeginning];
+    });
 }
 
 - (void)cameraDidSelectAlbumPhoto:(UIImage *)image

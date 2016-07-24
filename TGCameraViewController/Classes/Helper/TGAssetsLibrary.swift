@@ -148,6 +148,30 @@ public class TGAssetsLibrary: PHImageManager{
         })
     }
     
+    public func saveVideo(videoURL: NSURL, resultBlock: TGAssetsResultCompletion, failureBlock: TGAssetsFailureCompletion)
+    {
+        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+            let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(videoURL)
+            let assetPlaceholder = assetRequest!.placeholderForCreatedAsset
+            let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.assetCollection)
+            albumChangeRequest!.addAssets([assetPlaceholder!])
+            }, completionHandler: { success, error in
+                print("added video to album")
+                print(error)
+                
+                if success
+                {
+                    resultBlock(assetURL: NSURL(fileURLWithPath: ""))
+                }
+                    
+                else
+                {
+                    failureBlock(error: error)
+                }
+                
+        })
+    }
+    
     
     
     public func saveJPGImageAtDocumentDirectory(image: UIImage, resultBlock: TGAssetsResultCompletion, failureBlock: TGAssetsFailureCompletion) {

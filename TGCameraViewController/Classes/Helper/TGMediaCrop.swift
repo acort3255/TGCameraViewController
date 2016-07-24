@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 public  class TGMediaCrop
 {
@@ -56,8 +57,42 @@ public  class TGMediaCrop
         
     }
     
-    public static func cropVideo(videoURL: NSURL, withCropSize: CGSize) -> NSURL
+    public static func cropVideo(videoURL: NSURL, completion: (croppedVideoURL: NSURL) -> Void)
     {
-        return videoURL
+        // output file
+        let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
+        let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mov"
+        
+        // input file
+        let asset: AVAsset = AVAsset(URL: videoURL)
+        let composition: AVMutableComposition = AVMutableComposition()
+        composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
+        // input clip
+        let clipVideoTrack: AVAssetTrack = asset.tracksWithMediaType(AVMediaTypeVideo)[0]
+        // make it square
+        let videoComposition: AVMutableVideoComposition = AVMutableVideoComposition()
+        videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.height)
+        videoComposition.frameDuration = CMTimeMake(1, 30)
+        let instruction: AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))
+        // rotate to portrait
+        let transformer: AVMutableVideoCompositionLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
+        let t1: CGAffineTransform = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -(clipVideoTrack.naturalSize.width - clipVideoTrack.naturalSize.height) / 2)
+        let t2: CGAffineTransform = CGAffineTransformRotate(t1, CGFloat(M_PI_2))
+        let finalTransform: CGAffineTransform = t2
+        transformer.setTransform(finalTransform, atTime: kCMTimeZero)
+        instruction.layerInstructions = [transformer]
+        videoComposition.instructions = [instruction]
+        // export
+        let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
+        exporter!.videoComposition = videoComposition
+        exporter!.outputURL = NSURL.fileURLWithPath(outputFileURL)
+        exporter!.outputFileType = AVFileTypeQuickTimeMovie
+        exporter!.exportAsynchronouslyWithCompletionHandler({() -> Void in
+            print("Exporting done!")
+            completion(croppedVideoURL: NSURL.fileURLWithPath(outputFileURL))
+        })
+        
+        //return videoURL
     }
 }
