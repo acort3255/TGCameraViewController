@@ -135,6 +135,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
     public func recordVideoWtihCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize)
     {
+        print("Session outputs: \(session.outputs.count)")
         TGCameraShot.recordVideoCaptureView(captureView, movieFileOutput: movieOutputFile, videoOrientation: videoOrientation, cropSize: cropSize, delegate: self)
         isRecording = true
     }
@@ -143,6 +144,11 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     {
         TGCameraToggle.toogleWithCaptureSession(session)
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
+        
+        // Update the orientation on the movie file output video connection before starting recording.
+        let connection: AVCaptureConnection = movieOutputFile.connectionWithMediaType(AVMediaTypeVideo)
+        connection.videoOrientation = previewLayer.connection.videoOrientation
+
 
     }
     

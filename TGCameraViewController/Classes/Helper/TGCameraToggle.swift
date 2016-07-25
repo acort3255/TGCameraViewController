@@ -12,12 +12,23 @@ import AVFoundation
 public class TGCameraToggle: NSObject {
     public static func toogleWithCaptureSession(session: AVCaptureSession)
     {
-        let deviceInput = session.inputs.last as! AVCaptureDeviceInput
-        let reverseDeviceInput: AVCaptureDeviceInput = self.reverseDeviceInput(deviceInput)!
-        session.beginConfiguration()
-        session.removeInput(deviceInput)
-        session.addInput(reverseDeviceInput)
-        session.commitConfiguration()
+        var deviceInput: AVCaptureDeviceInput! //= session.inputs.last as! AVCaptureDeviceInput
+        
+        for input in session.inputs
+        {
+            if (input as! AVCaptureDeviceInput).device.hasMediaType(AVMediaTypeVideo)
+            {
+                deviceInput = input as! AVCaptureDeviceInput
+            }
+        }
+        
+        if deviceInput != nil {
+            let reverseDeviceInput: AVCaptureDeviceInput = self.reverseDeviceInput(deviceInput)!
+            session.beginConfiguration()
+            session.removeInput(deviceInput)
+            session.addInput(reverseDeviceInput)
+            session.commitConfiguration()
+        }
     }
     
     // MARK: Private

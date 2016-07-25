@@ -56,12 +56,13 @@ public class TGCameraShot: NSObject {
                         videoConnection = connection as? AVCaptureConnection
                     }
                 }
-                if videoConnection == nil {
-                    return
-                }
-                
-                videoConnection!.videoOrientation = videoOrientation
             }
+            
+            if videoConnection == nil {
+                return
+            }
+            
+            videoConnection!.videoOrientation = videoOrientation
 
             
             // Start recording to a temporary file.
