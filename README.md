@@ -39,23 +39,24 @@ Find out [who uses TGCameraViewController](https://github.com/tdginternet/TGCame
 ---
 ---
 
-### Adding to your project
+### Installation with Carthage
 
-[CocoaPods](http://cocoapods.org) is the recommended way to add TGCameraViewController to your project.
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
 
-* Add a pod entry for TGCameraViewController to your Podfile:
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
 
-```
-pod 'TGCameraViewController'
-```
-
-* Install the pod(s) by running:
-
-```
-pod install
+```bash
+$ brew update
+$ brew install carthage
 ```
 
-<em>Alternatively you can directly download the [latest code version](https://github.com/tdginternet/TGCameraViewController/archive/master.zip) add  drag and drop all files at <strong>TGCameraViewController</strong> folder onto your project.</em>
+To integrate AFNetworking into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "acort3255/TGCameraViewController"
+```
+
+Run `carthage` to build the framework and drag the built `TGCameraViewController.framework` into your Xcode project.
 
 ---
 ---
