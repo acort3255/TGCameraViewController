@@ -95,12 +95,6 @@ Run `carthage` to build the framework and drag the built `TGCameraViewController
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)cameraDidSavePhotoAtPath:(NSURL *)assetURL
-{
-    // When this method is implemented, an image will be saved on the user's device
-    NSLog(@"%s album path: %@", __PRETTY_FUNCTION__, assetURL);
-}
-
 - (void)cameraDidSavePhotoWithError:(NSError *)error
 {
     NSLog(@"%s error: %@", __PRETTY_FUNCTION__, error);
@@ -132,6 +126,7 @@ Run `carthage` to build the framework and drag the built `TGCameraViewController
 
 ```obj-c
 #import "TGCameraViewController.h"
+#import "TGCameraViewController-Swift.h"
 
 @interface TGViewController : UIViewController
 <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
