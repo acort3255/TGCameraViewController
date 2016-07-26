@@ -172,6 +172,14 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         
         else
         {
+            let cleanup: dispatch_block_t = {() -> Void in
+                do {
+                    try NSFileManager.defaultManager().removeItemAtURL(self.videoURL)
+                }
+                catch _ {
+                }
+            }
+            
             if #available(iOS 8.0, *) {
                 let library = TGAssetsLibrary()
                 let status = PHPhotoLibrary.authorizationStatus()
@@ -179,6 +187,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
                 {
                     library.saveVideo(videoURL, resultBlock: {_ in
                         self.delegate.cameraDidRecordVideo(self.videoURL)
+                        cleanup()
                         }, failureBlock: {(error) in
                         print("Could not save video to album: \(error!.description)")
                     })

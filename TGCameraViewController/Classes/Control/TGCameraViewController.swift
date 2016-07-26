@@ -220,9 +220,10 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         if sender.state == UIGestureRecognizerState.Ended
         {
             print("Stop recording")
-            shotButton.enabled = true
+            /*shotButton.enabled = true
             albumButton.enabled = true
-            toggleButton.enabled = true
+            toggleButton.enabled = true*/
+            flashButton.enabled = false
             camera.stopRecording()
         }
     }
@@ -298,6 +299,11 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     
     func recordingStopped(videoFileURL: NSURL)
     {
+        shotButton.enabled = true
+        albumButton.enabled = true
+        toggleButton.enabled = true
+        flashButton.enabled = true
+        
         //Send to TGMediaViewController
         print(videoFileURL)
         let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndVideo(self.delegate, videoURL: videoFileURL)

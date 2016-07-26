@@ -59,6 +59,16 @@ public  class TGMediaCrop
     
     public static func cropVideo(videoURL: NSURL, completion: (croppedVideoURL: NSURL) -> Void)
     {
+        // cleanup initial file
+        
+        let cleanup: dispatch_block_t = {() -> Void in
+            do {
+                try NSFileManager.defaultManager().removeItemAtURL(videoURL)
+            }
+            catch let _ {
+            }
+        }
+        
         // output file
         let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
         let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mov"
@@ -90,6 +100,7 @@ public  class TGMediaCrop
         exporter!.outputFileType = AVFileTypeQuickTimeMovie
         exporter!.exportAsynchronouslyWithCompletionHandler({() -> Void in
             print("Exporting done!")
+            cleanup()
             completion(croppedVideoURL: NSURL.fileURLWithPath(outputFileURL))
         })
         
