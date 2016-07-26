@@ -29,7 +29,9 @@
     [super viewDidLoad];
     
     // save image at album
-    TGCamera.albumButtonHidden = YES;
+    TGCamera.toggleButtonHidden = YES;
+    NSLog(@"ToggleButtonHidden %d", TGCamera.toggleButtonHidden);
+    //TGCamera.albumButtonHidden = YES;
     //TGCamera.filterButtonHidden = YES;
     TGCamera.saveMediaToAlbum = YES;
     
