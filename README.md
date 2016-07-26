@@ -18,8 +18,7 @@ Custom camera with AVFoundation. Beautiful, light and easy to integrate with iOS
 * Custom view with camera permission denied
 * Custom button colors
 * Easy way to access album (camera roll)
-* Flash auto, off and on
-* Torch auto, off, and on
+* Flash/Torch auto, off and on
 * Video support
 * Focus
 * Front and back camera
@@ -191,10 +190,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 |Option|Type|Default|Description|
 |:-:|:-:|:-:|:-:|
-|kTGCameraOptionHiddenToggleButton|NSNumber (YES/NO)|NO|Displays or hides the button that switches between the front and rear camera|
-|kTGCameraOptionHiddenAlbumButton|NSNumber (YES/NO)|NO|Displays or hides the button that allows the user to select a photo from his/her album|
-|kTGCameraOptionHiddenFilterButton|NSNumber (YES/NO)|NO|Displays or hides the button that allos the user to filter his/her photo|
-|kTGCameraOptionSaveImageToAlbum|NSNumber (YES/NO)|NO|Save or not the photo in the camera roll|
+|TGCamera.toggleButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that switches between the front and rear camera|
+|TGCamera.albumButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that allows the user to select a photo from his/her album|
+|TGCamera.filterButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that allos the user to filter his/her photo|
+|TGCamera.saveMediaToAlbum|BOOL (true/false)(YES/NO)|(false/NO)|Whether or not to the media to the camera roll|
 
 ```obj-c
 #import "TGCamera.h"
@@ -204,20 +203,20 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 - (void)viewDidLoad
 {
     //...
-    [TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];
-    [TGCamera setOption:kTGCameraOptionHiddenAlbumButton value:[NSNumber numberWithBool:YES]];
-    [TGCamera setOption:kTGCameraOptionHiddenFilterButton value:[NSNumber numberWithBool:YES]];
-    [TGCamera setOption:kTGCameraOptionSaveImageToAlbum value:[NSNumber numberWithBool:YES]];
+    TGCamera.toggleButtonHidden = YES;
+    TGCamera.albumButtonHidden = YES;
+    TGCamera.filterButtonHidden = YES;
+    TGCamera.saveMediaToAlbum = YES;
     //...
 }
 
 - (IBAction)buttonTapped
 {
     //...
-    BOOL hiddenToggleButton = [[TGCamera getOption:kTGCameraOptionHiddenToggleButton] boolValue];
-    BOOL hiddenAlbumButton = [[TGCamera getOption:kTGCameraOptionHiddenAlbumButton] boolValue];
-    BOOL hiddenFilterButton = [[TGCamera getOption:kTGCameraOptionHiddenFilterButton] boolValue];
-    BOOL saveToDevice = [[TGCamera getOption:kTGCameraOptionSaveImageToAlbum] boolValue];
+    BOOL hiddenToggleButton = TGCamera.toggleButtonHidden;
+    BOOL hiddenAlbumButton = TGCamera.albumButtonHidden;
+    BOOL hiddenFilterButton = TGCamera.filterButtonHidden;
+    BOOL saveToDevice = TGCamera.saveMediaToAlbum;
     //...    
 }
 
@@ -229,7 +228,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 ### Requirements
 
-TGCameraViewController works on iOS 7.0+ version and is compatible with ARC projects. It depends on the following Apple frameworks, which should already be included with most Xcode templates:
+TGCameraViewController works on iOS 8.0+ version and is compatible with ARC projects. It depends on the following Apple frameworks, which should already be included with most Xcode templates:
 
 * PHPhotoLibrary.framework
 * AVFoundation.framework
