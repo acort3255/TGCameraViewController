@@ -14,11 +14,13 @@ Custom camera with AVFoundation. Beautiful, light and easy to integrate with iOS
 [![Cocoapods](http://img.shields.io/cocoapods/p/TGCameraViewController.svg)](http://cocoapods.org/?q=on%3Aios%20tgcameraviewcontroller)&nbsp;
 [![Analytics](https://ga-beacon.appspot.com/UA-54929747-1/tdginternet/TGCameraViewController/README.md)](https://github.com/igrigorik/ga-beacon)
 
-* Completely custom camera with AVFoundation
+* Completely custom camera with AVFoundation, written in Swift 2.2
 * Custom view with camera permission denied
 * Custom button colors
 * Easy way to access album (camera roll)
 * Flash auto, off and on
+* Torch auto, off, and on
+* Video support
 * Focus
 * Front and back camera
 * Grid view
@@ -26,7 +28,7 @@ Custom camera with AVFoundation. Beautiful, light and easy to integrate with iOS
 * Visual effects like Instagram iOS app
 * iPhone, iPod and iPad supported
 
-<em>This library can be applied on devices running iOS 7.0+.</em>
+<em>This library can be applied on devices running iOS 8.0+.</em>
 
 ---
 ---
@@ -229,7 +231,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 TGCameraViewController works on iOS 7.0+ version and is compatible with ARC projects. It depends on the following Apple frameworks, which should already be included with most Xcode templates:
 
-* AssetsLibrary.framework
+* PHPhotoLibrary.framework
 * AVFoundation.framework
 * CoreImage.framework
 * Foundation.framework
