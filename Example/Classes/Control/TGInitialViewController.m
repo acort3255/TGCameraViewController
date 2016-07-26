@@ -30,7 +30,7 @@
     
     // save image at album
     TGCamera.albumButtonHidden = YES;
-    TGCamera.filterButtonHidden = YES;
+    //TGCamera.filterButtonHidden = YES;
     TGCamera.saveMediaToAlbum = YES;
     
     // hidden toggle button

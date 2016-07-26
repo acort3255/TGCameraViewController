@@ -16,7 +16,7 @@ public class TGCameraFlash: NSObject {
         // find the input that supports flash aka video input
         for input in session.inputs
         {
-            if (input as! AVCaptureDeviceInput).device.flashAvailable == true
+            if (input as! AVCaptureDeviceInput).device.hasFlash == true
             {
                 device = input.device
                 break
@@ -28,18 +28,20 @@ public class TGCameraFlash: NSObject {
         
         do {
             try device.lockForConfiguration()
-            switch device.flashMode {
-            case .Auto:
-                mode = .On
-            case .On:
-                mode = .Off
-            case .Off:
-                mode = .Auto
-            }
-        
+            
+                switch device.flashMode {
+                case .Auto:
+                    mode = .On
+                case .On:
+                    mode = .Off
+                case .Off:
+                    mode = .Auto
+                }
+            
             if device.isFlashModeSupported(mode) {
                 device.flashMode = mode
             }
+            
             device.unlockForConfiguration()
             self.flashModeWithCaptureSession(session, andButton: button)
         }
@@ -51,6 +53,38 @@ public class TGCameraFlash: NSObject {
         }
     }
     
+    public static func matchFlashModeToTorchMode(session: AVCaptureSession, andButton button: UIButton) {
+        var device: AVCaptureDevice! //= (session.inputs.last?.device)!
+        
+        for input in session.inputs
+        {
+            if (input as! AVCaptureDeviceInput).device.hasTorch == true
+            {
+                device = input.device
+            }
+        }
+        
+        if device != nil {
+            let mode: AVCaptureFlashMode = determineFlashMode(device)
+            do {
+                
+                try device.lockForConfiguration()
+                if device.isFlashModeSupported(mode) {
+                    device.flashMode = mode
+                }
+                print("Supported flash \(device.isFlashModeSupported(mode))")
+                
+                device.unlockForConfiguration()
+                self.flashModeWithCaptureSession(session, andButton: button)
+            }
+                
+            catch
+            {
+                print("Could not lock configuration for AVCapture (TGCamera Torch)")
+            }
+        }
+    }
+    
     public static func flashModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
         
         var device: AVCaptureDevice! //= (session.inputs.last?.device)!
@@ -59,7 +93,7 @@ public class TGCameraFlash: NSObject {
         // find the input that supports flash aka video input
         for input in session.inputs
         {
-            if (input as! AVCaptureDeviceInput).device.flashAvailable == true
+            if (input as! AVCaptureDeviceInput).device.hasFlash == true
             {
                 device = input.device
                 break
@@ -93,6 +127,22 @@ public class TGCameraFlash: NSObject {
         let array = [UIColor.grayColor(), TGCameraColor.tintColor(), TGCameraColor.tintColor()]
         let color: UIColor = array[flashMode.rawValue]
         return color
+    }
+    
+    private static func determineFlashMode(device: AVCaptureDevice) -> AVCaptureFlashMode
+    {
+        var result: AVCaptureFlashMode!
+        if device.hasTorch == true && device.flashMode != AVCaptureFlashMode(rawValue: device.torchMode.rawValue)!
+        {
+            result = AVCaptureFlashMode(rawValue: device.torchMode.rawValue)!
+        }
+            
+        else
+        {
+            result = device.flashMode
+        }
+        
+        return result
     }
 
 }

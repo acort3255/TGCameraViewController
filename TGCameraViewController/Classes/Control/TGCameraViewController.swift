@@ -128,7 +128,6 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             wasLoaded = true
             camera.insertSublayerWithCaptureView(captureView, atRootView: view)
         }
-
     }
     
     override public func viewDidDisappear(animated: Bool) {
@@ -209,6 +208,9 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             shotButton.enabled = false
             albumButton.enabled = false
             toggleButton.enabled = false
+            
+            // Set the torch to the what appears on the flash button
+            camera.setTorchMode(flashButton)
             
             let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
             let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)

@@ -15,7 +15,7 @@ public class TGCameraTorch: NSObject {
         
         for input in session.inputs
         {
-            if (input as! AVCaptureDeviceInput).device.torchAvailable == true
+            if (input as! AVCaptureDeviceInput).device.hasTorch == true
             {
                 device = input.device
             }
@@ -26,15 +26,14 @@ public class TGCameraTorch: NSObject {
             do {
             
                 try device.lockForConfiguration()
-                switch device.torchMode {
-                case .Auto:
-                    mode = .On
-                case .On:
-                    mode = .Off
-                case .Off:
-                    mode = .Auto
-                }
-        
+                    switch device.torchMode {
+                    case .Auto:
+                        mode = .On
+                    case .On:
+                        mode = .Off
+                    case .Off:
+                        mode = .Auto
+                    }
                 if device.isTorchModeSupported(mode) {
                     device.torchMode = mode
                 }
@@ -51,14 +50,47 @@ public class TGCameraTorch: NSObject {
         }
     }
     
+    public static func matchTorchModeToFlashMode(session: AVCaptureSession, andButton button: UIButton) {
+        var device: AVCaptureDevice! //= (session.inputs.last?.device)!
+        
+        for input in session.inputs
+        {
+            if (input as! AVCaptureDeviceInput).device.hasTorch == true
+            {
+                device = input.device
+            }
+        }
+        
+        if device != nil {
+            let mode: AVCaptureTorchMode = determineTorchMode(device)
+            do {
+                
+                try device.lockForConfiguration()
+                if device.isTorchModeSupported(mode) {
+                    device.torchMode = mode
+                }
+                print("Supported torch \(device.isTorchModeSupported(mode))")
+                
+                device.unlockForConfiguration()
+                self.torchModeWithCaptureSession(session, andButton: button)
+            }
+                
+            catch
+            {
+                print("Could not lock configuration for AVCapture (TGCamera Torch)")
+            }
+        }
+    }
+    
     public static func torchModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
         var device: AVCaptureDevice!// = (session.inputs.first!.device)!
         
         // find input that supports torch aka video input
         for input in session.inputs
         {
-            if (input as! AVCaptureDeviceInput).device.torchAvailable == true
+            if (input as! AVCaptureDeviceInput).device.hasTorch == true
             {
+                print("Device has torch")
                 device = input.device
             }
         }
@@ -90,5 +122,21 @@ public class TGCameraTorch: NSObject {
         let array = [UIColor.grayColor(), TGCameraColor.tintColor(), TGCameraColor.tintColor()]
         let color: UIColor = array[torchMode.rawValue]
         return color
+    }
+    
+    private static func determineTorchMode(device: AVCaptureDevice) -> AVCaptureTorchMode
+    {
+        var result: AVCaptureTorchMode!
+        if device.hasFlash == true && device.flashMode != AVCaptureFlashMode(rawValue: device.torchMode.rawValue)!
+        {
+            result = AVCaptureTorchMode(rawValue: device.flashMode.rawValue)!
+        }
+        
+        else
+        {
+            result = device.torchMode
+        }
+        
+        return result
     }
 }

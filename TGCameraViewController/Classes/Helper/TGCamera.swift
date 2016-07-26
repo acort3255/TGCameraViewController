@@ -37,8 +37,8 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public required override init() {
         super.init()
         
-        previewLayer = AVCaptureVideoPreviewLayer()
-        stillImageOutput = AVCaptureStillImageOutput()
+        //previewLayer = AVCaptureVideoPreviewLayer()
+        //stillImageOutput = AVCaptureStillImageOutput()
         
     }
     
@@ -135,7 +135,6 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
     public func recordVideoWtihCaptureView(captureView: UIView, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize)
     {
-        print("Session outputs: \(session.outputs.count)")
         TGCameraShot.recordVideoCaptureView(captureView, movieFileOutput: movieOutputFile, videoOrientation: videoOrientation, cropSize: cropSize, delegate: self)
         isRecording = true
     }
@@ -145,11 +144,18 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         TGCameraToggle.toogleWithCaptureSession(session)
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
         
-        // Update the orientation on the movie file output video connection before starting recording.
-        let connection: AVCaptureConnection = movieOutputFile.connectionWithMediaType(AVMediaTypeVideo)
-        connection.videoOrientation = previewLayer.connection.videoOrientation
-
-
+    }
+    
+    // Sets the flash mode to what appears on the flash button for when the view disappears
+    public func setFlashMode(flashButton: UIButton)
+    {
+        TGCameraFlash.matchFlashModeToTorchMode(session, andButton: flashButton)
+    }
+    
+    // Sets the torch mode to what appears on the flash button when the recording
+    public func setTorchMode(flashButton: UIButton)
+    {
+        TGCameraTorch.matchTorchModeToFlashMode(session, andButton: flashButton)
     }
     
     // MARK - Private Methods
@@ -281,56 +287,6 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         //
         TGCameraFlash.flashModeWithCaptureSession(session, andButton: flashButton)
     }
-    
-    /* public func setupWithFlashButtonForVideo(flashButton: UIButton)
-    {
-        //
-        // create session
-        //
-        //session = AVCaptureSession()
-        //self.session.sessionPreset = AVCaptureSessionPresetPhoto
-        //
-        // setup device
-        //
-        movieOutputFile = AVCaptureMovieFileOutput()
-        let device: AVCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        do{
-            try device.lockForConfiguration()
-            if device.autoFocusRangeRestrictionSupported {
-                device.autoFocusRangeRestriction = .Near
-            }
-            if device.smoothAutoFocusSupported {
-                device.smoothAutoFocusEnabled = true
-            }
-            if device.isFocusModeSupported(.ContinuousAutoFocus) {
-                device.focusMode = .ContinuousAutoFocus
-            }
-            device.exposureMode = .ContinuousAutoExposure
-            device.unlockForConfiguration()
-        }
-            
-        catch
-        {
-            print("Unable to lock configuration")
-        }
-        
-        //
-        // add device input to session
-        //
-        
-        
-        session.beginConfiguration()
-        audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-        audioInput = try! AVCaptureDeviceInput(device: audioCaptureDevice)
-        session.addInput(audioInput)
-        session.addOutput(movieOutputFile)
-        session.commitConfiguration()
-        
-        //
-        // setup torch button
-        //
-        TGCameraTorch.torchModeWithCaptureSession(session, andButton: flashButton)
-    }*/
     
     public func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!)
     {

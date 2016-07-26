@@ -63,7 +63,7 @@ public class TGCameraShot: NSObject {
             }
             
             videoConnection!.videoOrientation = videoOrientation
-
+            
             
             // Start recording to a temporary file.
             let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
