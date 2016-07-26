@@ -50,7 +50,7 @@ $ brew update
 $ brew install carthage
 ```
 
-To integrate AFNetworking into your Xcode project using Carthage, specify it in your `Cartfile`:
+To integrate TGCameraViewController into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
 github "acort3255/TGCameraViewController"
