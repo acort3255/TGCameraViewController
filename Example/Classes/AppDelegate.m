@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "TGCameraViewController.h"
 
 @interface AppDelegate ()
 

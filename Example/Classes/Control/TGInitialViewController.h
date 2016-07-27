@@ -7,6 +7,7 @@
 //
 
 @import UIKit;
+@import TGCameraViewController;
 
 @interface TGInitialViewController : UIViewController
 
