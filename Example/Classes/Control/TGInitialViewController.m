@@ -29,10 +29,9 @@
     
     // save image at album
     //TGCamera.toggleButtonHidden = YES;
-    NSLog(@"ToggleButtonHidden %d", TGCamera.toggleButtonHidden);
-    TGCamera.albumButtonHidden = YES;
+    //TGCamera.albumButtonHidden = YES;
     //TGCamera.filterButtonHidden = YES;
-    TGCamera.saveMediaToAlbum = YES;
+    //TGCamera.saveMediaToAlbum = YES;
     
     // hidden toggle button
     //[TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];
