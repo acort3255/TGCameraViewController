@@ -31,6 +31,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var toggleButtonWidth: NSLayoutConstraint!
     var camera: TGCamera!
     var wasLoaded: Bool!
+    private var croppedVideoURL: NSURL!
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -212,6 +213,9 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             // Set the torch to the what appears on the flash button
             camera.setTorchMode(flashButton)
             
+            // removes previous cropped video
+            cleanupPreviousVideo()
+            
             let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
             let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
             camera.recordVideoWtihCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size)
@@ -220,10 +224,6 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         if sender.state == UIGestureRecognizerState.Ended
         {
             print("Stop recording")
-            /*shotButton.enabled = true
-            albumButton.enabled = true
-            toggleButton.enabled = true*/
-            flashButton.enabled = false
             camera.stopRecording()
         }
     }
@@ -306,8 +306,21 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         
         //Send to TGMediaViewController
         print(videoFileURL)
+        croppedVideoURL = videoFileURL
         let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndVideo(self.delegate, videoURL: videoFileURL)
         self.navigationController!.pushViewController(viewController, animated: true)
+    }
+    
+    func cleanupPreviousVideo()
+    {
+        if croppedVideoURL != nil{
+            do {
+                try NSFileManager.defaultManager().removeItemAtURL(self.croppedVideoURL)
+            }
+            catch _ {
+            }
+            
+        }
     }
     
 }
