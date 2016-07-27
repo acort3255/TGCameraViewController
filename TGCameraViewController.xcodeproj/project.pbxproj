@@ -36,6 +36,7 @@
 		0B44107A1D48F7F900D60575 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4410791D48F7F900D60575 /* AssetsLibrary.framework */; };
 		0B44107C1D48F80300D60575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B44107B1D48F80300D60575 /* Foundation.framework */; };
 		0B44107E1D48F82400D60575 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B44107D1D48F82400D60575 /* CoreImage.framework */; };
+		0B8736DD1D493B8000CF308D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8736DC1D493B7F00CF308D /* CoreGraphics.framework */; };
 		0BDA9FA61D3D15E2008B6594 /* UIImage+CameraFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */; };
 		0BDA9FA81D3D2949008B6594 /* TGAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */; };
 		0BDA9FAC1D3D7BBD008B6594 /* TGAssetImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */; };
@@ -86,6 +87,7 @@
 		0B4410791D48F7F900D60575 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0B44107B1D48F80300D60575 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0B44107D1D48F82400D60575 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		0B8736DC1D493B7F00CF308D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CameraFilters.swift"; sourceTree = "<group>"; };
 		0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAlbum.swift; sourceTree = "<group>"; };
 		0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAssetImageFile.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B8736DD1D493B8000CF308D /* CoreGraphics.framework in Frameworks */,
 				0B44107E1D48F82400D60575 /* CoreImage.framework in Frameworks */,
 				0B44107C1D48F80300D60575 /* Foundation.framework in Frameworks */,
 				0B44107A1D48F7F900D60575 /* AssetsLibrary.framework in Frameworks */,
@@ -131,6 +134,7 @@
 		F82F8E7819C4EFE700A47148 = {
 			isa = PBXGroup;
 			children = (
+				0B8736DC1D493B7F00CF308D /* CoreGraphics.framework */,
 				0B44107D1D48F82400D60575 /* CoreImage.framework */,
 				0B44107B1D48F80300D60575 /* Foundation.framework */,
 				0B4410791D48F7F900D60575 /* AssetsLibrary.framework */,
