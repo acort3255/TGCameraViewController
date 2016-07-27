@@ -67,7 +67,7 @@ public class TGCameraShot: NSObject {
             
             // Start recording to a temporary file.
             let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
-            let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mov"
+            let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mp4"
             //NSLog(@"Path to video in camera call: %@", outputFileURL);
             movieFileOutput.startRecordingToOutputFileURL(NSURL.fileURLWithPath(outputFileURL), recordingDelegate: delegate)
         }

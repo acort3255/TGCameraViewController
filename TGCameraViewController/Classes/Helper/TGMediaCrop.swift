@@ -65,13 +65,13 @@ public  class TGMediaCrop
             do {
                 try NSFileManager.defaultManager().removeItemAtURL(videoURL)
             }
-            catch let _ {
+            catch _ {
             }
         }
         
         // output file
         let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
-        let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mov"
+        let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mp4"
         
         // input file
         let asset: AVAsset = AVAsset(URL: videoURL)
