@@ -29,6 +29,13 @@
 		0B2381171D440E9700E6D5B4 /* TGMediaCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2381161D440E9700E6D5B4 /* TGMediaCrop.swift */; };
 		0B2381191D4548EF00E6D5B4 /* TGPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2381181D4548EF00E6D5B4 /* TGPlayer.swift */; };
 		0B23811B1D45498100E6D5B4 /* TGVideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23811A1D45498100E6D5B4 /* TGVideoCacheManager.swift */; };
+		0B4410721D48F79900D60575 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4410711D48F79900D60575 /* AVFoundation.framework */; };
+		0B4410741D48F7A700D60575 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4410731D48F7A700D60575 /* Photos.framework */; };
+		0B4410761D48F7AF00D60575 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4410751D48F7AF00D60575 /* UIKit.framework */; };
+		0B4410781D48F7E700D60575 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4410771D48F7E700D60575 /* MobileCoreServices.framework */; };
+		0B44107A1D48F7F900D60575 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4410791D48F7F900D60575 /* AssetsLibrary.framework */; };
+		0B44107C1D48F80300D60575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B44107B1D48F80300D60575 /* Foundation.framework */; };
+		0B44107E1D48F82400D60575 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B44107D1D48F82400D60575 /* CoreImage.framework */; };
 		0BDA9FA61D3D15E2008B6594 /* UIImage+CameraFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */; };
 		0BDA9FA81D3D2949008B6594 /* TGAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */; };
 		0BDA9FAC1D3D7BBD008B6594 /* TGAssetImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */; };
@@ -72,6 +79,13 @@
 		0B2381161D440E9700E6D5B4 /* TGMediaCrop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGMediaCrop.swift; sourceTree = "<group>"; };
 		0B2381181D4548EF00E6D5B4 /* TGPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPlayer.swift; sourceTree = "<group>"; };
 		0B23811A1D45498100E6D5B4 /* TGVideoCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGVideoCacheManager.swift; sourceTree = "<group>"; };
+		0B4410711D48F79900D60575 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0B4410731D48F7A700D60575 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		0B4410751D48F7AF00D60575 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0B4410771D48F7E700D60575 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0B4410791D48F7F900D60575 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		0B44107B1D48F80300D60575 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0B44107D1D48F82400D60575 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		0BDA9FA51D3D15E2008B6594 /* UIImage+CameraFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CameraFilters.swift"; sourceTree = "<group>"; };
 		0BDA9FA71D3D2949008B6594 /* TGAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAlbum.swift; sourceTree = "<group>"; };
 		0BDA9FAB1D3D7BBD008B6594 /* TGAssetImageFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAssetImageFile.swift; sourceTree = "<group>"; };
@@ -101,6 +115,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B44107E1D48F82400D60575 /* CoreImage.framework in Frameworks */,
+				0B44107C1D48F80300D60575 /* Foundation.framework in Frameworks */,
+				0B44107A1D48F7F900D60575 /* AssetsLibrary.framework in Frameworks */,
+				0B4410781D48F7E700D60575 /* MobileCoreServices.framework in Frameworks */,
+				0B4410761D48F7AF00D60575 /* UIKit.framework in Frameworks */,
+				0B4410741D48F7A700D60575 /* Photos.framework in Frameworks */,
+				0B4410721D48F79900D60575 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +131,13 @@
 		F82F8E7819C4EFE700A47148 = {
 			isa = PBXGroup;
 			children = (
+				0B44107D1D48F82400D60575 /* CoreImage.framework */,
+				0B44107B1D48F80300D60575 /* Foundation.framework */,
+				0B4410791D48F7F900D60575 /* AssetsLibrary.framework */,
+				0B4410771D48F7E700D60575 /* MobileCoreServices.framework */,
+				0B4410751D48F7AF00D60575 /* UIKit.framework */,
+				0B4410731D48F7A700D60575 /* Photos.framework */,
+				0B4410711D48F79900D60575 /* AVFoundation.framework */,
 				F82F8EC519C4F29000A47148 /* Example */,
 				F82F8EE519C4F29500A47148 /* TGCameraViewController */,
 				F82F8E8219C4EFE700A47148 /* Products */,
