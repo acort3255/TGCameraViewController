@@ -6,7 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGCameraViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGCameraViewController" customModule="TGCameraViewController" customModuleProvider="target">
             <connections>
                 <outlet property="actionsView" destination="Ni6-M2-hWT" id="SLr-Oc-ge0"/>
                 <outlet property="albumButton" destination="wxI-gO-dPX" id="WtA-c8-1cs"/>
