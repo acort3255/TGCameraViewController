@@ -43,11 +43,11 @@
 		0B87370E1D494B6D00CF308D /* TGCameraAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89FACBC1B1A3D3A0079B391 /* TGCameraAuthorizationViewController.xib */; };
 		0B87370F1D494B6D00CF308D /* TGCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89FACBE1B1A3D3A0079B391 /* TGCameraViewController.xib */; };
 		0B8737101D494B6D00CF308D /* TGMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89FACC01B1A3D3A0079B391 /* TGMediaViewController.xib */; };
+		0B8737171D49554700CF308D /* TGCameraViewController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F861D62819C653D90077B642 /* TGCameraViewController.xcassets */; };
 		F82F8EDC19C4F29000A47148 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F82F8EC819C4F29000A47148 /* AppDelegate.m */; };
 		F82F8EE219C4F29000A47148 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82F8ED719C4F29000A47148 /* Images.xcassets */; };
 		F82F8EE419C4F29000A47148 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F82F8EDB19C4F29000A47148 /* main.m */; };
 		F835957F19C7230500CAE395 /* TGInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F835957E19C7230500CAE395 /* TGInitialViewController.m */; };
-		F861D62919C653D90077B642 /* TGCameraViewController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F861D62819C653D90077B642 /* TGCameraViewController.xcassets */; };
 		F89FACDE1B1A3D400079B391 /* TGCameraViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F89FACDD1B1A3D400079B391 /* TGCameraViewController.bundle */; };
 		F89FACDF1B1A3D920079B391 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82F8ED119C4F29000A47148 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -416,6 +416,7 @@
 			files = (
 				0B87370F1D494B6D00CF308D /* TGCameraViewController.xib in Resources */,
 				0B8737101D494B6D00CF308D /* TGMediaViewController.xib in Resources */,
+				0B8737171D49554700CF308D /* TGCameraViewController.xcassets in Resources */,
 				0B87370E1D494B6D00CF308D /* TGCameraAuthorizationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +427,6 @@
 			files = (
 				F89FACDF1B1A3D920079B391 /* Main.storyboard in Resources */,
 				F82F8EE219C4F29000A47148 /* Images.xcassets in Resources */,
-				F861D62919C653D90077B642 /* TGCameraViewController.xcassets in Resources */,
 				F89FACDE1B1A3D400079B391 /* TGCameraViewController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,6 +711,7 @@
 				0B8736EE1D4948FB00CF308D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F82F8E7C19C4EFE700A47148 /* Build configuration list for PBXProject "TGCameraViewController-Demo" */ = {
 			isa = XCConfigurationList;
