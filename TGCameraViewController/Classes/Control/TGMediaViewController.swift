@@ -139,56 +139,46 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
                 delegate.cameraDidTakePhoto(photo)
             }
             
+            let library = TGAssetsLibrary()
+            let status = PHPhotoLibrary.authorizationStatus()
             
-            if #available(iOS 8.0, *) {
-                let library = TGAssetsLibrary()
-                let status = PHPhotoLibrary.authorizationStatus()
-                
-                if TGCamera.saveMediaToAlbum == true && status != PHAuthorizationStatus.Denied
-                {
-                    library.saveImage(photo, resultBlock: { (assetURL) in
-                        self.delegate.cameraDidSavePhotoAtPath!(assetURL)
-                        }, failureBlock: { (error) in
-                            self.delegate.cameraDidSavePhotoWithError!(error!)
-                    })
-                }
-                
-                else
-                {
-                    library.saveJPGImageAtDocumentDirectory(photo, resultBlock: {
-                            (assetURL: NSURL?) in
-                            self.delegate.cameraDidSavePhotoAtPath!(assetURL!)
-                            }, failureBlock: { (error) in
-                                self.delegate.cameraDidSavePhotoWithError!(error!)
-                    })
-                    
-                    delegate.cameraDidSavePhotoAtPath!(nil)
-                    
-                }
-            } else {
-                // Fallback on earlier versions
-                print("Can't save to directory")
+            if TGCamera.saveMediaToAlbum == true && status != PHAuthorizationStatus.Denied
+            {
+                library.saveImage(photo, resultBlock: { (assetURL) in
+                    self.delegate.cameraDidSavePhotoAtPath!(assetURL)
+                    }, failureBlock: { (error) in
+                        self.delegate.cameraDidSavePhotoWithError!(error!)
+                })
             }
-            
+                
+            else
+            {
+                library.saveJPGImageAtDocumentDirectory(photo, resultBlock: {
+                    (assetURL: NSURL?) in
+                    self.delegate.cameraDidSavePhotoAtPath!(assetURL!)
+                    }, failureBlock: { (error) in
+                        self.delegate.cameraDidSavePhotoWithError!(error!)
+                })
+                
+                delegate.cameraDidSavePhotoAtPath!(nil)
+                
+            }
+           
         }
         
         else
         {
-            if #available(iOS 8.0, *) {
-                let library = TGAssetsLibrary()
-                let status = PHPhotoLibrary.authorizationStatus()
-                if TGCamera.saveMediaToAlbum == true && status != .Denied
-                {
-                    library.saveVideo(videoURL, resultBlock: {_ in
-                        self.delegate.cameraDidRecordVideo(self.videoURL)
-                        }, failureBlock: {(error) in
+            let library = TGAssetsLibrary()
+            let status = PHPhotoLibrary.authorizationStatus()
+            if TGCamera.saveMediaToAlbum == true && status != .Denied
+            {
+                library.saveVideo(videoURL, resultBlock: {_ in
+                    self.delegate.cameraDidRecordVideo(self.videoURL)
+                    }, failureBlock: {(error) in
                         print("Could not save video to album: \(error!.description)")
-                    })
-                }
-            } else {
-                // Fallback on earlier versions
-                print("This version is not supported")
+                })
             }
+            
         }
     }
     
