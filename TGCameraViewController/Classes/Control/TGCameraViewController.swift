@@ -210,7 +210,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     {
         if sender.state == UIGestureRecognizerState.Began
         {
-            print("Start recording")
+            print("Started recording")
             shotButton.enabled = false
             albumButton.enabled = false
             toggleButton.enabled = false
@@ -228,7 +228,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         
         if sender.state == UIGestureRecognizerState.Ended
         {
-            print("Stop recording")
+            print("Stopped recording")
             camera.stopRecording()
         }
     }

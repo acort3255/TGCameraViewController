@@ -52,7 +52,6 @@ public class TGAssetsLibrary: PHImageManager{
                     
                     if (success) {
                         let collectionFetchResult = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([self.assetCollectionPlaceholder.localIdentifier], options: nil)
-                        print(collectionFetchResult)
                         self.assetCollection = collectionFetchResult.firstObject as! PHAssetCollection
                     }
             })
@@ -95,7 +94,6 @@ public class TGAssetsLibrary: PHImageManager{
         var items = [AnyObject]()
         
         let assets : PHFetchResult = PHAsset.fetchAssetsInAssetCollection(assetCollection, options: nil)
-        print(assets)
         
         let imageManager = PHCachingImageManager()
         //Enumerating objects to get a chached image - This is to save loading time
@@ -105,7 +103,6 @@ public class TGAssetsLibrary: PHImageManager{
             
             if object is PHAsset {
                 let asset = object as! PHAsset
-                print(asset)
                 
                 let imageSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
                 
@@ -114,8 +111,6 @@ public class TGAssetsLibrary: PHImageManager{
                 
                 imageManager.requestImageForAsset(asset, targetSize: imageSize, contentMode: .AspectFill, options: options, resultHandler: {(image: UIImage?,
                     info: [NSObject : AnyObject]?) in
-                    print(info)
-                    print(image)
                     items.append(image!)
                     
                 })
@@ -133,7 +128,6 @@ public class TGAssetsLibrary: PHImageManager{
             albumChangeRequest!.addAssets([assetPlaceholder!])
             }, completionHandler: { success, error in
                 print("added image to album")
-                print(error)
                 
                 if success
                 {
@@ -157,7 +151,6 @@ public class TGAssetsLibrary: PHImageManager{
             albumChangeRequest!.addAssets([assetPlaceholder!])
             }, completionHandler: { success, error in
                 print("added video to album")
-                print(error)
                 
                 if success
                 {

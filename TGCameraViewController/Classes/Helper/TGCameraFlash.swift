@@ -88,7 +88,6 @@ public class TGCameraFlash: NSObject {
     public static func flashModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
         
         var device: AVCaptureDevice! //= (session.inputs.last?.device)!
-        print(session.inputs.count)
         
         // find the input that supports flash aka video input
         for input in session.inputs

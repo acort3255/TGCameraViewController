@@ -83,7 +83,6 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     
     public func stopRecording()
     {
-        print("stop!!!!!!!")
         movieOutputFile.stopRecording()
         isRecording = false
     }
@@ -291,8 +290,6 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!)
     {
         // send url for cropped video
-        print("did Finish recording")
-        
         if error == nil
         {
             //let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
