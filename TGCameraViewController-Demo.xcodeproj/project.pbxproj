@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B45F0DE1D49A2BF00533ACD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0DD1D49A2BF00533ACD /* AVFoundation.framework */; };
+		0B45F0E01D49A2CF00533ACD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0DF1D49A2CF00533ACD /* UIKit.framework */; };
+		0B45F0E21D49A2D800533ACD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0E11D49A2D800533ACD /* Foundation.framework */; };
+		0B45F0E41D49A2E000533ACD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0E31D49A2E000533ACD /* CoreGraphics.framework */; };
+		0B45F0E61D49A2E900533ACD /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0E51D49A2E900533ACD /* Photos.framework */; };
+		0B45F0E81D49A31D00533ACD /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0E71D49A31D00533ACD /* AssetsLibrary.framework */; };
+		0B45F0EA1D49A36700533ACD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0E91D49A36700533ACD /* MobileCoreServices.framework */; };
+		0B45F0EC1D49A37C00533ACD /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B45F0EB1D49A37C00533ACD /* CoreImage.framework */; };
 		0B8736E61D4948FB00CF308D /* TGCameraViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B8736E51D4948FB00CF308D /* TGCameraViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B8736EA1D4948FB00CF308D /* TGCameraViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8736E31D4948FB00CF308D /* TGCameraViewController.framework */; };
 		0B8736EB1D4948FB00CF308D /* TGCameraViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8736E31D4948FB00CF308D /* TGCameraViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -100,6 +108,14 @@
 		0B2381161D440E9700E6D5B4 /* TGMediaCrop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGMediaCrop.swift; sourceTree = "<group>"; };
 		0B2381181D4548EF00E6D5B4 /* TGPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPlayer.swift; sourceTree = "<group>"; };
 		0B23811A1D45498100E6D5B4 /* TGVideoCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGVideoCacheManager.swift; sourceTree = "<group>"; };
+		0B45F0DD1D49A2BF00533ACD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0B45F0DF1D49A2CF00533ACD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0B45F0E11D49A2D800533ACD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0B45F0E31D49A2E000533ACD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0B45F0E51D49A2E900533ACD /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		0B45F0E71D49A31D00533ACD /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		0B45F0E91D49A36700533ACD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0B45F0EB1D49A37C00533ACD /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		0B8736E31D4948FB00CF308D /* TGCameraViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TGCameraViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8736E51D4948FB00CF308D /* TGCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TGCameraViewController.h; sourceTree = "<group>"; };
 		0B8736E71D4948FB00CF308D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +148,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B45F0EC1D49A37C00533ACD /* CoreImage.framework in Frameworks */,
+				0B45F0EA1D49A36700533ACD /* MobileCoreServices.framework in Frameworks */,
+				0B45F0E81D49A31D00533ACD /* AssetsLibrary.framework in Frameworks */,
+				0B45F0E61D49A2E900533ACD /* Photos.framework in Frameworks */,
+				0B45F0E41D49A2E000533ACD /* CoreGraphics.framework in Frameworks */,
+				0B45F0E21D49A2D800533ACD /* Foundation.framework in Frameworks */,
+				0B45F0E01D49A2CF00533ACD /* UIKit.framework in Frameworks */,
+				0B45F0DE1D49A2BF00533ACD /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +184,14 @@
 		F82F8E7819C4EFE700A47148 = {
 			isa = PBXGroup;
 			children = (
+				0B45F0EB1D49A37C00533ACD /* CoreImage.framework */,
+				0B45F0E91D49A36700533ACD /* MobileCoreServices.framework */,
+				0B45F0E71D49A31D00533ACD /* AssetsLibrary.framework */,
+				0B45F0E51D49A2E900533ACD /* Photos.framework */,
+				0B45F0E31D49A2E000533ACD /* CoreGraphics.framework */,
+				0B45F0E11D49A2D800533ACD /* Foundation.framework */,
+				0B45F0DF1D49A2CF00533ACD /* UIKit.framework */,
+				0B45F0DD1D49A2BF00533ACD /* AVFoundation.framework */,
 				F82F8EC519C4F29000A47148 /* Example */,
 				0B8736E41D4948FB00CF308D /* TGCameraViewController */,
 				F82F8E8219C4EFE700A47148 /* Products */,
