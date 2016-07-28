@@ -58,6 +58,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         }
         albumButton.layer.cornerRadius = 10.0
         albumButton.layer.masksToBounds = true
+        
         closeButton.setImage(UIImage(named: "CameraClose")!, forState: .Normal)
         shotButton.setImage(UIImage(named: "CameraShot")!, forState: .Normal)
         gridButton.setImage(UIImage(named: "CameraGrid")!, forState: .Normal)
