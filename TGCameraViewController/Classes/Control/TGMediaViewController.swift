@@ -42,9 +42,10 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         //fatalError("init(coder:) has not been implemented")
     }*/
     
-    public static func newWithDelegateAndPhoto(delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
+    public func newWithDelegateAndPhoto(delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
     {
-        let viewController: TGMediaViewController = TGMediaViewController(nibName: nil, bundle: nil)
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let viewController: TGMediaViewController = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
         viewController.delegate = delegate
         viewController.photo = photo
         viewController.cachePhoto = NSCache()
@@ -52,9 +53,10 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
 
     }
     
-    public static func newWithDelegateAndVideo(delegate: TGCameraDelegate, videoURL: NSURL) -> TGMediaViewController
+    public func newWithDelegateAndVideo(delegate: TGCameraDelegate, videoURL: NSURL) -> TGMediaViewController
     {
-        let viewController: TGMediaViewController = TGMediaViewController(nibName: nil, bundle: nil)
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let viewController: TGMediaViewController = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
         viewController.delegate = delegate
         viewController.videoURL = videoURL
         viewController.isVideo = true

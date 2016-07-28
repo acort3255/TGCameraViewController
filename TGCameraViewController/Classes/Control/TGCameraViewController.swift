@@ -40,8 +40,8 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         if CGRectGetHeight(UIScreen.mainScreen().bounds) <= 480 {
             self.topViewHeight.constant = 0
         }
-        let devices: [AnyObject] = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
-        if devices.count > 1 {
+        let devices: [AnyObject]? = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        if devices != nil && devices!.count > 1 {
             if TGCamera.toggleButtonHidden == true {
                 self.toggleButton.hidden = true
                 self.toggleButtonWidth.constant = 0
@@ -148,7 +148,9 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     
     public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let photo: UIImage = TGAlbum.imageWithMediaInfo(info)!
-        let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndPhoto(delegate, photo: photo)
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let mediaVC = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
+        let viewController: TGMediaViewController = mediaVC.newWithDelegateAndPhoto(delegate, photo: photo)
         viewController.albumPhoto = true
         self.navigationController!.pushViewController(viewController, animated: false)
         self.dismissViewControllerAnimated(true, completion: { _ in })
@@ -196,7 +198,9 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
         self.viewWillDisappearWithCompletion({() -> Void in
             self.camera.takePhotoWithCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size, completion: {(photo: UIImage) -> Void in
-                let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndPhoto(self.delegate, photo: photo)
+                let bundle = NSBundle(forClass: TGCameraViewController.self)
+                let mediaVC = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
+                let viewController: TGMediaViewController = mediaVC.newWithDelegateAndPhoto(self.delegate, photo: photo)
                 self.navigationController!.pushViewController(viewController, animated: true)
             })
         })
@@ -308,7 +312,9 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         //Send to TGMediaViewController
         print(videoFileURL)
         croppedVideoURL = videoFileURL
-        let viewController: TGMediaViewController = TGMediaViewController.newWithDelegateAndVideo(self.delegate, videoURL: videoFileURL)
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let mediaVC = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
+        let viewController: TGMediaViewController = mediaVC.newWithDelegateAndVideo(self.delegate, videoURL: videoFileURL)
         self.navigationController!.pushViewController(viewController, animated: true)
     }
     
