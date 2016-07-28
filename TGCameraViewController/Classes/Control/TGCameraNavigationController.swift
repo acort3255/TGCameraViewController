@@ -75,7 +75,8 @@ public class TGCameraNavigationController: UINavigationController {
     }
     
     func setupDenied() {
-        let viewController: UIViewController = TGCameraAuthorizationViewController()
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let viewController: UIViewController = TGCameraAuthorizationViewController(nibName: "TGCameraAuthorizationViewController", bundle: bundle)
         self.viewControllers = [viewController]
     }
     
