@@ -59,10 +59,11 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         albumButton.layer.cornerRadius = 10.0
         albumButton.layer.masksToBounds = true
         
-        closeButton.setImage(UIImage(named: "CameraClose")!, forState: .Normal)
-        shotButton.setImage(UIImage(named: "CameraShot")!, forState: .Normal)
-        gridButton.setImage(UIImage(named: "CameraGrid")!, forState: .Normal)
-        toggleButton.setImage(UIImage(named: "CameraToggle")!, forState: .Normal)
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        closeButton.setImage(UIImage(named: "CameraClose",inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
+        shotButton.setImage(UIImage(named: "CameraShot", inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
+        gridButton.setImage(UIImage(named: "CameraGrid", inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
+        toggleButton.setImage(UIImage(named: "CameraToggle", inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
         camera = TGCamera()
         self.camera.setupWithFlashButtonForPictures(flashButton)
         camera.delegate = self
