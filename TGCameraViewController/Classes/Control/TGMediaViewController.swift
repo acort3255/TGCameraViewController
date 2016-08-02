@@ -192,6 +192,19 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             
           }
         }
+        
+        else
+        {
+            if isVideo == false
+            {
+                delegate.cameraDidTakePhoto(photo)
+            }
+            
+            else
+            {
+                delegate.cameraDidRecordVideo(self.videoURL)
+            }
+        }
     }
     
     @IBAction func filtersTapped() {
