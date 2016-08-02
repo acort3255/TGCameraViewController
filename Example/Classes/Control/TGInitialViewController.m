@@ -31,7 +31,7 @@
     //TGCamera.toggleButtonHidden = YES;
     //TGCamera.albumButtonHidden = YES;
     //TGCamera.filterButtonHidden = YES;
-    //TGCamera.saveMediaToAlbum = YES;
+    TGCamera.saveMediaToAlbum = YES;
     
     // hidden toggle button
     //[TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];
@@ -93,7 +93,7 @@
 #pragma mark -
 #pragma mark - TGCameraDelegate optional
 
-- (void)cameraWillTakePhoto
+- (void)cameraWillCaptureMedia
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }

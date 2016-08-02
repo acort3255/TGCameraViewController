@@ -192,6 +192,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     
     func takePicture()
     {
+        delegate.cameraWillCaptureMedia!()
         shotButton.enabled = false
         albumButton.enabled = false
         print("Taking picture ")
@@ -211,6 +212,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     {
         if sender.state == UIGestureRecognizerState.Began
         {
+            delegate.cameraWillCaptureMedia!()
             print("Started recording")
             shotButton.enabled = false
             albumButton.enabled = false
@@ -311,7 +313,6 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         flashButton.enabled = true
         
         //Send to TGMediaViewController
-        print(videoFileURL)
         croppedVideoURL = videoFileURL
         let bundle = NSBundle(forClass: TGCameraViewController.self)
         let mediaVC = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
