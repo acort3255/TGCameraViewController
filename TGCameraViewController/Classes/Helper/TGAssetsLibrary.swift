@@ -175,7 +175,7 @@ public class TGAssetsLibrary: PHImageManager{
             failureBlock(error: nil)
             return
         }
-        let fileName: String = dateFormatter.stringFromDate(NSDate()) + "jpg"
+        let fileName: String = dateFormatter.stringFromDate(NSDate()) + ".jpg"
         let filePath: String? = directory!.stringByAppendingString(fileName)
         if filePath == nil {
             failureBlock(error: nil)
