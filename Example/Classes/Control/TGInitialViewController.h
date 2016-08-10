@@ -8,6 +8,7 @@
 
 @import UIKit;
 @import TGCameraViewController;
+@import AVFoundation;
 
 @interface TGInitialViewController : UIViewController
 

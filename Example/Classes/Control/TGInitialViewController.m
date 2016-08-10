@@ -33,6 +33,8 @@
     //TGCamera.filterButtonHidden = YES;
     //TGCamera.saveMediaToAlbum = YES;
     
+    TGCamera.capturePreset = AVCaptureSessionPresetLow;
+    
     // hidden toggle button
     //[TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];
     //[TGCameraColor setTintColor: [UIColor greenColor]];

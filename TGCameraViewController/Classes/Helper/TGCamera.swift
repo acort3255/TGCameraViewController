@@ -15,6 +15,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public static var albumButtonHidden = false
     public static var filterButtonHidden = false
     public static var saveMediaToAlbum = false
+    public static var capturePreset = AVCaptureSessionPreset1280x720
     public var previewLayer: AVCaptureVideoPreviewLayer!
     public var stillImageOutput: AVCaptureStillImageOutput!
     
@@ -29,7 +30,6 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public var delegate = TGCameraViewController()
     public var cropSize = CGSize()
     public var isRecording = false
-    public var capturePreset = AVCaptureSessionPreset1280x720
     //
     
     private var session: AVCaptureSession!
@@ -166,7 +166,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         // create session
         //
         self.session = AVCaptureSession()
-        self.session.sessionPreset = capturePreset
+        self.session.sessionPreset = TGCamera.capturePreset
         //
         // setup device
         //
@@ -225,7 +225,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         // create session
         //
         self.session = AVCaptureSession()
-        self.session.sessionPreset = capturePreset
+        self.session.sessionPreset = TGCamera.capturePreset
         //
         // setup device
         //
