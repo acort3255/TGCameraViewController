@@ -83,6 +83,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             videoPlayer = TGPlayer()
             videoPlayer.playerView.frame = CGRectMake(photoView.frame.origin.x, photoView.frame.origin.y, 414, 414)//photoView.frame
             videoPlayer.setURL(videoURL)
+            videoPlayer.playerView.contentMode = UIViewContentMode.ScaleAspectFill
             videoPlayer.delegate = self
             view.addSubview(videoPlayer.playerView)
             videoPlayer.playbackLoops = true

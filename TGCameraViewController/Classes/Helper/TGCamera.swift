@@ -29,6 +29,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public var delegate = TGCameraViewController()
     public var cropSize = CGSize()
     public var isRecording = false
+    public var capturePreset = AVCaptureSessionPreset1280x720
     //
     
     private var session: AVCaptureSession!
@@ -165,7 +166,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         // create session
         //
         self.session = AVCaptureSession()
-        self.session.sessionPreset = AVCaptureSessionPresetHigh
+        self.session.sessionPreset = capturePreset
         //
         // setup device
         //
@@ -224,7 +225,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         // create session
         //
         self.session = AVCaptureSession()
-        self.session.sessionPreset = AVCaptureSessionPresetHigh
+        self.session.sessionPreset = capturePreset
         //
         // setup device
         //
@@ -233,6 +234,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         for aDevice in devices {
             if aDevice.position == devicePosition {
                 device = aDevice as! AVCaptureDevice
+                //device.activeVideoMaxFrameDuration
             }
         }
         //if  device != nil {
@@ -293,7 +295,7 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         if error == nil
         {
             //let tempURL = TGMediaCrop.cropVideo(outputFileURL, withCropSize: cropSize)
-            //delegate.recordingStopped(tempURL)
+            //delegate.recordingStopped(outputFileURL)
             TGMediaCrop.cropVideo(outputFileURL, completion: { (croppedVideoURL) in
                 
                 dispatch_async(dispatch_get_main_queue(), {
