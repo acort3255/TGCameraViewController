@@ -115,9 +115,10 @@ public class TGCameraFlash: NSObject {
     
     private static func UIImageFromAVCapture(flashMode: AVCaptureFlashMode) -> UIImage
     {
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
         let array = ["CameraFlashOff", "CameraFlashOn", "CameraFlashAuto"]
         let imageName = array[flashMode.rawValue]
-        return UIImage(named: imageName)!
+        return UIImage(named: imageName, inBundle: bundle, compatibleWithTraitCollection: nil)!
     }
     
     

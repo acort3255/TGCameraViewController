@@ -18,6 +18,6 @@ import UIKit
     
     optional func cameraDidSavePhotoWithError(error: NSError?)
     optional func cameraDidSavePhotoAtPath(assetURL: NSURL?)
-    optional func cameraWillTakePhoto()
+    optional func cameraWillCaptureMedia()
     
 }

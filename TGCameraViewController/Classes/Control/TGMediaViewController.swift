@@ -100,16 +100,20 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
 
     }
     
+    override public func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isVideo == true
+        {
+            videoPlayer.muted = false
+        }
+    }
+    
     override public func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
         if isVideo == true {
-            videoPlayer.pause()
             videoPlayer.muted = true
-            videoPlayer.delegate = nil
-            videoPlayer.clearAsset()
-            videoPlayer.playerView.removeFromSuperview()
-            videoPlayer = nil
         }
     }
     
@@ -119,13 +123,20 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
     
     
     @IBAction func backTapped() {
+        
+        if isVideo == true {
+            videoPlayer.pause()
+            videoPlayer.muted = true
+            //videoPlayer.delegate = nil
+            videoPlayer.clearAsset()
+            //videoPlayer.playerView.removeFromSuperview()
+            //videoPlayer = nil
+        }
         self.navigationController!.popViewControllerAnimated(true)
     }
     
     @IBAction func confirmTapped() {
-        delegate.cameraWillTakePhoto!()
-        
-        
+        if TGCamera.saveMediaToAlbum == true { 
         if photoView != nil && isVideo == false
         {
             photo = photoView.image
@@ -143,43 +154,57 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             let library = TGAssetsLibrary()
             let status = PHPhotoLibrary.authorizationStatus()
             
-            if TGCamera.saveMediaToAlbum == true && status != PHAuthorizationStatus.Denied
-            {
-                library.saveImage(photo, resultBlock: { (assetURL) in
-                    self.delegate.cameraDidSavePhotoAtPath!(assetURL)
-                    }, failureBlock: { (error) in
-                        self.delegate.cameraDidSavePhotoWithError!(error!)
-                })
-            }
+                if status != PHAuthorizationStatus.Denied
+                {
+                    library.saveImage(photo, resultBlock: { (assetURL) in
+                        self.delegate.cameraDidSavePhotoAtPath!(assetURL)
+                        }, failureBlock: { (error) in
+                            self.delegate.cameraDidSavePhotoWithError!(error!)
+                    })
+                }
                 
+                else
+                {
+                    library.saveJPGImageAtDocumentDirectory(photo, resultBlock: {
+                        (assetURL: NSURL?) in
+                        self.delegate.cameraDidSavePhotoAtPath!(assetURL!)
+                        }, failureBlock: { (error) in
+                            self.delegate.cameraDidSavePhotoWithError!(error!)
+                    })
+                
+                    delegate.cameraDidSavePhotoAtPath!(nil)
+                
+                }
+           
+            }
+        
             else
             {
-                library.saveJPGImageAtDocumentDirectory(photo, resultBlock: {
-                    (assetURL: NSURL?) in
-                    self.delegate.cameraDidSavePhotoAtPath!(assetURL!)
-                    }, failureBlock: { (error) in
-                        self.delegate.cameraDidSavePhotoWithError!(error!)
-                })
-                
-                delegate.cameraDidSavePhotoAtPath!(nil)
-                
-            }
-           
-        }
-        
-        else
-        {
-            let library = TGAssetsLibrary()
-            let status = PHPhotoLibrary.authorizationStatus()
-            if TGCamera.saveMediaToAlbum == true && status != .Denied
-            {
-                library.saveVideo(videoURL, resultBlock: {_ in
+                let library = TGAssetsLibrary()
+                let status = PHPhotoLibrary.authorizationStatus()
+                if status != .Denied
+                {
+                    library.saveVideo(videoURL, resultBlock: {_ in
                     self.delegate.cameraDidRecordVideo(self.videoURL)
                     }, failureBlock: {(error) in
                         print("Could not save video to album: \(error!.description)")
                 })
             }
             
+          }
+        }
+        
+        else
+        {
+            if isVideo == false
+            {
+                delegate.cameraDidTakePhoto(photo)
+            }
+            
+            else
+            {
+                delegate.cameraDidRecordVideo(self.videoURL)
+            }
         }
     }
     

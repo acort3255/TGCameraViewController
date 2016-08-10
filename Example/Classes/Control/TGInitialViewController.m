@@ -93,7 +93,7 @@
 #pragma mark -
 #pragma mark - TGCameraDelegate optional
 
-- (void)cameraWillTakePhoto
+- (void)cameraWillCaptureMedia
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }

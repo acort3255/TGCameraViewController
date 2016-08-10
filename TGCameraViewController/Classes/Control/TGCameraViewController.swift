@@ -59,10 +59,11 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         albumButton.layer.cornerRadius = 10.0
         albumButton.layer.masksToBounds = true
         
-        closeButton.setImage(UIImage(named: "CameraClose")!, forState: .Normal)
-        shotButton.setImage(UIImage(named: "CameraShot")!, forState: .Normal)
-        gridButton.setImage(UIImage(named: "CameraGrid")!, forState: .Normal)
-        toggleButton.setImage(UIImage(named: "CameraToggle")!, forState: .Normal)
+        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        closeButton.setImage(UIImage(named: "CameraClose",inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
+        shotButton.setImage(UIImage(named: "CameraShot", inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
+        gridButton.setImage(UIImage(named: "CameraGrid", inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
+        toggleButton.setImage(UIImage(named: "CameraToggle", inBundle: bundle, compatibleWithTraitCollection: nil)!, forState: .Normal)
         camera = TGCamera()
         self.camera.setupWithFlashButtonForPictures(flashButton)
         camera.delegate = self
@@ -191,6 +192,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     
     func takePicture()
     {
+        delegate.cameraWillCaptureMedia!()
         shotButton.enabled = false
         albumButton.enabled = false
         print("Taking picture ")
@@ -210,6 +212,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     {
         if sender.state == UIGestureRecognizerState.Began
         {
+            delegate.cameraWillCaptureMedia!()
             print("Started recording")
             shotButton.enabled = false
             albumButton.enabled = false
@@ -310,7 +313,6 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         flashButton.enabled = true
         
         //Send to TGMediaViewController
-        print(videoFileURL)
         croppedVideoURL = videoFileURL
         let bundle = NSBundle(forClass: TGCameraViewController.self)
         let mediaVC = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
