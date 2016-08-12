@@ -99,7 +99,7 @@ public  class TGMediaCrop
         exporter!.outputURL = NSURL.fileURLWithPath(outputFileURL)
         exporter!.outputFileType = AVFileTypeQuickTimeMovie
         exporter!.exportAsynchronouslyWithCompletionHandler({() -> Void in
-            print("Exporting done!")
+            //print("Exporting done!")
             cleanup()
             completion(croppedVideoURL: NSURL.fileURLWithPath(outputFileURL))
         })

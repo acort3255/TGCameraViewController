@@ -16,6 +16,7 @@
                 <outlet property="closeButton" destination="O3k-MF-E1l" id="WpI-xb-eE2"/>
                 <outlet property="flashButton" destination="p7O-pE-Mp0" id="Tqo-vg-CGw"/>
                 <outlet property="gridButton" destination="Nol-dD-ETh" id="tfG-QF-CbC"/>
+                <outlet property="lblStopWatch" destination="oCZ-PE-zKy" id="acx-Y7-mqk"/>
                 <outlet property="separatorView" destination="xFF-75-cke" id="J08-U0-hk1"/>
                 <outlet property="shotButton" destination="wtQ-Dg-G3i" id="cWY-WV-5Gp"/>
                 <outlet property="slideDownView" destination="Czb-nz-m44" id="Ga2-kT-HSY"/>
@@ -35,9 +36,22 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dit-c7-IZk" userLabel="Top View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCZ-PE-zKy">
+                            <rect key="frame" x="287" y="16" width="26" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="26" id="l76-p3-0wP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                            <color key="textColor" red="1" green="0.35686275360000003" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="0mu-lN-Lkb"/>
+                        <constraint firstItem="oCZ-PE-zKy" firstAttribute="centerY" secondItem="dit-c7-IZk" secondAttribute="centerY" id="GOa-IQ-nIZ"/>
+                        <constraint firstItem="oCZ-PE-zKy" firstAttribute="centerX" secondItem="dit-c7-IZk" secondAttribute="centerX" id="fo5-nU-Kva"/>
                     </constraints>
                 </view>
                 <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-rQ-gzr" userLabel="Capture View">
@@ -285,6 +299,15 @@
                 <action selector="handleTapGesture:" destination="-1" id="4eA-y3-VFZ"/>
             </connections>
         </tapGestureRecognizer>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyU-Ob-tTN">
+            <rect key="frame" x="0.0" y="0.0" width="26" height="28"/>
+            <constraints>
+                <constraint firstAttribute="width" constant="26" id="NI6-nC-3Ld"/>
+            </constraints>
+            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+            <color key="textColor" red="1" green="0.35686275360000003" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+            <nil key="highlightedColor"/>
+        </label>
     </objects>
     <resources>
         <image name="CameraClose" width="26" height="26"/>

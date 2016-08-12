@@ -17,7 +17,7 @@ public class TGCameraFunctions: NSObject
         
         dispatch_once(&token,{
             let path = NSBundle(forClass: TGCameraViewController.self).pathForResource("TGCameraViewController", ofType: "bundle")!
-            print(path)
+            //print(path)
             bundle = NSBundle(path: path)
         })
         

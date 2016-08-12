@@ -15,6 +15,9 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
     public static var albumButtonHidden = false
     public static var filterButtonHidden = false
     public static var saveMediaToAlbum = false
+    public static var stopWatchHidden = true
+    public static var maxDuration = CMTimeMake(0, 0)
+    public static var minDuration = CMTimeMake(0, 0)
     public static var capturePreset = AVCaptureSessionPreset1280x720
     public var previewLayer: AVCaptureVideoPreviewLayer!
     public var stillImageOutput: AVCaptureStillImageOutput!
@@ -183,6 +186,12 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
                 device.focusMode = .ContinuousAutoFocus
             }
             device.exposureMode = .ContinuousAutoExposure
+            
+            if TGCamera.minDuration != CMTimeMake(0, 0)
+            {
+                device.activeVideoMinFrameDuration = TGCamera.minDuration
+            }
+            
             device.unlockForConfiguration()
         }
         
@@ -208,6 +217,12 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         session.addOutput(stillImageOutput)
         
         movieOutputFile = AVCaptureMovieFileOutput()
+        
+        if TGCamera.maxDuration != CMTimeMake(0, 0)
+        {
+            movieOutputFile.maxRecordedDuration = TGCamera.maxDuration
+        }
+        
         session.addOutput(movieOutputFile)
         audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         audioInput = try! AVCaptureDeviceInput(device: audioCaptureDevice)
@@ -253,6 +268,12 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
                 device.focusMode = .ContinuousAutoFocus
             }
             device.exposureMode = .ContinuousAutoExposure
+            
+            if TGCamera.minDuration != CMTimeMake(0, 0)
+            {
+                device.activeVideoMinFrameDuration = TGCamera.minDuration
+            }
+            
             device.unlockForConfiguration()
         }
         
@@ -278,6 +299,12 @@ public class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         session.addOutput(stillImageOutput)
         
         movieOutputFile = AVCaptureMovieFileOutput()
+        
+        if TGCamera.maxDuration != CMTimeMake(0, 0)
+        {
+            movieOutputFile.maxRecordedDuration = TGCamera.maxDuration
+        }
+        
         session.addOutput(movieOutputFile)
         audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         audioInput = try! AVCaptureDeviceInput(device: audioCaptureDevice)

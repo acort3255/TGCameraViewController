@@ -15,17 +15,17 @@ public class TGCameraNavigationController: UINavigationController {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        print("User newWithCameraDelegate to init")
+        //print("User newWithCameraDelegate to init")
     }
     
     public override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
-        print("User newWithCameraDelegate to init")
+        //print("User newWithCameraDelegate to init")
     }
     
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print("User newWithCameraDelegate to init")
+        //print("User newWithCameraDelegate to init")
     }
     
     override init(rootViewController: UIViewController) {

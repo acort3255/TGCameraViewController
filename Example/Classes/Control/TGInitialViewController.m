@@ -31,9 +31,11 @@
     //TGCamera.toggleButtonHidden = YES;
     //TGCamera.albumButtonHidden = YES;
     //TGCamera.filterButtonHidden = YES;
-    //TGCamera.saveMediaToAlbum = YES;
+    TGCamera.saveMediaToAlbum = YES;
+    TGCamera.stopWatchHidden = NO;
+    TGCamera.maxDuration = CMTimeMake(10, 1);
     
-    TGCamera.capturePreset = AVCaptureSessionPresetLow;
+    TGCamera.capturePreset = AVCaptureSessionPresetMedium;
     
     // hidden toggle button
     //[TGCamera setOption:kTGCameraOptionHiddenToggleButton value:[NSNumber numberWithBool:YES]];

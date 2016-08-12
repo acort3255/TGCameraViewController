@@ -25,6 +25,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet var shotButton: TGTintedButton!
     @IBOutlet var albumButton: TGTintedButton!
     @IBOutlet var flashButton: UIButton!
+    @IBOutlet weak var lblStopWatch: UILabel!
     @IBOutlet var slideUpView: TGCameraSlideView!
     @IBOutlet var slideDownView: TGCameraSlideView!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
@@ -32,6 +33,8 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
     var camera: TGCamera!
     var wasLoaded: Bool!
     private var croppedVideoURL: NSURL!
+    private var timer: NSTimer?
+    private var stopWatchValue: Int = 0
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +59,9 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         if TGCamera.albumButtonHidden == true {
             self.albumButton.hidden = true
         }
+        
+        lblStopWatch.hidden = true
+        
         albumButton.layer.cornerRadius = 10.0
         albumButton.layer.masksToBounds = true
         
@@ -100,6 +106,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         shotButton.enabled = false
         albumButton.enabled = false
         flashButton.enabled = false
+        
     }
     
     override public func viewDidAppear(animated: Bool) {
@@ -124,6 +131,12 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             self.shotButton.enabled = true
             self.albumButton.enabled = true
             self.flashButton.enabled = true
+            
+            if TGCamera.stopWatchHidden == false
+            {
+                self.resetTimer()
+            }
+            
         })
         
         if !wasLoaded
@@ -137,6 +150,8 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         super.viewDidDisappear(animated)
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        lblStopWatch.hidden = true
+        killTimer()
         camera.stopRunning()
     }
     
@@ -195,7 +210,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         delegate.cameraWillCaptureMedia!()
         shotButton.enabled = false
         albumButton.enabled = false
-        print("Taking picture ")
+        //print("Taking picture ")
         let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
         let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
         self.viewWillDisappearWithCompletion({() -> Void in
@@ -213,7 +228,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         if sender.state == UIGestureRecognizerState.Began
         {
             delegate.cameraWillCaptureMedia!()
-            print("Started recording")
+            //print("Started recording")
             shotButton.enabled = false
             albumButton.enabled = false
             toggleButton.enabled = false
@@ -226,12 +241,26 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
             
             let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
             let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
+            
+            if TGCamera.maxDuration != CMTimeMake(0, 0) || TGCamera.stopWatchHidden == false
+            {
+                startTimer()
+            }
+            
+            lblStopWatch.hidden = false
+            
             camera.recordVideoWtihCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size)
         }
         
         if sender.state == UIGestureRecognizerState.Ended
         {
-            print("Stopped recording")
+            //print("Stopped recording")
+            
+            if TGCamera.maxDuration != CMTimeMake(0, 0) || TGCamera.stopWatchHidden == false
+            {
+                killTimer()
+            }
+            
             camera.stopRecording()
         }
     }
@@ -303,6 +332,42 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         TGCameraSlideView.showSlideUpView(slideUpView, slideDownView: slideDownView, atView: captureView, completion: {() -> Void in
             completion()
         })
+    }
+    
+    // MARK: Timer methods
+    
+    func updateTimerLabel()
+    {
+        if  TGCamera.maxDuration != CMTimeMake(0, 0) && Double(self.lblStopWatch.text!)! >= (TGCamera.maxDuration.seconds - 1)
+        {
+            killTimer()
+            stopWatchValue += 1
+            lblStopWatch.text = "\(stopWatchValue)"
+            camera.stopRecording()
+            return
+        }
+        
+        stopWatchValue += 1
+        lblStopWatch.text = "\(stopWatchValue)"
+    }
+    
+    func startTimer()
+    {
+        lblStopWatch.text = "\(stopWatchValue)"
+        killTimer()
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+    }
+    
+    func killTimer()
+    {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
+    func resetTimer()
+    {
+        stopWatchValue = 0
+        lblStopWatch.text = "\(stopWatchValue)"
     }
     
     func recordingStopped(videoFileURL: NSURL)

@@ -37,7 +37,7 @@ public class TGCameraTorch: NSObject {
                 if device.isTorchModeSupported(mode) {
                     device.torchMode = mode
                 }
-                print("Supported torch \(device.isTorchModeSupported(mode))")
+                //print("Supported torch \(device.isTorchModeSupported(mode))")
         
                 device.unlockForConfiguration()
                 self.torchModeWithCaptureSession(session, andButton: button)
@@ -69,7 +69,7 @@ public class TGCameraTorch: NSObject {
                 if device.isTorchModeSupported(mode) {
                     device.torchMode = mode
                 }
-                print("Supported torch \(device.isTorchModeSupported(mode))")
+                //print("Supported torch \(device.isTorchModeSupported(mode))")
                 
                 device.unlockForConfiguration()
                 self.torchModeWithCaptureSession(session, andButton: button)
@@ -90,7 +90,7 @@ public class TGCameraTorch: NSObject {
         {
             if (input as! AVCaptureDeviceInput).device.hasTorch == true
             {
-                print("Device has torch")
+                //print("Device has torch")
                 device = input.device
             }
         }

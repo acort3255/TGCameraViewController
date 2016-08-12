@@ -72,7 +72,7 @@ public class TGCameraFlash: NSObject {
                 if device.isFlashModeSupported(mode) {
                     device.flashMode = mode
                 }
-                print("Supported flash \(device.isFlashModeSupported(mode))")
+                //print("Supported flash \(device.isFlashModeSupported(mode))")
                 
                 device.unlockForConfiguration()
                 self.flashModeWithCaptureSession(session, andButton: button)
