@@ -151,6 +151,7 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
         lblStopWatch.hidden = true
+        resetTimer()
         killTimer()
         camera.stopRunning()
     }
@@ -247,7 +248,10 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
                 startTimer()
             }
             
-            lblStopWatch.hidden = false
+            if TGCamera.stopWatchHidden == false
+            {
+                lblStopWatch.hidden = false
+            }
             
             camera.recordVideoWtihCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size)
         }
