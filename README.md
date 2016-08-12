@@ -203,6 +203,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     TGCamera.albumButtonHidden = YES;
     TGCamera.filterButtonHidden = YES;
     TGCamera.saveMediaToAlbum = YES;
+    TGCamera.stopWatchHidden = NO;
+    TGCamera.maxDuration = CMTimeMake(10, 1);
     //...
 }
 
@@ -213,6 +215,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     BOOL hiddenAlbumButton = TGCamera.albumButtonHidden;
     BOOL hiddenFilterButton = TGCamera.filterButtonHidden;
     BOOL saveToDevice = TGCamera.saveMediaToAlbum;
+    BOOL stopWatchHidden = TGCamera.stopWatchHidden;
     //...    
 }
 
