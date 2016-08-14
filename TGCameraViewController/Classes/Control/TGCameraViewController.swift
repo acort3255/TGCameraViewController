@@ -191,21 +191,6 @@ public class TGCameraViewController: UIViewController, UIImagePickerControllerDe
         camera.changeFlashModeWithButton(flashButton)
     }
     
-    /*@IBAction func shotTapped(sender: UITapGestureRecognizer) {
-        shotButton.enabled = false
-        albumButton.enabled = false
-        
-        
-        let deviceOrientation: UIDeviceOrientation = UIDevice.currentDevice().orientation
-        let videoOrientation: AVCaptureVideoOrientation = self.videoOrientationForDeviceOrientation(deviceOrientation)
-        self.viewWillDisappearWithCompletion({() -> Void in
-            TGCamera.takePhotoWithCaptureView(self.captureView, videoOrientation: videoOrientation, cropSize: self.captureView.frame.size, completion: {(photo: UIImage) -> Void in
-                let viewController: TGPhotoViewController = TGPhotoViewController.newWithDelegate(self.delegate, photo: photo)
-                self.navigationController!.pushViewController(viewController, animated: true)
-            })
-        })
-    }*/
-    
     func takePicture()
     {
         delegate.cameraWillCaptureMedia!()
