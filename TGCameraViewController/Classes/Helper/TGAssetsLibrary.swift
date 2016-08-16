@@ -194,7 +194,7 @@ public class TGAssetsLibrary: PHImageManager{
         var path: String = NSMutableString() as String
         path += NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).last!
         path += "/Images/"
-        if NSFileManager.defaultManager().fileExistsAtPath(path) {
+        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
             var _: NSError
             do {
                 try NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil)
