@@ -133,19 +133,19 @@ public class TGPlayer: NSObject, NSURLSessionDownloadDelegate
         
         self.setupPlayerItem(nil)
         var videoAsset: AVAsset?
-        if VideoCacheManager.sharedVideoCache.objectForKey(url.absoluteString) == nil
+        if VideoCacheManager.sharedVideoCache.objectForKey(url.absoluteString!) == nil
         {
             videoAsset = AVAsset(URL: url)
             
-            VideoCacheManager.sharedVideoCache.setObject(videoAsset!, forKey: url.absoluteString)
+            VideoCacheManager.sharedVideoCache.setObject(videoAsset!, forKey: url.absoluteString!)
         }
         
         else
         {
-            videoAsset = VideoCacheManager.sharedVideoCache.objectForKey(url.absoluteString) as? AVAsset
+            videoAsset = VideoCacheManager.sharedVideoCache.objectForKey(url.absoluteString!) as? AVAsset
         }
         
-        self.setupAsset(VideoCacheManager.sharedVideoCache.objectForKey(url.absoluteString) as! AVAsset)
+        self.setupAsset(VideoCacheManager.sharedVideoCache.objectForKey(url.absoluteString!) as! AVAsset)
     }
     
     public func clearAsset()

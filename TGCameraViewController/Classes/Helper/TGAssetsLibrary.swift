@@ -79,7 +79,7 @@ public class TGAssetsLibrary: PHImageManager{
         var items = [AnyObject]()
         for name: String in (contents as! [String])
         {
-            let path: String = NSURL(fileURLWithPath: directory()).URLByAppendingPathComponent(name).absoluteString
+            let path: String = NSURL(fileURLWithPath: directory()).URLByAppendingPathComponent(name)!.absoluteString!
             let data: NSData = NSData(contentsOfFile: path)!
             
             let image: UIImage = UIImage(data: data)!

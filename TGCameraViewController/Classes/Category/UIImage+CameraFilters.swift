@@ -72,7 +72,7 @@ extension UIImage {
     internal func imageFromContext(context: CIContext, withFilter filter: CIFilter) -> UIImage {
         let outputImage: CoreImage.CIImage = filter.outputImage!
         let extent: CGRect = filter.outputImage!.extent
-        let imageRef: CGImageRef = context.createCGImage(outputImage, fromRect: extent)
+        let imageRef: CGImageRef = context.createCGImage(outputImage, fromRect: extent)!
         let image: UIImage = UIImage(CGImage: imageRef, scale: self.scale, orientation: self.imageOrientation)
         return image
     }
