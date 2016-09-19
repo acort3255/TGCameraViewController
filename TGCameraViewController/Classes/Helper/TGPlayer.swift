@@ -507,11 +507,11 @@ open class TGPlayer: NSObject, URLSessionDownloadDelegate
         if context == &PlayerItemObserverContext
         {
             if keyPath == PlayerRateKey{
-                true
+                //true
             }
             
             else if keyPath == PlayerStatusKey{
-                true
+                //true
             }
             
             else if keyPath == PlayerKeepUp{

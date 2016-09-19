@@ -66,8 +66,6 @@ open class TGCameraViewController: UIViewController, UIImagePickerControllerDele
         albumButton.layer.masksToBounds = true
         
         let bundle = Bundle(for: TGCameraViewController.self)
-        let test = UIImage(named: "CameraClose",in: bundle, compatibleWith: nil)!
-        // setImage is changed
         closeButton.setImage(UIImage(named: "CameraClose",in: bundle, compatibleWith: nil)!, for: .normal)
         shotButton.setImage(UIImage(named: "CameraShot", in: bundle, compatibleWith: nil)!, for: .normal)
         gridButton.setImage(UIImage(named: "CameraGrid", in: bundle, compatibleWith: nil)!, for: .normal)
