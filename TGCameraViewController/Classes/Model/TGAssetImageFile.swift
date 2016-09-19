@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class TGAssetImageFile {
+open class TGAssetImageFile {
     var desc: String!
     var image: UIImage!
     var path: String!

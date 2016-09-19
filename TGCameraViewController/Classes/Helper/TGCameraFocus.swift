@@ -9,25 +9,25 @@
 import UIKit
 import AVFoundation
 
-public class TGCameraFocus: NSObject {
-    public static func focusWithCaptureSession(session: AVCaptureSession, touchPoint: CGPoint, inFocusView focusView: UIView) {
+open class TGCameraFocus: NSObject {
+    open static func focusWithCaptureSession(_ session: AVCaptureSession, touchPoint: CGPoint, inFocusView focusView: UIView) {
         
-        let device: AVCaptureDevice = session.inputs.last!.device
+        let device: AVCaptureDevice = session.inputs.last as! AVCaptureDevice 
         self.showFocusView(focusView, withTouchPoint: touchPoint, andDevice: device)
         do{
             try device.lockForConfiguration()
             let pointOfInterest: CGPoint = self.pointOfInterestWithTouchPoint(touchPoint)
-            if device.focusPointOfInterestSupported {
+            if device.isFocusPointOfInterestSupported {
                 device.focusPointOfInterest = pointOfInterest
             }
-            if device.exposurePointOfInterestSupported {
+            if device.isExposurePointOfInterestSupported {
                 device.exposurePointOfInterest = pointOfInterest
             }
-            if device.isFocusModeSupported(.ContinuousAutoFocus) {
-                device.focusMode = .ContinuousAutoFocus
+            if device.isFocusModeSupported(.continuousAutoFocus) {
+                device.focusMode = .continuousAutoFocus
             }
-            if device.isExposureModeSupported(.ContinuousAutoExposure) {
-                device.exposureMode = .ContinuousAutoExposure
+            if device.isExposureModeSupported(.continuousAutoExposure) {
+                device.exposureMode = .continuousAutoExposure
             }
             device.unlockForConfiguration()
         }
@@ -40,28 +40,28 @@ public class TGCameraFocus: NSObject {
     
     // MARK: - Private methods
     
-    static func pointOfInterestWithTouchPoint(touchPoint: CGPoint) -> CGPoint {
-        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+    static func pointOfInterestWithTouchPoint(_ touchPoint: CGPoint) -> CGPoint {
+        let screenSize: CGSize = UIScreen.main.bounds.size
         var pointOfInterest = CGPoint()
         pointOfInterest.x = touchPoint.x / screenSize.width
         pointOfInterest.y = touchPoint.y / screenSize.height
         return pointOfInterest
     }
     
-    static func showFocusView(focusView: UIView, withTouchPoint touchPoint: CGPoint, andDevice device: AVCaptureDevice) {
+    static func showFocusView(_ focusView: UIView, withTouchPoint touchPoint: CGPoint, andDevice device: AVCaptureDevice) {
         //
         // add focus view animated
         //
-        let cameraFocusView: TGCameraFocusView = TGCameraFocusView(frame: CGRectMake(0, 0, TGCameraFocusSize, TGCameraFocusSize))
+        let cameraFocusView: TGCameraFocusView = TGCameraFocusView(frame: CGRect(x: 0, y: 0, width: TGCameraFocusSize, height: TGCameraFocusSize))
         cameraFocusView.center = touchPoint
         focusView.addSubview(cameraFocusView)
         cameraFocusView.startAnimation()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), {() -> Void in
-            NSThread.sleepForTimeInterval(0.5)
-            while device.adjustingFocus || device.adjustingExposure || device.adjustingWhiteBalance {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {() -> Void in
+            Thread.sleep(forTimeInterval: 0.5)
+            while device.isAdjustingFocus || device.isAdjustingExposure || device.isAdjustingWhiteBalance {
                 
             }
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
+            DispatchQueue.main.async(execute: {() -> Void in
                 //
                 // remove focus view and focus subview animated
                 //

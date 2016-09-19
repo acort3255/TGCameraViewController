@@ -15,7 +15,7 @@ let kTGCacheCurveKey: String = "TGCacheCurveKey"
 let kTGCacheVignetteKey: String = "TGCacheVignetteKey"
 
 
-public class TGMediaViewController: UIViewController, PlayerDelegate
+open class TGMediaViewController: UIViewController, PlayerDelegate
 {
     
     
@@ -27,14 +27,14 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
     @IBOutlet weak var cancelButton: TGTintedButton!
     @IBOutlet weak var confirmButton: TGTintedButton!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
-    public var delegate: TGCameraDelegate!
+    open var delegate: TGCameraDelegate!
     var detailFilterView: UIView!
     var photo: UIImage!
-    var videoURL: NSURL!
-    var cachePhoto: NSCache!
+    var videoURL: URL!
+    var cachePhoto: NSCache<NSString, AnyObject>!
     var isVideo: Bool = false
     var videoPlayer: TGPlayer!
-    public var albumPhoto: Bool!
+    open var albumPhoto: Bool!
     
     
     /*public required init?(coder aDecoder: NSCoder) {
@@ -42,9 +42,9 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         //fatalError("init(coder:) has not been implemented")
     }*/
     
-    public func newWithDelegateAndPhoto(delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
+    open func newWithDelegateAndPhoto(_ delegate: TGCameraDelegate, photo: UIImage) -> TGMediaViewController
     {
-        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let bundle = Bundle(for: TGCameraViewController.self)
         let viewController: TGMediaViewController = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
         viewController.delegate = delegate
         viewController.photo = photo
@@ -53,9 +53,9 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
 
     }
     
-    public func newWithDelegateAndVideo(delegate: TGCameraDelegate, videoURL: NSURL) -> TGMediaViewController
+    open func newWithDelegateAndVideo(_ delegate: TGCameraDelegate, videoURL: URL) -> TGMediaViewController
     {
-        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let bundle = Bundle(for: TGCameraViewController.self)
         let viewController: TGMediaViewController = TGMediaViewController(nibName: "TGMediaViewController", bundle: bundle)
         viewController.delegate = delegate
         viewController.videoURL = videoURL
@@ -63,12 +63,12 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         return viewController
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         detailFilterView = UIView()
         
-        if CGRectGetHeight(UIScreen.mainScreen().bounds) <= 480 {
+        if UIScreen.main.bounds.height <= 480 {
             self.topViewHeight.constant = 0
         }
         self.photoView.clipsToBounds = true
@@ -81,9 +81,13 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         else
         {
             videoPlayer = TGPlayer()
-            videoPlayer.playerView.frame = CGRectMake(photoView.frame.origin.x, photoView.frame.origin.y, 414, 414)//photoView.frame
+            videoPlayer.playerView.frame = CGRect(x: photoView.frame.origin.x, y: photoView.frame.origin.y, width: 414, height: 414)//photoView.frame
             videoPlayer.setURL(videoURL)
-            videoPlayer.playerView.contentMode = UIViewContentMode.ScaleAspectFill
+            
+            // Scaffolding for Swift 3.0 migration
+            videoPlayer.muted =  true
+           
+            videoPlayer.playerView.contentMode = UIViewContentMode.scaleAspectFill
             videoPlayer.delegate = self
             view.addSubview(videoPlayer.playerView)
             videoPlayer.playbackLoops = true
@@ -91,16 +95,16 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             
         }
         
-        cancelButton.setImage(UIImage(named: "CameraBack")!, forState: .Normal)
-        confirmButton.setImage(UIImage(named: "CameraShot")!, forState: .Normal)
+        cancelButton.setImage(UIImage(named: "CameraBack")!, for: UIControlState())
+        confirmButton.setImage(UIImage(named: "CameraShot")!, for: UIControlState())
         if TGCamera.filterButtonHidden == true || isVideo == true{
-            self.filterWandButton.hidden = true
+            self.filterWandButton.isHidden = true
         }
         self.addDetailViewToButton(defaultFilterButton)
 
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if isVideo == true
@@ -109,7 +113,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         }
     }
     
-    override public func viewDidDisappear(animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         if isVideo == true {
@@ -117,7 +121,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
         }
     }
     
-    override public func prefersStatusBarHidden() -> Bool {
+    override open var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -132,7 +136,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             //videoPlayer.playerView.removeFromSuperview()
             //videoPlayer = nil
         }
-        self.navigationController!.popViewControllerAnimated(true)
+        self.navigationController!.popViewController(animated: true)
     }
     
     @IBAction func confirmTapped() {
@@ -154,7 +158,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             let library = TGAssetsLibrary()
             let status = PHPhotoLibrary.authorizationStatus()
             
-                if status != PHAuthorizationStatus.Denied
+                if status != PHAuthorizationStatus.denied
                 {
                     library.saveImage(photo, resultBlock: { (assetURL) in
                         self.delegate.cameraDidSavePhotoAtPath!(assetURL)
@@ -166,7 +170,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
                 else
                 {
                     library.saveJPGImageAtDocumentDirectory(photo, resultBlock: {
-                        (assetURL: NSURL?) in
+                        (assetURL: URL?) in
                         self.delegate.cameraDidSavePhotoAtPath!(assetURL!)
                         }, failureBlock: { (error) in
                             self.delegate.cameraDidSavePhotoWithError!(error!)
@@ -182,7 +186,7 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
             {
                 let library = TGAssetsLibrary()
                 let status = PHPhotoLibrary.authorizationStatus()
-                if status != .Denied
+                if status != .denied
                 {
                     library.saveVideo(videoURL, resultBlock: {_ in
                     self.delegate.cameraDidRecordVideo(self.videoURL)
@@ -209,118 +213,121 @@ public class TGMediaViewController: UIViewController, PlayerDelegate
     }
     
     @IBAction func filtersTapped() {
-        if filterView.isDescendantOfView(self.view!) {
+        if filterView.isDescendant(of: self.view!) {
             filterView.removeFromSuperviewAnimated()
         }
         else {
             filterView.addToView(self.view!, aboveView: bottomView)
-            self.view!.sendSubviewToBack(filterView)
-            self.view!.sendSubviewToBack(photoView)
+            self.view!.sendSubview(toBack: filterView)
+            self.view!.sendSubview(toBack: photoView)
         }
 
     }
     
     // MARK: Filter view actions
     
-    @IBAction func defaultFilterTapped(button: UIButton) {
+    @IBAction func defaultFilterTapped(_ button: UIButton) {
         self.addDetailViewToButton(button)
         self.photoView.image = photo
     }
     
-    @IBAction func satureFilterTapped(button: UIButton) {
+    @IBAction func satureFilterTapped(_ button: UIButton) {
         self.addDetailViewToButton(button)
-        if (cachePhoto[kTGCacheSatureKey] != nil) {
-            self.photoView.image = (cachePhoto[kTGCacheSatureKey] as! UIImage)
+        if (cachePhoto.object(forKey: kTGCacheSatureKey as NSString) != nil) {
+            self.photoView.image = (cachePhoto.object(forKey: (kTGCacheSatureKey as NSString)) as! UIImage)
         }
         else {
-            cachePhoto[kTGCacheSatureKey] = photo.saturateImage(1.8, withContrast: 1)
-            self.photoView.image = (cachePhoto[kTGCacheSatureKey] as! UIImage)
+            cachePhoto.setObject(photo.saturateImage(1.8, withContrast: 1), forKey: kTGCacheSatureKey as NSString)
+            self.photoView.image = (cachePhoto.object(forKey: kTGCacheSatureKey as NSString) as! UIImage)
         }
 
     }
     
-    @IBAction func curveFilterTapped(button: UIButton) {
+    @IBAction func curveFilterTapped(_ button: UIButton) {
         self.addDetailViewToButton(button)
-        if (cachePhoto[kTGCacheCurveKey] != nil) {
-            self.photoView.image = (cachePhoto[kTGCacheCurveKey] as! UIImage)
+        if (cachePhoto.object(forKey:kTGCacheCurveKey as NSString) != nil) {
+            self.photoView.image = (cachePhoto.object(forKey: kTGCacheCurveKey as NSString) as! UIImage)
         }
         else {
-            cachePhoto[kTGCacheCurveKey] = photo.curveFilter()
-            self.photoView.image = (cachePhoto[kTGCacheCurveKey] as! UIImage)
+            //cachePhoto[kTGCacheCurveKey] = photo.curveFilter()
+            cachePhoto.setObject(photo.curveFilter(), forKey: kTGCacheCurveKey as NSString)
+            self.photoView.image = (cachePhoto.object(forKey: kTGCacheCurveKey as NSString) as! UIImage)
         }
 
     }
     
-    @IBAction func vignetteFilterTapped(button: UIButton) {
+    @IBAction func vignetteFilterTapped(_ button: UIButton) {
         self.addDetailViewToButton(button)
-        if (cachePhoto[kTGCacheVignetteKey] != nil) {
-            self.photoView.image = (cachePhoto[kTGCacheVignetteKey] as! UIImage)
+        if (cachePhoto.object(forKey: kTGCacheVignetteKey as NSString) != nil) {
+            self.photoView.image = (cachePhoto.object(forKey: kTGCacheVignetteKey as NSString) as! UIImage)
         }
         else {
-            cachePhoto[kTGCacheVignetteKey] = photo.vignetteWithRadius(0, intensity: 6)
-            self.photoView.image = (cachePhoto[kTGCacheVignetteKey] as! UIImage)
+            //cachePhoto[kTGCacheVignetteKey] = photo.vignetteWithRadius(0, intensity: 6)
+            cachePhoto.setObject(photo.vignetteWithRadius(0, intensity: 6), forKey: kTGCacheVignetteKey as NSString)
+            self.photoView.image = (cachePhoto.object(forKey: kTGCacheVignetteKey as NSString) as! UIImage)
         }
     }
     
     // MARK: Video Player delegate
     
-    public func playerReady(player: TGPlayer)
+    open func playerReady(_ player: TGPlayer)
     {
         
     }
-    public func playerPlaybackStateDidChange(player: TGPlayer)
+    open func playerPlaybackStateDidChange(_ player: TGPlayer)
     {
         
     }
-    public func playerBufferingStateDidChange(player: TGPlayer)
-    {
-        
-    }
-    
-    public func playerPlaybackWillStartFromBeginning(player: TGPlayer)
-    {
-        
-    }
-    public func playerPlaybackDidEnd(player: TGPlayer)
+    open func playerBufferingStateDidChange(_ player: TGPlayer)
     {
         
     }
     
-    public func playerDidReachHalfWayPoint()
+    open func playerPlaybackWillStartFromBeginning(_ player: TGPlayer)
+    {
+        
+    }
+    open func playerPlaybackDidEnd(_ player: TGPlayer)
+    {
+        
+    }
+    
+    open func playerDidReachHalfWayPoint()
     {
         
     }
     
     // MARK: Private methods
     
-    func addDetailViewToButton(button: UIButton) {
+    func addDetailViewToButton(_ button: UIButton) {
         detailFilterView.removeFromSuperview()
         let height: CGFloat = 2.5
         var frame: CGRect = button.frame
         frame.size.height = height
         frame.origin.x = 0
-        frame.origin.y = CGRectGetMaxY(button.frame) - height
+        frame.origin.y = button.frame.maxY - height
         self.detailFilterView = UIView(frame: frame)
         self.detailFilterView.backgroundColor = TGCameraColor.tintColor()
-        self.detailFilterView.userInteractionEnabled = false
+        self.detailFilterView.isUserInteractionEnabled = false
         button.addSubview(detailFilterView)
 
     }
     
     
 }
-
+/*
 extension NSCache {
     subscript(key: AnyObject) -> AnyObject? {
         get {
-            return objectForKey(key)
+            return object(forKey: key as! KeyType)
         }
         set {
             if let value: AnyObject = newValue {
-                setObject(value, forKey: key)
+                setObject(value as! ObjectType, forKey: key as! KeyType)
             } else {
-                removeObjectForKey(key)
+                removeObject(forKey: key as! KeyType)
             }
         }
     }
 }
+*/

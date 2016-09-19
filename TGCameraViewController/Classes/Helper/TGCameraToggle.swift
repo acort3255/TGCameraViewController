@@ -9,8 +9,8 @@
 import Foundation
 import AVFoundation
 
-public class TGCameraToggle: NSObject {
-    public static func toogleWithCaptureSession(session: AVCaptureSession)
+open class TGCameraToggle: NSObject {
+    open static func toogleWithCaptureSession(_ session: AVCaptureSession)
     {
         var deviceInput: AVCaptureDeviceInput! //= session.inputs.last as! AVCaptureDeviceInput
         
@@ -33,21 +33,21 @@ public class TGCameraToggle: NSObject {
     
     // MARK: Private
     
-    static func reverseDeviceInput(deviceInput: AVCaptureDeviceInput) -> AVCaptureDeviceInput? {
+    static func reverseDeviceInput(_ deviceInput: AVCaptureDeviceInput) -> AVCaptureDeviceInput? {
         //
         // reverse device position
         //
         var reversePosition: AVCaptureDevicePosition
-        if deviceInput.device.position == .Front {
-            reversePosition = .Back
+        if deviceInput.device.position == .front {
+            reversePosition = .back
         }
         else {
-            reversePosition = .Front
+            reversePosition = .front
         }
         //
         // find device with reverse position
         //
-        let devices: [AnyObject] = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        let devices: [AnyObject] = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as [AnyObject]
         var reverseDevice: AVCaptureDevice? = nil
         for device in devices {
             if device.position == reversePosition {

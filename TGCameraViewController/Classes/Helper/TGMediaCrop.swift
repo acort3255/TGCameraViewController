@@ -9,9 +9,9 @@
 import UIKit
 import AVFoundation
 
-public  class TGMediaCrop
+open  class TGMediaCrop
 {
-    public static func cropImage(image: UIImage, withCropSize cropSize: CGSize) -> UIImage
+    open static func cropImage(_ image: UIImage, withCropSize cropSize: CGSize) -> UIImage
     {
         var newImage: UIImage? = nil
         let imageSize: CGSize = image.size
@@ -22,9 +22,9 @@ public  class TGMediaCrop
         var scaleFactor: CGFloat = 0
         var scaledWidth: CGFloat = targetWidth
         var scaledHeight: CGFloat = targetHeight
-        var thumbnailPoint: CGPoint = CGPointMake(0, 0)
+        var thumbnailPoint: CGPoint = CGPoint(x: 0, y: 0)
         
-        if CGSizeEqualToSize(imageSize, cropSize) == false {
+        if imageSize.equalTo(cropSize) == false {
             let widthFactor: CGFloat = targetWidth / width
             let heightFactor: CGFloat = targetHeight / height
             if widthFactor > heightFactor {
@@ -46,62 +46,62 @@ public  class TGMediaCrop
         }
         
         UIGraphicsBeginImageContextWithOptions(cropSize, true, 0)
-        var thumbnailRect: CGRect = CGRectZero
+        var thumbnailRect: CGRect = CGRect.zero
         thumbnailRect.origin = thumbnailPoint
         thumbnailRect.size.width = scaledWidth
         thumbnailRect.size.height = scaledHeight
-        image.drawInRect(thumbnailRect)
+        image.draw(in: thumbnailRect)
         newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
         
     }
     
-    public static func cropVideo(videoURL: NSURL, completion: (croppedVideoURL: NSURL) -> Void)
+    open static func cropVideo(_ videoURL: URL, completion: @escaping (_ croppedVideoURL: URL) -> Void)
     {
         // cleanup initial file
         
-        let cleanup: dispatch_block_t = {() -> Void in
+        let cleanup: ()->() = {() -> Void in
             do {
-                try NSFileManager.defaultManager().removeItemAtURL(videoURL)
+                try FileManager.default.removeItem(at: videoURL)
             }
             catch _ {
             }
         }
         
         // output file
-        let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
+        let outputFileName: String = ProcessInfo.processInfo.globallyUniqueString
         let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mp4"
         
         // input file
-        let asset: AVAsset = AVAsset(URL: videoURL)
+        let asset: AVAsset = AVAsset(url: videoURL)
         let composition: AVMutableComposition = AVMutableComposition()
-        composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
+        composition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
         // input clip
-        let clipVideoTrack: AVAssetTrack = asset.tracksWithMediaType(AVMediaTypeVideo)[0]
+        let clipVideoTrack: AVAssetTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
         // make it square
         let videoComposition: AVMutableVideoComposition = AVMutableVideoComposition()
-        videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.height)
+        videoComposition.renderSize = CGSize(width: clipVideoTrack.naturalSize.height, height: clipVideoTrack.naturalSize.height)
         videoComposition.frameDuration = CMTimeMake(1, 30)
         let instruction: AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))
         // rotate to portrait
         let transformer: AVMutableVideoCompositionLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
-        let t1: CGAffineTransform = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -(clipVideoTrack.naturalSize.width - clipVideoTrack.naturalSize.height) / 2)
-        let t2: CGAffineTransform = CGAffineTransformRotate(t1, CGFloat(M_PI_2))
+        let t1: CGAffineTransform = CGAffineTransform(translationX: clipVideoTrack.naturalSize.height, y: -(clipVideoTrack.naturalSize.width - clipVideoTrack.naturalSize.height) / 2)
+        let t2: CGAffineTransform = t1.rotated(by: CGFloat(M_PI_2))
         let finalTransform: CGAffineTransform = t2
-        transformer.setTransform(finalTransform, atTime: kCMTimeZero)
+        transformer.setTransform(finalTransform, at: kCMTimeZero)
         instruction.layerInstructions = [transformer]
         videoComposition.instructions = [instruction]
         // export
         let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
         exporter!.videoComposition = videoComposition
-        exporter!.outputURL = NSURL.fileURLWithPath(outputFileURL)
+        exporter!.outputURL = URL(fileURLWithPath: outputFileURL)
         exporter!.outputFileType = AVFileTypeQuickTimeMovie
-        exporter!.exportAsynchronouslyWithCompletionHandler({() -> Void in
+        exporter!.exportAsynchronously(completionHandler: {() -> Void in
             //print("Exporting done!")
             cleanup()
-            completion(croppedVideoURL: NSURL.fileURLWithPath(outputFileURL))
+            completion(URL(fileURLWithPath: outputFileURL))
         })
         
         //return videoURL

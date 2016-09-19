@@ -10,5 +10,5 @@ import Foundation
 
 class VideoCacheManager: NSObject
 {
-    static let sharedVideoCache = NSCache()
+    static let sharedVideoCache = NSCache<AnyObject, AnyObject>()
 }

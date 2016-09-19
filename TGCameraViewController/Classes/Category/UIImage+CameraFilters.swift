@@ -40,7 +40,7 @@ extension UIImage {
         return imageFromContext(context, withFilter: filter)
     }
     
-    public func saturateImage(saturation: CGFloat, withContrast contrast: CGFloat) -> UIImage {
+    public func saturateImage(_ saturation: CGFloat, withContrast contrast: CGFloat) -> UIImage {
         let inputImage: CoreImage.CIImage = CoreImage.CIImage(image: self)!
         let saturationNumber: Int = Int(saturation)
         let contrastNumber: Int = Int(contrast)
@@ -54,7 +54,7 @@ extension UIImage {
         
     }
     
-    public func vignetteWithRadius(radius: CGFloat, intensity: CGFloat) -> UIImage {
+    public func vignetteWithRadius(_ radius: CGFloat, intensity: CGFloat) -> UIImage {
         let inputImage: CoreImage.CIImage = CoreImage.CIImage(image: self)!
         let intentisyNumber: Int = Int(intensity)
         let radiusNumber: Int = Int(radius)
@@ -69,11 +69,11 @@ extension UIImage {
     }
     
     // MARK: Private
-    internal func imageFromContext(context: CIContext, withFilter filter: CIFilter) -> UIImage {
+    internal func imageFromContext(_ context: CIContext, withFilter filter: CIFilter) -> UIImage {
         let outputImage: CoreImage.CIImage = filter.outputImage!
         let extent: CGRect = filter.outputImage!.extent
-        let imageRef: CGImageRef = context.createCGImage(outputImage, fromRect: extent)!
-        let image: UIImage = UIImage(CGImage: imageRef, scale: self.scale, orientation: self.imageOrientation)
+        let imageRef: CGImage = context.createCGImage(outputImage, from: extent)!
+        let image: UIImage = UIImage(cgImage: imageRef, scale: self.scale, orientation: self.imageOrientation)
         return image
     }
 }

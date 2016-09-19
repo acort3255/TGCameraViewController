@@ -9,10 +9,10 @@
 import UIKit
 import MobileCoreServices 
 
-public class TGAlbum: NSObject {
+open class TGAlbum: NSObject {
     
     
-    public static func imageWithMediaInfo(info: [NSObject : AnyObject]) -> UIImage? {
+    open static func imageWithMediaInfo(_ info: [AnyHashable: Any]) -> UIImage? {
         let mediaType: String = info[UIImagePickerControllerMediaType] as! String
         if (mediaType == String(kUTTypeImage)) {
             return info[UIImagePickerControllerEditedImage] as? UIImage
@@ -20,12 +20,12 @@ public class TGAlbum: NSObject {
         return nil
     }
     
-    public static func isAvailable() -> Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum)
+    open static func isAvailable() -> Bool {
+        return UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum)
 
     }
     
-    public static func imagePickerControllerWithDelegate(delegate: protocol<UINavigationControllerDelegate, UIImagePickerControllerDelegate>) -> UIImagePickerController {
+    open static func imagePickerControllerWithDelegate(_ delegate: UINavigationControllerDelegate & UIImagePickerControllerDelegate) -> UIImagePickerController {
         
         var pickerController: UIImagePickerController = UIImagePickerController()
         pickerController = UIImagePickerController()

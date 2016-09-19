@@ -10,16 +10,16 @@ import Foundation
 import AVFoundation
 import UIKit
 
-public class TGCameraShot: NSObject {
+open class TGCameraShot: NSObject {
     
-    public static var delegate: TGCamera!
-    public static func takePhotoCaptureView(captureView: UIView, stillImageOutput: AVCaptureStillImageOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: (photo: UIImage) -> Void) {
+    open static var delegate: TGCamera!
+    open static func takePhotoCaptureView(_ captureView: UIView, stillImageOutput: AVCaptureStillImageOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, completion: @escaping (_ photo: UIImage) -> Void) {
         
-         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
             var videoConnection: AVCaptureConnection? = nil
             for connection in stillImageOutput.connections {
-                for port in connection.inputPorts! {
-                    if port.mediaType == AVMediaTypeVideo {
+                for port in (connection as AnyObject).inputPorts! {
+                    if (port as AnyObject).mediaType == AVMediaTypeVideo {
                         videoConnection = connection as? AVCaptureConnection
                     }
                 }
@@ -31,28 +31,28 @@ public class TGCameraShot: NSObject {
             }
         
         
-                stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
-                (imageDataSampleBuffer: CMSampleBufferRef!, _) in
+                stillImageOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: {
+                    (imageDataSampleBuffer: CMSampleBuffer?, error: Error?) in
                     
                     if imageDataSampleBuffer != nil
                     {
                         let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
-                        let image = UIImage(data: imageData)
+                        let image = UIImage(data: imageData!)
                         let croppedImage = TGMediaCrop.cropImage(image!, withCropSize: cropSize)
-                        completion(photo: croppedImage)
+                        completion(croppedImage)
                     }
             })
         })
     }
     
-    public static func recordVideoCaptureView(captureView: UIView, movieFileOutput: AVCaptureMovieFileOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, delegate: TGCamera)
+    open static func recordVideoCaptureView(_ captureView: UIView, movieFileOutput: AVCaptureMovieFileOutput, videoOrientation: AVCaptureVideoOrientation, cropSize: CGSize, delegate: TGCamera)
     {
-        if movieFileOutput.recording == false
+        if movieFileOutput.isRecording == false
         {
             var videoConnection: AVCaptureConnection? = nil
             for connection in movieFileOutput.connections {
-                for port in connection.inputPorts! {
-                    if port.mediaType == AVMediaTypeVideo {
+                for port in (connection as AnyObject).inputPorts! {
+                    if (port as AnyObject).mediaType == AVMediaTypeVideo {
                         videoConnection = connection as? AVCaptureConnection
                     }
                 }
@@ -66,10 +66,10 @@ public class TGCameraShot: NSObject {
             
             
             // Start recording to a temporary file.
-            let outputFileName: String = NSProcessInfo.processInfo().globallyUniqueString
+            let outputFileName: String = ProcessInfo.processInfo.globallyUniqueString
             let outputFileURL = NSTemporaryDirectory() + outputFileName + ".mp4"
             //NSLog(@"Path to video in camera call: %@", outputFileURL);
-            movieFileOutput.startRecordingToOutputFileURL(NSURL.fileURLWithPath(outputFileURL), recordingDelegate: delegate)
+            movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFileURL), recordingDelegate: delegate)
         }
     }
     

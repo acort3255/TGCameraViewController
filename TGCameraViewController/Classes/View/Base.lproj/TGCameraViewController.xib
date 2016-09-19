@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGCameraViewController" customModule="TGCameraViewController" customModuleProvider="target">
@@ -35,19 +36,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dit-c7-IZk" userLabel="Top View">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCZ-PE-zKy">
-                            <rect key="frame" x="287" y="16" width="26" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="26" id="l76-p3-0wP"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                            <color key="textColor" red="1" green="0.35686275360000003" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textColor" red="0.98755216598510742" green="0.26285848021507263" blue="0.032961577177047729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="0mu-lN-Lkb"/>
                         <constraint firstItem="oCZ-PE-zKy" firstAttribute="centerY" secondItem="dit-c7-IZk" secondAttribute="centerY" id="GOa-IQ-nIZ"/>
@@ -55,35 +54,29 @@
                     </constraints>
                 </view>
                 <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-rQ-gzr" userLabel="Capture View">
-                    <rect key="frame" x="0.0" y="60" width="600" height="600"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraDetail" translatesAutoresizingMaskIntoConstraints="NO" id="ljD-PV-2sR" userLabel="Top Left">
-                            <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="58" id="1gn-ke-nrx"/>
                                 <constraint firstAttribute="width" constant="58" id="cfo-2C-tKa"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraDetail" translatesAutoresizingMaskIntoConstraints="NO" id="umk-ea-F3l" userLabel="Top Right">
-                            <rect key="frame" x="542" y="0.0" width="58" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="3kF-VG-r1w"/>
                                 <constraint firstAttribute="height" constant="58" id="fo1-rR-IP5"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xFF-75-cke" userLabel="Separator View">
-                            <rect key="frame" x="0.0" y="299" width="600" height="2"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxH-mC-xM3" userLabel="Top Separator View">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
-                                    <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="iTp-J7-sUN"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yg1-A1-fum" userLabel="Button Separator View">
-                                    <rect key="frame" x="0.0" y="1" width="600" height="1"/>
-                                    <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="ACL-FR-naP"/>
                                     </constraints>
@@ -100,21 +93,19 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraDetail" translatesAutoresizingMaskIntoConstraints="NO" id="2rS-OA-lDQ" userLabel="Bottom Left">
-                            <rect key="frame" x="0.0" y="542" width="58" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="58" id="m8b-0G-cS3"/>
                                 <constraint firstAttribute="width" constant="58" id="r8H-hS-XjU"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraDetail" translatesAutoresizingMaskIntoConstraints="NO" id="HFV-tF-409" userLabel="Bottom Right">
-                            <rect key="frame" x="542" y="542" width="58" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="Hf0-do-VjA"/>
                                 <constraint firstAttribute="height" constant="58" id="eM7-tr-8mw"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <gestureRecognizers/>
                     <constraints>
                         <constraint firstItem="umk-ea-F3l" firstAttribute="top" secondItem="dIq-rQ-gzr" secondAttribute="top" id="1zC-th-e2x"/>
@@ -135,10 +126,8 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ni6-M2-hWT" userLabel="Actions View">
-                    <rect key="frame" x="0.0" y="660" width="600" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nol-dD-ETh" userLabel="Grid" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
-                            <rect key="frame" x="162" y="5" width="50" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Aub-V9-12O"/>
                                 <constraint firstAttribute="width" constant="50" id="ivk-GF-mOZ"/>
@@ -149,7 +138,6 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJG-N5-BnZ" userLabel="Toggle" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
-                            <rect key="frame" x="275" y="5" width="50" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="6Yw-v5-k8c"/>
                                 <constraint firstAttribute="height" constant="40" id="XBx-hh-hmO"/>
@@ -160,7 +148,6 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7O-pE-Mp0" userLabel="Flash" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
-                            <rect key="frame" x="388" y="5" width="50" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="6QJ-EO-jQZ"/>
                                 <constraint firstAttribute="height" constant="40" id="iqh-0F-jLz"/>
@@ -171,7 +158,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="p7O-pE-Mp0" firstAttribute="leading" secondItem="WJG-N5-BnZ" secondAttribute="trailing" constant="63" id="1q8-DG-v1g"/>
                         <constraint firstItem="WJG-N5-BnZ" firstAttribute="leading" secondItem="Nol-dD-ETh" secondAttribute="trailing" constant="63" id="41d-NA-H1H"/>
@@ -183,10 +170,8 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJ9-I8-VJI" userLabel="Bottom View">
-                    <rect key="frame" x="0.0" y="710" width="600" height="110"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3k-MF-E1l" userLabel="Close" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
-                            <rect key="frame" x="20" y="15" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="cgU-fk-MtB"/>
                                 <constraint firstAttribute="width" constant="80" id="xhg-SH-0Q3"/>
@@ -197,7 +182,6 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-gO-dPX" userLabel="Album" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
-                            <rect key="frame" x="500" y="15" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="Qit-id-URc"/>
                                 <constraint firstAttribute="width" constant="80" id="twe-nl-2AZ"/>
@@ -208,7 +192,6 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtQ-Dg-G3i" userLabel="Shot" customClass="TGTintedButton" customModule="TGCameraViewController" customModuleProvider="target">
-                            <rect key="frame" x="261" y="16" width="78" height="78"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="78" id="HAC-kq-tli"/>
                                 <constraint firstAttribute="height" constant="78" id="Hud-wO-9uR"/>
@@ -216,7 +199,7 @@
                             <state key="normal" image="CameraShot"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="wtQ-Dg-G3i" secondAttribute="centerY" id="02I-TO-eyD"/>
                         <constraint firstAttribute="centerY" secondItem="O3k-MF-E1l" secondAttribute="centerY" id="AlZ-MU-XJk"/>
@@ -227,8 +210,8 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-            <color key="tintColor" red="1" green="0.35686275362968445" blue="0.0039215688593685627" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" red="0.98755216598510742" green="0.26285848021507263" blue="0.032961577177047729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="rJ9-I8-VJI" secondAttribute="trailing" id="354-YR-Y3x"/>
                 <constraint firstItem="dIq-rQ-gzr" firstAttribute="top" secondItem="dit-c7-IZk" secondAttribute="bottom" id="5ZP-oL-R1c"/>
@@ -253,15 +236,14 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQ4-27-y2g" userLabel="Separator View">
-                    <rect key="frame" x="0.0" y="224" width="600" height="1"/>
-                    <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="HY2-Sb-rlR"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-            <color key="tintColor" red="1" green="0.35686275360000003" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" red="0.98755216598510742" green="0.26285848021507263" blue="0.032961577177047729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HQ4-27-y2g" firstAttribute="leading" secondItem="vJp-kA-okD" secondAttribute="leading" id="GqW-ZD-APZ"/>
                 <constraint firstAttribute="trailing" secondItem="HQ4-27-y2g" secondAttribute="trailing" id="Hnf-2P-GD4"/>
@@ -276,15 +258,14 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsO-7U-Imk" userLabel="Separator View">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
-                    <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="RKR-Z9-Lco"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-            <color key="tintColor" red="1" green="0.35686275360000003" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" red="0.98755216598510742" green="0.26285848021507263" blue="0.032961577177047729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="wsO-7U-Imk" firstAttribute="top" secondItem="Czb-nz-m44" secondAttribute="top" id="8ye-9a-LYK"/>
                 <constraint firstItem="wsO-7U-Imk" firstAttribute="leading" secondItem="Czb-nz-m44" secondAttribute="leading" id="9ZZ-vg-AT1"/>
@@ -300,12 +281,11 @@
             </connections>
         </tapGestureRecognizer>
         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyU-Ob-tTN">
-            <rect key="frame" x="0.0" y="0.0" width="26" height="28"/>
             <constraints>
                 <constraint firstAttribute="width" constant="26" id="NI6-nC-3Ld"/>
             </constraints>
             <fontDescription key="fontDescription" type="system" pointSize="23"/>
-            <color key="textColor" red="1" green="0.35686275360000003" blue="0.0039215688589999999" alpha="1" colorSpace="deviceRGB"/>
+            <color key="textColor" red="0.98755216598510742" green="0.26285848021507263" blue="0.032961577177047729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="highlightedColor"/>
         </label>
     </objects>

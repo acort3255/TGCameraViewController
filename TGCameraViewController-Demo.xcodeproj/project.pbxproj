@@ -384,10 +384,12 @@
 					0B8736E21D4948FB00CF308D = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 62ZHJ674Y2;
+						LastSwiftMigration = 0800;
 					};
 					F82F8E8019C4EFE700A47148 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 62ZHJ674Y2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -555,7 +557,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -586,7 +588,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TGCameraViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -707,6 +709,7 @@
 				PRODUCT_NAME = "TGCameraViewController-Demo";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -726,6 +729,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "TG.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "TGCameraViewController-Demo";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

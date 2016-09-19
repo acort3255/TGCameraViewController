@@ -10,15 +10,15 @@ import Foundation
 import AVFoundation
 import UIKit
 
-public class TGCameraFlash: NSObject {
-    public static func changeModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
+open class TGCameraFlash: NSObject {
+    open static func changeModeWithCaptureSession(_ session: AVCaptureSession, andButton button: UIButton) {
         var device: AVCaptureDevice!// = (session.inputs.last?.device)!
         // find the input that supports flash aka video input
         for input in session.inputs
         {
             if (input as! AVCaptureDeviceInput).device.hasFlash == true
             {
-                device = input.device
+                device = (input as AnyObject).device
                 break
             }
         }
@@ -30,12 +30,12 @@ public class TGCameraFlash: NSObject {
             try device.lockForConfiguration()
             
                 switch device.flashMode {
-                case .Auto:
-                    mode = .On
-                case .On:
-                    mode = .Off
-                case .Off:
-                    mode = .Auto
+                case .auto:
+                    mode = .on
+                case .on:
+                    mode = .off
+                case .off:
+                    mode = .auto
                 }
             
             if device.isFlashModeSupported(mode) {
@@ -53,14 +53,14 @@ public class TGCameraFlash: NSObject {
         }
     }
     
-    public static func matchFlashModeToTorchMode(session: AVCaptureSession, andButton button: UIButton) {
+    open static func matchFlashModeToTorchMode(_ session: AVCaptureSession, andButton button: UIButton) {
         var device: AVCaptureDevice! //= (session.inputs.last?.device)!
         
         for input in session.inputs
         {
             if (input as! AVCaptureDeviceInput).device.hasTorch == true
             {
-                device = input.device
+                device = (input as AnyObject).device
             }
         }
         
@@ -85,7 +85,7 @@ public class TGCameraFlash: NSObject {
         }
     }
     
-    public static func flashModeWithCaptureSession(session: AVCaptureSession, andButton button: UIButton) {
+    open static func flashModeWithCaptureSession(_ session: AVCaptureSession, andButton button: UIButton) {
         
         var device: AVCaptureDevice! //= (session.inputs.last?.device)!
         
@@ -94,7 +94,7 @@ public class TGCameraFlash: NSObject {
         {
             if (input as! AVCaptureDeviceInput).device.hasFlash == true
             {
-                device = input.device
+                device = (input as AnyObject).device
                 break
             }
         }
@@ -103,33 +103,34 @@ public class TGCameraFlash: NSObject {
             let mode: AVCaptureFlashMode = device.flashMode
             let image: UIImage = UIImageFromAVCapture(mode)
             let tintColor: UIColor = TintColorFromAVCapture(mode)
-            button.enabled = device.isFlashModeSupported(mode)
+            button.isEnabled = device.isFlashModeSupported(mode)
             if (button is TGTintedButton) {
                 (button as! TGTintedButton).customTintColorOverride = tintColor
             }
-            button.setImage(image, forState: .Normal)
+            button.setImage(image, for: .normal)
         }
     }
     
     // MARK: Private
     
-    private static func UIImageFromAVCapture(flashMode: AVCaptureFlashMode) -> UIImage
+    fileprivate static func UIImageFromAVCapture(_ flashMode: AVCaptureFlashMode) -> UIImage
     {
-        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let bundle = Bundle(for: TGCameraViewController.self)
         let array = ["CameraFlashOff", "CameraFlashOn", "CameraFlashAuto"]
         let imageName = array[flashMode.rawValue]
-        return UIImage(named: imageName, inBundle: bundle, compatibleWithTraitCollection: nil)!
+        return UIImage(named: imageName, in: bundle, compatibleWith: nil)!
     }
     
     
-    private static func TintColorFromAVCapture(flashMode: AVCaptureFlashMode) -> UIColor
+    fileprivate static func TintColorFromAVCapture(_ flashMode: AVCaptureFlashMode) -> UIColor
     {
-        let array = [UIColor.grayColor(), TGCameraColor.tintColor(), TGCameraColor.tintColor()]
+        
+        let array = [UIColor.gray, TGCameraColor.tintColor(), TGCameraColor.tintColor()]
         let color: UIColor = array[flashMode.rawValue]
         return color
     }
     
-    private static func determineFlashMode(device: AVCaptureDevice) -> AVCaptureFlashMode
+    fileprivate static func determineFlashMode(_ device: AVCaptureDevice) -> AVCaptureFlashMode
     {
         var result: AVCaptureFlashMode!
         if device.hasTorch == true && device.flashMode != AVCaptureFlashMode(rawValue: device.torchMode.rawValue)!

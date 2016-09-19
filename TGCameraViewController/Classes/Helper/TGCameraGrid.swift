@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class TGCameraGrid: NSObject {
-    public static func disPlayGridView(gridView: TGCameraGridView)
+open class TGCameraGrid: NSObject {
+    open static func disPlayGridView(_ gridView: TGCameraGridView)
     {
         let newAlpha: Int = (gridView.alpha == 0) ? 1 : 0
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut, animations: {() -> Void in
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions(), animations: {() -> Void in
             gridView.alpha = CGFloat(newAlpha)
             }, completion: { _ in })
 

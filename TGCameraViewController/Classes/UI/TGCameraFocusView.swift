@@ -10,31 +10,31 @@ import UIKit
 
 let TGCameraFocusSize: CGFloat = 50
 
-public class TGCameraFocusView: UIView {
+open class TGCameraFocusView: UIView {
     
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
         // Initialization code
-        self.backgroundColor = UIColor.clearColor()
-        self.contentMode = .ScaleToFill
+        self.backgroundColor = UIColor.clear
+        self.contentMode = .scaleToFill
     
         //
         // create view and subview to focus
         //
-        let view: UIView = UIView(frame: CGRectMake(0, 0, TGCameraFocusSize, TGCameraFocusSize))
-        let subview: UIView = UIView(frame: CGRectMake(0, 0, TGCameraFocusSize - 20, TGCameraFocusSize - 20))
+        let view: UIView = UIView(frame: CGRect(x: 0, y: 0, width: TGCameraFocusSize, height: TGCameraFocusSize))
+        let subview: UIView = UIView(frame: CGRect(x: 0, y: 0, width: TGCameraFocusSize - 20, height: TGCameraFocusSize - 20))
         view.tag = -1
         subview.tag = -1
-        view.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-        subview.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-        view.layer.borderColor = TGCameraColor.tintColor().CGColor
-        subview.layer.borderColor = TGCameraColor.tintColor().CGColor
+        view.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+        subview.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+        view.layer.borderColor = TGCameraColor.tintColor().cgColor
+        subview.layer.borderColor = TGCameraColor.tintColor().cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = CGRectGetHeight(view.frame) / 2
+        view.layer.cornerRadius = view.frame.height / 2
         subview.layer.borderWidth = 5
-        subview.layer.cornerRadius = CGRectGetHeight(subview.frame) / 2
+        subview.layer.cornerRadius = subview.frame.height / 2
         
         //
         // add focus view and focus subview to touch viiew
@@ -49,26 +49,26 @@ public class TGCameraFocusView: UIView {
     }
     // MARK: - Animation Method
     
-    public func startAnimation() {
+    open func startAnimation() {
         self.layer.removeAllAnimations()
-        self.transform = CGAffineTransformMakeScale(1.5, 1.5)
+        self.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         self.alpha = 0
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseIn, animations: {() -> Void in
-            self.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {() -> Void in
+            self.transform = CGAffineTransform.identity
             self.alpha = 1
             }, completion: {(finished: Bool) -> Void in
-                UIView.animateWithDuration(0.4, delay: 0, options: [.CurveLinear, .Autoreverse, .Repeat], animations: {() -> Void in
-                    self.transform = CGAffineTransformMakeScale(1.2, 1.2)
+                UIView.animate(withDuration: 0.4, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {() -> Void in
+                    self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                     self.alpha = 1
                     }, completion: {(finished1: Bool) -> Void in
                 })
         })
     }
     
-    public func stopAnimation() {
+    open func stopAnimation() {
         self.layer.removeAllAnimations()
-        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {() -> Void in
-            self.transform = CGAffineTransformMakeScale(0.001, 0.001)
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {() -> Void in
+            self.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
             self.alpha = 0
             }, completion: {(finished: Bool) -> Void in
                 self.removeFromSuperview()

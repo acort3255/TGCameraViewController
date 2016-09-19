@@ -32,7 +32,7 @@
     //TGCamera.albumButtonHidden = YES;
     //TGCamera.filterButtonHidden = YES;
     TGCamera.saveMediaToAlbum = YES;
-    //TGCamera.stopWatchHidden = NO;
+    TGCamera.stopWatchHidden = NO;
     TGCamera.maxDuration = CMTimeMake(10, 1);
     
     TGCamera.capturePreset = AVCaptureSessionPresetMedium;

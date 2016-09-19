@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TGCameraFilterView: UIView {
+open class TGCameraFilterView: UIView {
     
     public convenience init() {
         self.init()
@@ -27,23 +27,23 @@ public class TGCameraFilterView: UIView {
         self.setup()
     }
     
-    public func addToView(view: UIView, aboveView: UIView) {
+    open func addToView(_ view: UIView, aboveView: UIView) {
         var frame: CGRect = self.frame
-        frame.origin.y = CGRectGetMaxY(view.frame) - CGRectGetHeight(aboveView.frame)
+        frame.origin.y = view.frame.maxY - aboveView.frame.height
         self.frame = frame
         view.addSubview(self)
-        frame.origin.y -= CGRectGetHeight(self.frame)
-        UIView.animateWithDuration(0.5, animations: {() -> Void in
+        frame.origin.y -= self.frame.height
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.frame = frame
             }, completion: {(finished: Bool) -> Void in
         })
 
     }
     
-    public func removeFromSuperviewAnimated() {
+    open func removeFromSuperviewAnimated() {
         var frame: CGRect = self.frame
-        frame.origin.y += CGRectGetHeight(self.frame)
-        UIView.animateWithDuration(0.5, animations: {() -> Void in
+        frame.origin.y += self.frame.height
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.frame = frame
             }, completion: {(finished: Bool) -> Void in
                 self.removeFromSuperview()
@@ -56,7 +56,7 @@ public class TGCameraFilterView: UIView {
     
     func setup() {
         var frame: CGRect = self.frame
-        frame.size.width = CGRectGetWidth(UIScreen.mainScreen().applicationFrame)
+        frame.size.width = UIScreen.main.applicationFrame.width
         self.frame = frame
     }
 }

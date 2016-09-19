@@ -18,36 +18,37 @@ public class TGTintedButton: UIButton {
         self.updateTintIfNeeded()
     }
     
-    override public func setBackgroundImage(image: UIImage?, forState state: UIControlState) {
-        if state != .Normal{
+    override open func setBackgroundImage(_ image: UIImage?, for state: UIControlState) {
+        if state != .normal{
             return
         }
-        let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .AlwaysOriginal : .AlwaysTemplate
-        super.setBackgroundImage(image!.imageWithRenderingMode(renderingMode), forState: state)
+        let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .alwaysOriginal : .alwaysTemplate
+        super.setBackgroundImage(image!.withRenderingMode(renderingMode), for: state)
     }
     
-    override public func setImage(image: UIImage?, forState state: UIControlState) {
-        if state != .Normal {
+    override open func setImage(_ image: UIImage?, for state: UIControlState) {
+        if state != .normal {
            return
         }
-        let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .AlwaysOriginal : .AlwaysTemplate
-        super.setImage(image!.imageWithRenderingMode(renderingMode), forState: state)
+        let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .alwaysOriginal : .alwaysTemplate
+        super.setImage(image!.withRenderingMode(renderingMode), for: state)
+        super.setImage(image!, for: state)
     }
     
     func updateTintIfNeeded() {
         let color: UIColor =  TGCameraColor.tintColor()
-        let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .AlwaysOriginal : .AlwaysTemplate
+        let renderingMode: UIImageRenderingMode = (self.disableTint != nil) ? .alwaysOriginal : .alwaysTemplate
         if self.tintColor != color {
             self.tintColor = color
-            let backgroundImage = self.backgroundImageForState(.Normal)?.imageWithRenderingMode(renderingMode)
+            let backgroundImage = self.backgroundImage(for: .normal)?.withRenderingMode(renderingMode)
             if backgroundImage != nil
             {
-                self.setBackgroundImage(backgroundImage, forState: .Normal)
+                self.setBackgroundImage(backgroundImage, for: .normal)
             }
-            let image: UIImage? = self.imageForState(.Normal)!.imageWithRenderingMode(renderingMode)
+            let image: UIImage? = self.image(for: .normal)!.withRenderingMode(renderingMode)
             if image != nil
             {
-                self.setImage(image, forState: .Normal)
+                self.setImage(image, for: .normal)
             }
         }
     }

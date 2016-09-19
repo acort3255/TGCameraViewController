@@ -10,7 +10,7 @@ import UIKit
 
 public protocol TGCameraSlideViewProtocol: class
 {
-    func initialPositionWithView(view: UIView) -> CGFloat
+    func initialPositionWithView(_ view: UIView) -> CGFloat
     
     func finalPosition() -> CGFloat
 }

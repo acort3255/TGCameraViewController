@@ -20,7 +20,7 @@ class TGTintedLabel: UILabel {
         self.updateTintIfNeeded()
     }
     
-    private  func updateTintIfNeeded() {
+    fileprivate  func updateTintIfNeeded() {
         if self.tintColor != TGCameraColor.tintColor() || self.textColor != self.tintColor {
             self.tintColor = TGCameraColor.tintColor()
             self.textColor = self.tintColor

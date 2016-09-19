@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-public class TGCameraNavigationController: UINavigationController {
+open class TGCameraNavigationController: UINavigationController {
     
     
     required public init?(coder aDecoder: NSCoder) {
@@ -23,7 +23,7 @@ public class TGCameraNavigationController: UINavigationController {
         //print("User newWithCameraDelegate to init")
     }
     
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         //print("User newWithCameraDelegate to init")
     }
@@ -32,17 +32,17 @@ public class TGCameraNavigationController: UINavigationController {
         super.init(rootViewController: rootViewController)
     }
     
-    static public func newWithCameraDelegate(delegate: TGCameraDelegate) -> TGCameraNavigationController{
+    static open func newWithCameraDelegate(_ delegate: TGCameraDelegate) -> TGCameraNavigationController{
         let navigationController: TGCameraNavigationController = TGCameraNavigationController()
-        navigationController.navigationBarHidden = true
+        navigationController.isNavigationBarHidden = true
         //if navigationController != nil {
-            let status: AVAuthorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+            let status: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
             switch status {
-            case .Authorized:
+            case .authorized:
                 navigationController.setupAuthorizedWithDelegate(delegate)
-            case .Restricted, .Denied:
+            case .restricted, .denied:
                 navigationController.setupDenied()
-            case .NotDetermined:
+            case .notDetermined:
                 navigationController.setupNotDeterminedWithDelegate(delegate)
             }
         // }
@@ -50,48 +50,48 @@ public class TGCameraNavigationController: UINavigationController {
 
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+        UIApplication.shared.setStatusBarHidden(true, with: .fade)
     }
     
-    override public func viewWillDisappear(animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
+        UIApplication.shared.setStatusBarHidden(false, with: .fade)
     }
     
-    override public func shouldAutorotate() -> Bool {
+    override open var shouldAutorotate : Bool {
         return false
     }
     
     // MARK -Private Methods
     
-    func setupAuthorizedWithDelegate(delegate: TGCameraDelegate) {
+    func setupAuthorizedWithDelegate(_ delegate: TGCameraDelegate) {
         
-        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let bundle = Bundle(for: TGCameraViewController.self)
         let viewController: TGCameraViewController = TGCameraViewController(nibName: "TGCameraViewController", bundle: bundle)
         viewController.delegate = delegate
         self.viewControllers = [viewController]
     }
     
     func setupDenied() {
-        let bundle = NSBundle(forClass: TGCameraViewController.self)
+        let bundle = Bundle(for: TGCameraViewController.self)
         let viewController: UIViewController = TGCameraAuthorizationViewController(nibName: "TGCameraAuthorizationViewController", bundle: bundle)
         self.viewControllers = [viewController]
     }
     
-    func setupNotDeterminedWithDelegate(delegate: TGCameraDelegate)
+    func setupNotDeterminedWithDelegate(_ delegate: TGCameraDelegate)
     {
-        let semaphore: dispatch_semaphore_t = dispatch_semaphore_create(0)
-        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: {(granted: Bool) -> Void in
+        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: {(granted: Bool) -> Void in
             if granted {
                 self.setupAuthorizedWithDelegate(delegate)
             }
             else {
                 self.setupDenied()
             }
-            dispatch_semaphore_signal(semaphore)
+            semaphore.signal()
         })
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        //semaphore.wait(timeout: DispatchTime.distantFuture)
     }
 }

@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class TGCameraSlideUpView: TGCameraSlideView
+open class TGCameraSlideUpView: TGCameraSlideView
 {
     // MARK: - TGCameraSlideViewProtocol
     
     
-    public override func initialPositionWithView(view: UIView) -> CGFloat {
+    open override func initialPositionWithView(_ view: UIView) -> CGFloat {
         return 0
     }
     
-    public override func finalPosition() -> CGFloat {
-        return -CGRectGetMaxY(self.frame)
+    open override func finalPosition() -> CGFloat {
+        return -self.frame.maxY
     }
 }

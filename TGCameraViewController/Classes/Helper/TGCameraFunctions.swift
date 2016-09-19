@@ -8,19 +8,18 @@
 
 import Foundation
 
-public class TGCameraFunctions: NSObject
+open class TGCameraFunctions: NSObject
 {
-    public static func TGLocalizedString(key: String) -> String
-    {
-        var bundle: NSBundle?
-        var token: dispatch_once_t = 0
-        
-        dispatch_once(&token,{
-            let path = NSBundle(forClass: TGCameraViewController.self).pathForResource("TGCameraViewController", ofType: "bundle")!
+    static var bundle: Bundle?
+    private static var __once: () = {
+            let path = Bundle(for: TGCameraViewController.self).path(forResource: "TGCameraViewController", ofType: "bundle")!
             //print(path)
-            bundle = NSBundle(path: path)
-        })
+            bundle = Bundle(path: path)
+        }()
+    open static func TGLocalizedString(_ key: String) -> String
+    {
+        _ = self.__once
         
-        return (bundle?.localizedStringForKey(key, value: key, table: nil))!
+        return (bundle?.localizedString(forKey: key, value: key, table: nil))!
     }
 }

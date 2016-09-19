@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class TGCameraGridView: UIView {
-    public var lineWidth: CGFloat = 0.0
-    public var numberOfColumns: Int = 0
-    public var numberOfRows: Int = 0
+open class TGCameraGridView: UIView {
+    open var lineWidth: CGFloat = 0.0
+    open var numberOfColumns: Int = 0
+    open var numberOfRows: Int = 0
     
     public convenience init() {
         self.init()
@@ -30,10 +30,10 @@ public class TGCameraGridView: UIView {
         self.setup()
     }
     
-    override public func drawRect(rect: CGRect) {
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        CGContextSetLineWidth(context, self.lineWidth)
-        CGContextSetStrokeColorWithColor(context, TGCameraColor.grayColor().colorWithAlphaComponent(0.7).CGColor)
+    override open func draw(_ rect: CGRect) {
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        context.setLineWidth(self.lineWidth)
+        context.setStrokeColor(TGCameraColor.gray.withAlphaComponent(0.7).cgColor)
         let columnWidth: CGFloat = self.frame.size.width / (CGFloat(numberOfColumns) + 1.0)
         let rowHeight: CGFloat = self.frame.size.height / (CGFloat(numberOfRows) + 1.0)
         
@@ -44,9 +44,9 @@ public class TGCameraGridView: UIView {
             var endPoint = CGPoint()
             endPoint.x = startPoint.x
             endPoint.y = self.frame.size.height
-            CGContextMoveToPoint(context, startPoint.x, startPoint.y)
-            CGContextAddLineToPoint(context, endPoint.x, endPoint.y)
-            CGContextStrokePath(context)
+            context.move(to: CGPoint(x: startPoint.x, y: startPoint.y))
+            context.addLine(to: CGPoint(x: endPoint.x, y: endPoint.y))
+            context.strokePath()
         }
         
         for i in 1 ... self.numberOfRows {
@@ -56,9 +56,9 @@ public class TGCameraGridView: UIView {
             var endPoint = CGPoint()
             endPoint.x = self.frame.size.width
             endPoint.y = startPoint.y
-            CGContextMoveToPoint(context, startPoint.x, startPoint.y)
-            CGContextAddLineToPoint(context, endPoint.x, endPoint.y)
-            CGContextStrokePath(context)
+            context.move(to: CGPoint(x: startPoint.x, y: startPoint.y))
+            context.addLine(to: CGPoint(x: endPoint.x, y: endPoint.y))
+            context.strokePath()
         }
 
 
@@ -69,7 +69,7 @@ public class TGCameraGridView: UIView {
     
     
     func setup() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.lineWidth = 0.8;
     }
     

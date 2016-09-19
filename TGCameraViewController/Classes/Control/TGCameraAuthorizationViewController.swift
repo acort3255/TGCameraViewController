@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TGCameraAuthorizationViewController: UIViewController
+open class TGCameraAuthorizationViewController: UIViewController
 {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
@@ -17,7 +17,7 @@ public class TGCameraAuthorizationViewController: UIViewController
     @IBOutlet var step3Label: UILabel!
     @IBOutlet var step4Label: UILabel!
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.titleLabel.text = TGCameraFunctions.TGLocalizedString("TGCameraViewController-Title")
         self.subtitleLabel.text = TGCameraFunctions.TGLocalizedString("TGCameraViewController-Subtitle")
@@ -27,7 +27,7 @@ public class TGCameraAuthorizationViewController: UIViewController
         self.step4Label.text = TGCameraFunctions.TGLocalizedString("TGCameraViewController-Step4")
     }
     
-    override public func prefersStatusBarHidden() -> Bool {
+    override open var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -38,6 +38,6 @@ public class TGCameraAuthorizationViewController: UIViewController
     
     
     @IBAction func closeTapped() {
-        self.dismissViewControllerAnimated(true, completion: { _ in })
+        self.dismiss(animated: true, completion: { _ in })
     }
 }
