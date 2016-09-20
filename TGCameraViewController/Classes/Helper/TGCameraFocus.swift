@@ -12,7 +12,7 @@ import AVFoundation
 open class TGCameraFocus: NSObject {
     open static func focusWithCaptureSession(_ session: AVCaptureSession, touchPoint: CGPoint, inFocusView focusView: UIView) {
         
-        let device: AVCaptureDevice = session.inputs.last as! AVCaptureDevice 
+        let device: AVCaptureDevice = (session.inputs.last as! AVCaptureDeviceInput).device
         self.showFocusView(focusView, withTouchPoint: touchPoint, andDevice: device)
         do{
             try device.lockForConfiguration()
