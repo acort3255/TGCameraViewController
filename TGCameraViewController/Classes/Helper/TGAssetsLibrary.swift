@@ -125,7 +125,8 @@ open class TGAssetsLibrary: PHImageManager{
             let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
             let assetPlaceholder = assetRequest.placeholderForCreatedAsset
             let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.assetCollection)
-            albumChangeRequest!.addAssets(assetPlaceholder! as! NSFastEnumeration)
+            let enumeration: NSArray = [assetPlaceholder!]
+            albumChangeRequest!.addAssets(enumeration)
             }, completionHandler: { success, error in
                 print("added image to album")
                 
@@ -148,7 +149,8 @@ open class TGAssetsLibrary: PHImageManager{
             let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
             let assetPlaceholder = assetRequest!.placeholderForCreatedAsset
             let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.assetCollection)
-            albumChangeRequest!.addAssets(assetPlaceholder! as! NSFastEnumeration)
+            let enumeration: NSArray = [assetPlaceholder!]
+            albumChangeRequest!.addAssets(enumeration)
             }, completionHandler: { success, error in
                 print("added video to album")
                 
