@@ -55,6 +55,19 @@
                                                                                  action:@selector(clearTapped)];
     
     self.navigationItem.rightBarButtonItem = clearButton;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    AVAudioSession *session1 = [AVAudioSession sharedInstance];
+    [session1 setCategory:AVAudioSessionCategoryPlayAndRecord  withOptions:AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionDefaultToSpeaker|AVAudioSessionCategoryOptionAllowBluetooth error:nil];
+    
+    [session1 setActive:YES error:nil];
+    
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 }
 
 - (void)didReceiveMemoryWarning

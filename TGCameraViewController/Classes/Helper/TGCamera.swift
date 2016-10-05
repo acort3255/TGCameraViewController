@@ -170,6 +170,9 @@ open class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         //
         self.session = AVCaptureSession()
         self.session.sessionPreset = TGCamera.capturePreset
+        self.session.automaticallyConfiguresApplicationAudioSession = false
+        self.session.usesApplicationAudioSession = true
+        
         //
         // setup device
         //
@@ -241,6 +244,8 @@ open class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         //
         self.session = AVCaptureSession()
         self.session.sessionPreset = TGCamera.capturePreset
+        self.session.automaticallyConfiguresApplicationAudioSession = false
+        self.session.usesApplicationAudioSession = true
         //
         // setup device
         //
