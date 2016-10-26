@@ -173,6 +173,7 @@ open class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
         self.session.automaticallyConfiguresApplicationAudioSession = false
         self.session.usesApplicationAudioSession = true
         
+        
         //
         // setup device
         //
@@ -189,6 +190,7 @@ open class TGCamera: NSObject, AVCaptureFileOutputRecordingDelegate{
                 device.focusMode = .continuousAutoFocus
             }
             device.exposureMode = .continuousAutoExposure
+            
             
             if TGCamera.minDuration != CMTimeMake(0, 0)
             {

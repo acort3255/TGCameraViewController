@@ -36,15 +36,29 @@ open class TGCameraNavigationController: UINavigationController {
         let navigationController: TGCameraNavigationController = TGCameraNavigationController()
         navigationController.isNavigationBarHidden = true
         //if navigationController != nil {
-            let status: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-            switch status {
+        let cameraStatus: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let micStatus: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeAudio)
+            /*switch status {
             case .authorized:
                 navigationController.setupAuthorizedWithDelegate(delegate)
             case .restricted, .denied:
                 navigationController.setupDenied()
             case .notDetermined:
                 navigationController.setupNotDeterminedWithDelegate(delegate)
-            }
+            }*/
+        
+        if cameraStatus == .authorized && micStatus == .authorized
+        {
+            navigationController.setupAuthorizedWithDelegate(delegate)
+        }
+        else if cameraStatus == .restricted || cameraStatus == .denied && micStatus == .restricted || micStatus == .denied
+        {
+            navigationController.setupDenied()
+        }
+        else
+        {
+            navigationController.setupNotDeterminedWithDelegate(delegate)
+        }
         // }
         return navigationController
 
