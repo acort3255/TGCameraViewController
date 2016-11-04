@@ -85,13 +85,18 @@ open class TGCameraNavigationController: UINavigationController {
         let bundle = Bundle(for: TGCameraViewController.self)
         let viewController: TGCameraViewController = TGCameraViewController(nibName: "TGCameraViewController", bundle: bundle)
         viewController.delegate = delegate
-        self.viewControllers = [viewController]
+        
+        DispatchQueue.main.async {
+            self.viewControllers = [viewController]
+        }
     }
     
     func setupDenied() {
         let bundle = Bundle(for: TGCameraViewController.self)
         let viewController: UIViewController = TGCameraAuthorizationViewController(nibName: "TGCameraAuthorizationViewController", bundle: bundle)
-        self.viewControllers = [viewController]
+        DispatchQueue.main.async {
+            self.viewControllers = [viewController]
+        }
     }
     
     func setupNotDeterminedWithDelegate(_ delegate: TGCameraDelegate)
