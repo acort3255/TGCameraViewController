@@ -14,7 +14,7 @@ Custom camera with AVFoundation. Beautiful, light and easy to integrate with iOS
 [![Cocoapods](http://img.shields.io/cocoapods/p/TGCameraViewController.svg)](http://cocoapods.org/?q=on%3Aios%20tgcameraviewcontroller)&nbsp;
 [![Analytics](https://ga-beacon.appspot.com/UA-54929747-1/tdginternet/TGCameraViewController/README.md)](https://github.com/igrigorik/ga-beacon)
 
-* Completely custom camera with AVFoundation, written in Swift 2.2
+* Completely custom camera with AVFoundation, written in Swift 3.0.1
 * Custom view with camera permission denied
 * Custom button colors
 * Easy way to access album (camera roll)
