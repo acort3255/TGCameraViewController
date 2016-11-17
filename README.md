@@ -188,7 +188,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 |:-:|:-:|:-:|:-:|
 |TGCamera.toggleButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that switches between the front and rear camera|
 |TGCamera.albumButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that allows the user to select a photo from his/her album|
-|TGCamera.filterButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that allos the user to filter his/her photo|
+|TGCamera.filterButtonHidden|BOOL (true/false)(YES/NO)|(false/NO)|Displays or hides the button that allows the user to filter his/her photo|
 |TGCamera.saveMediaToAlbum|BOOL (true/false)(YES/NO)|(false/NO)|Whether or not to save the media to the camera roll|
 
 ```obj-c
